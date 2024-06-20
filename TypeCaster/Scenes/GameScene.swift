@@ -156,7 +156,6 @@ class GameScene: SKScene, ExplorationSceneProtocol {
                 let waitAction = SKAction.wait(forDuration: 1.0)
                 let transitionAction = SKAction.run {
                     if let battleScene = SKScene(fileNamed: "BattleScene") as? BattleSceneProtocol {
-                        print("Battle Scene found!")
                         self.lastPlayerCoordinate = self.player.spriteNode.position
                         self.lastPlayerDirection = self.player.direction
                         
@@ -166,7 +165,6 @@ class GameScene: SKScene, ExplorationSceneProtocol {
                         battleScene.previousScene = self
                         
                         if let view = self.view {
-                            print("Go to Battle Scene")
                             let transition = SKTransition.fade(withDuration: 1.0)
                             view.presentScene(battleScene, transition: transition)
                         }
