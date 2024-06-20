@@ -7,13 +7,15 @@ class Spell {
     var isInCooldown: Bool = false
     var speed: CGFloat
     var textures: [SKTexture]
+    var spellType: SpellSfxType
     
-    init(hudSpriteNode: SKSpriteNode, chant: String, cooldownDuration: CGFloat, speed: CGFloat, textures: [SKTexture]) {
+    init(hudSpriteNode: SKSpriteNode, chant: String, cooldownDuration: CGFloat, speed: CGFloat, textures: [SKTexture], spellType: SpellSfxType) {
         self.hudSpriteNode = hudSpriteNode
         self.chant = chant
         self.cooldownDuration = cooldownDuration
         self.speed = speed
         self.textures = textures
+        self.spellType = spellType
     }
     
     func summonSpellInExplorationScene(scene: ExplorationSceneProtocol) {
@@ -69,6 +71,7 @@ class Spell {
         
         let sequence = SKAction.sequence([moveAction, roundPositionAction, removeAction])
         
+        AudioManager.shared.playSpellSfx(node: spellNode, spellType: self.spellType)
         spellNode.run(sequence)
     }
 }
@@ -83,7 +86,9 @@ class Rock: Spell {
             SKTexture(imageNamed: "rock")
         ]
         
-        super.init(hudSpriteNode: hudSpriteNode, chant: chant, cooldownDuration: cooldownDuration, speed: speed, textures: textures)
+        let spellType: SpellSfxType = .throwRock
+        
+        super.init(hudSpriteNode: hudSpriteNode, chant: chant, cooldownDuration: cooldownDuration, speed: speed, textures: textures, spellType: spellType)
     }
 }
 
@@ -99,8 +104,9 @@ class Fireball: Spell {
             SKTexture(imageNamed: "fireball-3"),
             SKTexture(imageNamed: "fireball-4")
         ]
+        let spellType: SpellSfxType = .fireball
         
-        super.init(hudSpriteNode: hudSpriteNode, chant: chant, cooldownDuration: cooldownDuration, speed: speed, textures: textures)
+        super.init(hudSpriteNode: hudSpriteNode, chant: chant, cooldownDuration: cooldownDuration, speed: speed, textures: textures, spellType: spellType)
     }
 }
 
@@ -116,6 +122,8 @@ class Iceblast: Spell {
             SKTexture(imageNamed: "iceblast-3")
         ]
         
-        super.init(hudSpriteNode: hudSpriteNode, chant: chant, cooldownDuration: cooldownDuration, speed: speed, textures: textures)
+        let spellType: SpellSfxType = .iceblast
+        
+        super.init(hudSpriteNode: hudSpriteNode, chant: chant, cooldownDuration: cooldownDuration, speed: speed, textures: textures, spellType: spellType)
     }
 }

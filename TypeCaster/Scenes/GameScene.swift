@@ -152,6 +152,7 @@ class GameScene: SKScene, ExplorationSceneProtocol {
                 exclamationSpriteNode.run(SKAction.move(by: CGVector(dx: 0, dy: 24.0), duration: 0.1))
                 
                 enemy.spriteNode.addChild(exclamationSpriteNode)
+                AudioManager.shared.playEnemyFoundSfx(node: enemy.spriteNode)
                 
                 let waitAction = SKAction.wait(forDuration: 1.0)
                 let transitionAction = SKAction.run {
@@ -181,6 +182,7 @@ class GameScene: SKScene, ExplorationSceneProtocol {
     
     
     override func didMove(to view: SKView) {
+        AudioManager.shared.playBgm(bgmType: .exploration)
         sceneCamera = childNode(withName: "sceneCamera") as! SKCameraNode
         
         for node in self.children {

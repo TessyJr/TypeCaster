@@ -21,6 +21,8 @@ class BattleScene: SKScene, BattleSceneProtocol {
     var attackNodes: [SKSpriteNode] = []
     
     override func didMove(to view: SKView) {
+        AudioManager.shared.playBgm(bgmType: .battle)
+        
         sceneCamera = childNode(withName: "sceneCamera") as! SKCameraNode
         
         //        spellBookNode = SKSpriteNode(imageNamed: "spellBook")

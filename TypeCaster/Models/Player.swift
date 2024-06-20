@@ -115,6 +115,9 @@ class Player {
                 spriteNode.removeAllActions()
                 
                 status = .dead
+                
+                AudioManager.shared.stopBgm()
+                AudioManager.shared.playPlayerDeadSfx(node: self.spriteNode)
                 animateSprite()
                 
                 scene.goToStartScene()
@@ -161,11 +164,14 @@ class Player {
         var textures: [SKTexture] = []
         var damage: Int = 0
         
+        var spellType: SpellSfxType = .fireball
+        
         switch spell {
         case "":
             let texture = SKTexture(imageNamed: "rock")
             textures.append(texture)
             damage = 1
+            spellType = .throwRock
         case "fireball":
             for i in 1...4 {
                 let textureName = "fireball-\(i)"
@@ -173,6 +179,7 @@ class Player {
                 textures.append(texture)
             }
             damage = 10
+            spellType = .fireball
         case "ice blast":
             for i in 1...3 {
                 let textureName = "iceblast-\(i)"
@@ -180,6 +187,7 @@ class Player {
                 textures.append(texture)
             }
             damage = 15
+            spellType = .iceblast
         default:
             break
         }
@@ -204,6 +212,9 @@ class Player {
         }
         
         let sequence = SKAction.sequence([moveAction, removeAction, damageAction])
+        
+        AudioManager.shared.playSpellSfx(node: spellNode, spellType: spellType)
+        
         spellNode.run(sequence)
     }
     
