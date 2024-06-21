@@ -161,11 +161,23 @@ class Player {
         if let spell = spellToCast {
             if !spell.isInCooldown {
                 if let cooldownNode = scene.spellCooldownNodes.first(where: { $0.texture == spell.cooldownTexture }) {
-                    cooldownNode.alpha = 0.1
+                    let overlayNode = SKSpriteNode(color: .black, size: cooldownNode.size)
+                    overlayNode.alpha = 0.8
+                    overlayNode.zPosition = 5
+                    overlayNode.anchorPoint = CGPoint(x: 0.5, y: 0.0) // Anchor at the bottom center
+                    overlayNode.position = CGPoint(x: 0, y: -cooldownNode.size.height / 2) // Position it at the bottom of the parent node
                     
-                    let fadeInAction = SKAction.fadeAlpha(to: 1.0, duration: spell.cooldownDuration)
+                    cooldownNode.addChild(overlayNode)
                     
-                    cooldownNode.run(fadeInAction)
+                    let scaleAction = SKAction.scaleY(to: 0.0, duration: spell.cooldownDuration)
+                    
+                    let removeAction = SKAction.run {
+                        overlayNode.removeFromParent()
+                    }
+                    
+                    let sequence = SKAction.sequence([scaleAction, removeAction])
+                    
+                    overlayNode.run(sequence)
                 }
                 
                 status = .attacking
@@ -280,11 +292,23 @@ class Player {
         if let spell = spellToCast {
             if !spell.isInCooldown {
                 if let cooldownNode = scene.spellCooldownNodes.first(where: { $0.texture == spell.cooldownTexture }) {
-                    cooldownNode.alpha = 0.1
+                    let overlayNode = SKSpriteNode(color: .black, size: cooldownNode.size)
+                    overlayNode.alpha = 0.8
+                    overlayNode.zPosition = 5
+                    overlayNode.anchorPoint = CGPoint(x: 0.5, y: 0.0) // Anchor at the bottom center
+                    overlayNode.position = CGPoint(x: 0, y: -cooldownNode.size.height / 2) // Position it at the bottom of the parent node
                     
-                    let fadeInAction = SKAction.fadeAlpha(to: 1.0, duration: spell.cooldownDuration)
+                    cooldownNode.addChild(overlayNode)
                     
-                    cooldownNode.run(fadeInAction)
+                    let scaleAction = SKAction.scaleY(to: 0.0, duration: spell.cooldownDuration)
+                    
+                    let removeAction = SKAction.run {
+                        overlayNode.removeFromParent()
+                    }
+                    
+                    let sequence = SKAction.sequence([scaleAction, removeAction])
+                    
+                    overlayNode.run(sequence)
                 }
                 
                 status = .attacking
