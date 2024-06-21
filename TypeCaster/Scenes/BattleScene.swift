@@ -15,6 +15,7 @@ class BattleScene: SKScene, BattleSceneProtocol {
     var player: Player = Player()
     
     var spellNode: SKSpriteNode?
+    var spellCooldownNodes: [SKSpriteNode] = []
     
     var enemy: Enemy = Enemy()
     var enemyHealthBar: SKSpriteNode = SKSpriteNode()
@@ -27,8 +28,6 @@ class BattleScene: SKScene, BattleSceneProtocol {
         AudioManager.shared.playBgm(bgmType: .battle)
         
         sceneCamera = childNode(withName: "sceneCamera") as! SKCameraNode
-        cooldownContainer = sceneCamera.childNode(withName: "cooldown-container")!
-        cooldownContainer.removeAllChildren()
         
         //        spellBookNode = SKSpriteNode(imageNamed: "spellBook")
         //        spellBookNode.zPosition = 20
@@ -63,24 +62,39 @@ class BattleScene: SKScene, BattleSceneProtocol {
         
         player.animateSprite()
                 
-        player.healthBarNode = player.spriteNode.childNode(withName: "playerHealthBar") as! SKSpriteNode
+        player.healthBarNode = sceneCamera.childNode(withName: "playerHealthBar") as! SKSpriteNode
         var playerHealthRatio = CGFloat(player.currentHealth) / CGFloat(player.maxHealth)
         if playerHealthRatio < 0 {
             playerHealthRatio = 0
         }
-        player.healthBarNode.size.width = 32 * playerHealthRatio
+        player.healthBarNode.size.width = 256 * playerHealthRatio
         
         player.spellLabelNode = player.spriteNode.childNode(withName: "labelPlayerSpell") as! SKLabelNode
         player.inputSpell = ""
         player.spellLabelNode.text = player.inputSpell
         player.spellLabelNodeBackground = player.spriteNode.childNode(withName: "labelPlayerSpellBackground") as! SKSpriteNode
+        
+        cooldownContainer = sceneCamera.childNode(withName: "cooldown-container")!
+        
+        if spellCooldownNodes.isEmpty {
+            var cooldownNodePosition = CGPoint(x: 0, y: 0)
+            for spell in player.spells {
+                let cooldownNode = SKSpriteNode(texture: spell.cooldownTexture)
+                cooldownNode.position = cooldownNodePosition
+                cooldownContainer.addChild(cooldownNode)
+                
+                spellCooldownNodes.append(cooldownNode)
+                
+                cooldownNodePosition.x += 40
+            }
+        }
     }
     
     func setUpEnemy() {
         enemy.spriteNode = childNode(withName: "enemy") as! SKSpriteNode
         enemy.animateSprite()
         
-        enemyHealthBar = enemy.spriteNode.childNode(withName: "enemyHealthBar") as! SKSpriteNode
+        enemyHealthBar = sceneCamera.childNode(withName: "enemyHealthBar") as! SKSpriteNode
     }
     
     func setUpWallsAndFloors(map: SKTileMapNode) {
@@ -130,9 +144,9 @@ class BattleScene: SKScene, BattleSceneProtocol {
     }
     
     func goToStartScene() {
-        let waitAction = SKAction.wait(forDuration: 2.0)
+        let waitAction = SKAction.wait(forDuration: 4.0)
         let transitionAction = SKAction.run {
-            if let scene = SKScene(fileNamed: "GameScene") {
+            if let scene = SKScene(fileNamed: "ExplorationScene1") {
                 scene.scaleMode = .aspectFit
                 
                 if let view = self.view {
@@ -232,12 +246,12 @@ class BattleScene: SKScene, BattleSceneProtocol {
         if playerHealthRatio < 0 {
             playerHealthRatio = 0
         }
-        player.healthBarNode.size.width = 32 * playerHealthRatio
+        player.healthBarNode.size.width = 256 * playerHealthRatio
         
         var enemyHealthRatio = CGFloat(enemy.currentHealth) / CGFloat(enemy.maxHealth)
         if enemyHealthRatio < 0 {
             enemyHealthRatio = 0
         }
-        enemyHealthBar.size.width = 32 * enemyHealthRatio
+        enemyHealthBar.size.width = 256 * enemyHealthRatio
     }
 }

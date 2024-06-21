@@ -160,38 +160,12 @@ class Player {
         
         if let spell = spellToCast {
             if !spell.isInCooldown {
-                let cooldownNode = SKSpriteNode(texture: spell.cooldownTexture)
-                
-                // Create the mask node
-                let maskNode = SKShapeNode(rectOf: CGSize(width: cooldownNode.size.width, height: cooldownNode.size.height))
-                maskNode.fillColor = .black
-                maskNode.strokeColor = .clear
-                maskNode.yScale = 0
-                
-                // Create a crop node to apply the mask
-                let cropNode = SKCropNode()
-                cropNode.addChild(cooldownNode)
-                cropNode.maskNode = maskNode
-                cropNode.position = CGPoint(x: CGFloat(scene.cooldownContainer.children.count * 40), y: 0)
-                
-                scene.cooldownContainer.addChild(cropNode)
-                
-                // Position maskNode at the bottom of cropNode
-                maskNode.position = CGPoint(x: 0, y: -cooldownNode.size.height / 2)
-                
-                // Animate the mask node to create the bottom-to-top fill effect
-                let revealAction = SKAction.scaleY(to: 2.0, duration: spell.cooldownDuration)
-                
-                // Group the animations and run them
-                maskNode.run(revealAction) {
-                    cropNode.removeFromParent()
+                if let cooldownNode = scene.spellCooldownNodes.first(where: { $0.texture == spell.cooldownTexture }) {
+                    cooldownNode.alpha = 0.1
                     
-                    var currentXPosition: CGFloat = 0
+                    let fadeInAction = SKAction.fadeAlpha(to: 1.0, duration: spell.cooldownDuration)
                     
-                    for (_, node) in scene.cooldownContainer.children.enumerated() {
-                        node.position = CGPoint(x: currentXPosition, y: 0)
-                        currentXPosition += node.frame.width + 8  // Adjust the gap between nodes as needed
-                    }
+                    cooldownNode.run(fadeInAction)
                 }
                 
                 status = .attacking
@@ -305,37 +279,12 @@ class Player {
         
         if let spell = spellToCast {
             if !spell.isInCooldown {
-                let cooldownNode = SKSpriteNode(texture: spell.cooldownTexture)
-                
-                // Create the mask node
-                let maskNode = SKShapeNode(rectOf: CGSize(width: cooldownNode.size.width, height: cooldownNode.size.height))
-                maskNode.fillColor = .black
-                maskNode.strokeColor = .clear
-                maskNode.yScale = 0
-                
-                // Create a crop node to apply the mask
-                let cropNode = SKCropNode()
-                cropNode.addChild(cooldownNode)
-                cropNode.maskNode = maskNode
-                cropNode.position = CGPoint(x: CGFloat(scene.cooldownContainer.children.count * 40), y: 0)
-                scene.cooldownContainer.addChild(cropNode)
-                
-                // Position maskNode at the bottom of cropNode
-                maskNode.position = CGPoint(x: 0, y: -cooldownNode.size.height / 2)
-                
-                // Animate the mask node to create the bottom-to-top fill effect
-                let revealAction = SKAction.scaleY(to: 2.0, duration: spell.cooldownDuration)
-                
-                // Group the animations and run them
-                maskNode.run(revealAction) {
-                    cropNode.removeFromParent()
+                if let cooldownNode = scene.spellCooldownNodes.first(where: { $0.texture == spell.cooldownTexture }) {
+                    cooldownNode.alpha = 0.1
                     
-                    var currentXPosition: CGFloat = 0
+                    let fadeInAction = SKAction.fadeAlpha(to: 1.0, duration: spell.cooldownDuration)
                     
-                    for (_, node) in scene.cooldownContainer.children.enumerated() {
-                        node.position = CGPoint(x: currentXPosition, y: 0)
-                        currentXPosition += node.frame.width + 8
-                    }
+                    cooldownNode.run(fadeInAction)
                 }
                 
                 status = .attacking
