@@ -117,7 +117,7 @@ class Player {
                 status = .dead
                 
                 AudioManager.shared.stopBgm()
-                AudioManager.shared.playPlayerDeadSfx(node: self.spriteNode)
+                AudioManager.shared.playPlayerStateSfx(node: self.spriteNode, playerState: .playerDie)
                 animateSprite()
                 
                 scene.goToStartScene()
@@ -206,6 +206,7 @@ class Player {
             }
         } else {
             status = .stunned
+            AudioManager.shared.playPlayerStateSfx(node: self.spriteNode, playerState: .stunned)
             animateSprite()
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
@@ -350,6 +351,7 @@ class Player {
             }
         } else {
             status = .stunned
+            AudioManager.shared.playPlayerStateSfx(node: self.spriteNode, playerState: .stunned)
             animateSprite()
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {

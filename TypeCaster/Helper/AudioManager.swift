@@ -50,13 +50,15 @@ class AudioManager {
         node.run(sfx)
     }
     
+    func playPlayerStateSfx(node: SKSpriteNode, playerState: PlayerStateSfxType) {
+        let fileName = playerState.rawValue
+        let sfx = SKAction.playSoundFileNamed(fileName, waitForCompletion: false)
+        node.run(sfx)
+    }
+    
     func playEnemyFoundSfx(node: SKSpriteNode) {
         let sfx = SKAction.playSoundFileNamed("alert", waitForCompletion: false)
         node.run(sfx)
     }
     
-    func playPlayerDeadSfx(node: SKSpriteNode) {
-        let sfx = SKAction.playSoundFileNamed("playerDie", waitForCompletion: true)
-        node.run(sfx)
-    }
 }
