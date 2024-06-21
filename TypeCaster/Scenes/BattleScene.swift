@@ -219,7 +219,7 @@ class BattleScene: SKScene, BattleSceneProtocol {
     }
     
     override func update(_ currentTime: TimeInterval) {
-        sceneCamera.position = player.spriteNode.position
+//        sceneCamera.position = player.spriteNode.position
         
         attackNodes.forEach { attackNode in
             if player.spriteNode.frame.intersects(attackNode.frame) {
