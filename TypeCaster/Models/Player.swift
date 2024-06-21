@@ -148,91 +148,63 @@ class Player {
     }
     
     // Battle scene functions
-    func summonSpellInBattleScene(scene: BattleSceneProtocol, spell: String, enemy: Enemy) {
-        status = .attacking
-        animateSprite()
+    func castSpellInBattleScene(scene: BattleSceneProtocol, chant: String, enemy: Enemy) {
+        var spellToCast: Spell?
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.status = .idle
-            self.animateSprite()
-        }
-        
-        let spellNode: SKSpriteNode = SKSpriteNode()
-        spellNode.size = CGSize(width: 32.0, height: 32.0)
-        spellNode.position = scene.player.spriteNode.position
-        
-        var textures: [SKTexture] = []
-        var damage: Int = 0
-        
-        var spellType: SpellSfxType = .fireball
-        
-        switch spell {
-        case "":
-            let texture = SKTexture(imageNamed: "rock")
-            textures.append(texture)
-            damage = 1
-            spellType = .throwRock
-        case "fireball":
-            for i in 1...4 {
-                let textureName = "fireball-\(i)"
-                let texture = SKTexture(imageNamed: textureName)
-                textures.append(texture)
+        for spell in spells {
+            if spell.chant == chant {
+                spellToCast = spell
+                break
             }
-            damage = 10
-            spellType = .fireball
-        case "ice blast":
-            for i in 1...3 {
-                let textureName = "iceblast-\(i)"
-                let texture = SKTexture(imageNamed: textureName)
-                textures.append(texture)
+        }
+        
+        if let spell = spellToCast {
+            if !spell.isInCooldown {
+                let cooldownNode = SKSpriteNode(texture: spell.cooldownTexture)
+                
+                // Create the mask node
+                let maskNode = SKShapeNode(rectOf: CGSize(width: cooldownNode.size.width, height: cooldownNode.size.height))
+                maskNode.fillColor = .black
+                maskNode.strokeColor = .clear
+                maskNode.yScale = 0
+                
+                // Create a crop node to apply the mask
+                let cropNode = SKCropNode()
+                cropNode.addChild(cooldownNode)
+                cropNode.maskNode = maskNode
+                cropNode.position = CGPoint(x: CGFloat(scene.cooldownContainer.children.count * 40), y: 0)
+                
+                scene.cooldownContainer.addChild(cropNode)
+                
+                // Position maskNode at the bottom of cropNode
+                maskNode.position = CGPoint(x: 0, y: -cooldownNode.size.height / 2)
+                
+                // Animate the mask node to create the bottom-to-top fill effect
+                let revealAction = SKAction.scaleY(to: 2.0, duration: spell.cooldownDuration)
+                
+                // Group the animations and run them
+                maskNode.run(revealAction) {
+                    cropNode.removeFromParent()
+                    
+                    var currentXPosition: CGFloat = 0
+                    
+                    for (_, node) in scene.cooldownContainer.children.enumerated() {
+                        node.position = CGPoint(x: currentXPosition, y: 0)
+                        currentXPosition += node.frame.width + 8  // Adjust the gap between nodes as needed
+                    }
+                }
+                
+                status = .attacking
+                animateSprite()
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.status = .idle
+                    self.animateSprite()
+                }
+                
+                spell.summonSpellInBattleScene(scene: scene, enemy: enemy)
             }
-            damage = 15
-            spellType = .iceblast
-        default:
-            break
-        }
-        
-        let moveAnimation = SKAction.animate(with: textures, timePerFrame: 0.1)
-        let repeatAnimation = SKAction.repeatForever(moveAnimation)
-        spellNode.run(repeatAnimation)
-        
-        scene.addChild(spellNode)
-        
-        let dx = enemy.spriteNode.position.x - spellNode.position.x
-        let dy = enemy.spriteNode.position.y - spellNode.position.y
-        let angle = atan2(dy, dx)
-        spellNode.zRotation = angle
-        
-        let moveAction = SKAction.move(to: enemy.spriteNode.position, duration: 1.0)
-        
-        let removeAction = SKAction.removeFromParent()
-        
-        let damageAction = SKAction.run {
-            enemy.getHurt(scene: scene, damage: damage)
-        }
-        
-        let sequence = SKAction.sequence([moveAction, removeAction, damageAction])
-        
-        AudioManager.shared.playSpellSfx(node: spellNode, spellType: spellType)
-        
-        spellNode.run(sequence)
-    }
-    
-    func castSpellInBattleScene(scene: BattleSceneProtocol, spell: String, enemy: Enemy) {
-        switch spell {
-        case "":
-            summonSpellInBattleScene(scene: scene, spell: spell, enemy: enemy)
-            
-        case "fireball":
-            summonSpellInBattleScene(scene: scene, spell: spell, enemy: enemy)
-            
-        case "ice blast":
-            summonSpellInBattleScene(scene: scene, spell: spell, enemy: enemy)
-            
-        case "avada kedavra":
-            enemy.getHurt(scene: scene, damage: enemy.currentHealth)
-            
-        default:
+        } else {
             status = .stunned
             animateSprite()
             
@@ -320,7 +292,7 @@ class Player {
             objectToInteract.interact(player: self)
         }
     }
-        
+    
     func castSpellInExplorationScene(scene: ExplorationSceneProtocol, chant: String) {
         var spellToCast: Spell?
         
@@ -333,6 +305,39 @@ class Player {
         
         if let spell = spellToCast {
             if !spell.isInCooldown {
+                let cooldownNode = SKSpriteNode(texture: spell.cooldownTexture)
+                
+                // Create the mask node
+                let maskNode = SKShapeNode(rectOf: CGSize(width: cooldownNode.size.width, height: cooldownNode.size.height))
+                maskNode.fillColor = .black
+                maskNode.strokeColor = .clear
+                maskNode.yScale = 0
+                
+                // Create a crop node to apply the mask
+                let cropNode = SKCropNode()
+                cropNode.addChild(cooldownNode)
+                cropNode.maskNode = maskNode
+                cropNode.position = CGPoint(x: CGFloat(scene.cooldownContainer.children.count * 40), y: 0)
+                scene.cooldownContainer.addChild(cropNode)
+                
+                // Position maskNode at the bottom of cropNode
+                maskNode.position = CGPoint(x: 0, y: -cooldownNode.size.height / 2)
+                
+                // Animate the mask node to create the bottom-to-top fill effect
+                let revealAction = SKAction.scaleY(to: 2.0, duration: spell.cooldownDuration)
+                
+                // Group the animations and run them
+                maskNode.run(revealAction) {
+                    cropNode.removeFromParent()
+                    
+                    var currentXPosition: CGFloat = 0
+                    
+                    for (_, node) in scene.cooldownContainer.children.enumerated() {
+                        node.position = CGPoint(x: currentXPosition, y: 0)
+                        currentXPosition += node.frame.width + 8
+                    }
+                }
+                
                 status = .attacking
                 animateSprite()
                 

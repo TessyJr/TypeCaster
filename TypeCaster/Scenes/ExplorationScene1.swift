@@ -1,7 +1,8 @@
 import SpriteKit
 
-class GameScene: SKScene, ExplorationSceneProtocol {
+class ExplorationScene1: SKScene, ExplorationSceneProtocol {
     var sceneCamera: SKCameraNode = SKCameraNode()
+    var cooldownContainer: SKNode = SKNode()
     
     var floorCoordinates: [CGPoint] = []
     var wallCoordinates: [CGPoint] = []
@@ -73,17 +74,6 @@ class GameScene: SKScene, ExplorationSceneProtocol {
         player.inputSpell = ""
         player.spellLabelNode.text = player.inputSpell
         player.spellLabelNodeBackground = player.spriteNode.childNode(withName: "labelPlayerSpellBackground") as! SKSpriteNode
-        
-        sceneCamera.removeAllChildren()
-        var hudPosition = CGPoint(x: -700, y: -400)
-        for spell in player.spells {
-            let hudSpriteNode = spell.hudSpriteNode
-            hudSpriteNode.size = CGSize(width: 64.0, height: 64.0)
-            hudSpriteNode.position = hudPosition
-            sceneCamera.addChild(hudSpriteNode)
-            
-            hudPosition.x += 96
-        }
     }
     
     func setUpEnemies() {
@@ -141,6 +131,26 @@ class GameScene: SKScene, ExplorationSceneProtocol {
         }
     }
     
+    override func didMove(to view: SKView) {
+        AudioManager.shared.playBgm(bgmType: .exploration)
+        sceneCamera = childNode(withName: "sceneCamera") as! SKCameraNode
+        cooldownContainer = sceneCamera.childNode(withName: "cooldown-container")!  
+        cooldownContainer.removeAllChildren()
+        
+        for node in self.children {
+            if let someTileMap = node as? SKTileMapNode {
+                if someTileMap.name == "background" {
+                    setUpWallsAndFloors(map: someTileMap)
+                }
+            }
+        }
+        
+        setUpEnemies()
+        setUpObjects()
+        setUpPlayer()
+    }
+    
+    
     func checkIfEnemyInPlayerRadius() {
         enemies.forEach { enemy in
             if player.radiusNode.frame.intersects(enemy.spriteNode.frame) {
@@ -179,25 +189,7 @@ class GameScene: SKScene, ExplorationSceneProtocol {
             }
         }
     }
-    
-    
-    override func didMove(to view: SKView) {
-        AudioManager.shared.playBgm(bgmType: .exploration)
-        sceneCamera = childNode(withName: "sceneCamera") as! SKCameraNode
-        
-        for node in self.children {
-            if let someTileMap = node as? SKTileMapNode {
-                if someTileMap.name == "background" {
-                    setUpWallsAndFloors(map: someTileMap)
-                }
-            }
-        }
-        
-        setUpEnemies()
-        setUpObjects()
-        setUpPlayer()
-    }
-    
+
     override func keyDown(with event: NSEvent) {
         if player.status == .stunned || player.isInBattle {
             return
@@ -225,7 +217,6 @@ class GameScene: SKScene, ExplorationSceneProtocol {
             
             player.inputSpell = ""
             player.spellLabelNode.text = player.inputSpell
-            
             player.spellLabelNodeBackground.size.width = 0
             
             //        case 48:

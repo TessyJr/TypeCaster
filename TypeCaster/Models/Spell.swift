@@ -1,20 +1,22 @@
 import SpriteKit
 
 class Spell {
-    var hudSpriteNode: SKSpriteNode
     var chant: String
     var cooldownDuration: CGFloat
     var isInCooldown: Bool = false
     var speed: CGFloat
+    var cooldownTexture: SKTexture
     var textures: [SKTexture]
+    var damage: Int
     var spellType: SpellSfxType
     
-    init(hudSpriteNode: SKSpriteNode, chant: String, cooldownDuration: CGFloat, speed: CGFloat, textures: [SKTexture], spellType: SpellSfxType) {
-        self.hudSpriteNode = hudSpriteNode
+    init(chant: String, cooldownDuration: CGFloat, speed: CGFloat, cooldownTexture: SKTexture, textures: [SKTexture], damage: Int, spellType: SpellSfxType) {
         self.chant = chant
         self.cooldownDuration = cooldownDuration
         self.speed = speed
+        self.cooldownTexture = cooldownTexture
         self.textures = textures
+        self.damage = damage
         self.spellType = spellType
     }
     
@@ -23,11 +25,9 @@ class Spell {
         let travelSpeed: CGFloat = 0.5
         
         isInCooldown = true
-        hudSpriteNode.alpha = 0.2
         
         DispatchQueue.main.asyncAfter(deadline: .now() + cooldownDuration) {
             self.isInCooldown = false
-            self.hudSpriteNode.alpha = 1
         }
         
         let spellNode: SKSpriteNode = SKSpriteNode()
@@ -74,56 +74,97 @@ class Spell {
         AudioManager.shared.playSpellSfx(node: spellNode, spellType: self.spellType)
         spellNode.run(sequence)
     }
+    
+    func summonSpellInBattleScene(scene: BattleSceneProtocol, enemy: Enemy) {
+        isInCooldown = true
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + cooldownDuration) {
+            self.isInCooldown = false
+        }
+        
+        let spellNode: SKSpriteNode = SKSpriteNode()
+        spellNode.size = CGSize(width: 32.0, height: 32.0)
+        spellNode.position = scene.player.spriteNode.position
+        
+        let moveAnimation = SKAction.animate(with: textures, timePerFrame: 0.1)
+        let repeatAnimation = SKAction.repeatForever(moveAnimation)
+        spellNode.run(repeatAnimation)
+        
+        scene.spellNode = spellNode
+        scene.addChild(spellNode)
+        
+        let spellType: SpellSfxType = .fireball
+        
+        let dx = enemy.spriteNode.position.x - spellNode.position.x
+        let dy = enemy.spriteNode.position.y - spellNode.position.y
+        let angle = atan2(dy, dx)
+        spellNode.zRotation = angle
+        
+        let moveAction = SKAction.move(to: enemy.spriteNode.position, duration: 1.0)
+        
+        let removeAction = SKAction.removeFromParent()
+        
+        let damageAction = SKAction.run {
+            enemy.getHurt(scene: scene, damage: self.damage)
+        }
+        
+        let sequence = SKAction.sequence([moveAction, removeAction, damageAction])
+        
+        AudioManager.shared.playSpellSfx(node: spellNode, spellType: spellType)
+        
+        spellNode.run(sequence)
+    }
 }
 
 class Rock: Spell {
     init() {
-        let hudSpriteNode = SKSpriteNode(imageNamed: "hud-rock")
         let chant = ""
         let cooldownDuration: CGFloat = 2.0
         let speed: CGFloat = 1.0
+        let cooldownTexture = SKTexture(imageNamed: "cooldown-rock")
         let textures = [
             SKTexture(imageNamed: "rock")
         ]
-        
+        let damage = 1
         let spellType: SpellSfxType = .throwRock
         
-        super.init(hudSpriteNode: hudSpriteNode, chant: chant, cooldownDuration: cooldownDuration, speed: speed, textures: textures, spellType: spellType)
+        super.init(chant: chant, cooldownDuration: cooldownDuration, speed: speed, cooldownTexture: cooldownTexture, textures: textures, damage: damage, spellType: spellType)
     }
 }
 
 class Fireball: Spell {
     init() {
-        let hudSpriteNode = SKSpriteNode(imageNamed: "hud-fireball")
         let chant = "fireball"
         let cooldownDuration: CGFloat = 3.0
         let speed: CGFloat = 1.0
+        let cooldownTexture = SKTexture(imageNamed: "cooldown-fireball")
         let textures = [
             SKTexture(imageNamed: "fireball-1"),
             SKTexture(imageNamed: "fireball-2"),
             SKTexture(imageNamed: "fireball-3"),
             SKTexture(imageNamed: "fireball-4")
         ]
+        let damage = 10
         let spellType: SpellSfxType = .fireball
         
-        super.init(hudSpriteNode: hudSpriteNode, chant: chant, cooldownDuration: cooldownDuration, speed: speed, textures: textures, spellType: spellType)
+        super.init(chant: chant, cooldownDuration: cooldownDuration, speed: speed, cooldownTexture: cooldownTexture, textures: textures, damage: damage, spellType: spellType)
     }
 }
 
 class Iceblast: Spell {
     init() {
-        let hudSpriteNode = SKSpriteNode(imageNamed: "hud-iceblast")
         let chant = "ice blast"
         let cooldownDuration: CGFloat = 5.0
         let speed: CGFloat = 1.0
+        let cooldownTexture = SKTexture(imageNamed: "cooldown-iceblast")
         let textures = [
             SKTexture(imageNamed: "iceblast-1"),
             SKTexture(imageNamed: "iceblast-2"),
             SKTexture(imageNamed: "iceblast-3")
         ]
-        
+        let damage = 15
         let spellType: SpellSfxType = .iceblast
         
-        super.init(hudSpriteNode: hudSpriteNode, chant: chant, cooldownDuration: cooldownDuration, speed: speed, textures: textures, spellType: spellType)
+        super.init(chant: chant, cooldownDuration: cooldownDuration, speed: speed, cooldownTexture: cooldownTexture, textures: textures, damage: damage, spellType: spellType)
     }
 }

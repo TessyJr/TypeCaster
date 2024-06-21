@@ -2,7 +2,8 @@ import SpriteKit
 
 class BattleScene: SKScene, BattleSceneProtocol {
     var sceneCamera: SKCameraNode = SKCameraNode()
-    
+    var cooldownContainer: SKNode = SKNode()
+
     var isBattleOver: Bool = false
     
     var floorCoordinates: [CGPoint] = [CGPoint]()
@@ -13,10 +14,12 @@ class BattleScene: SKScene, BattleSceneProtocol {
     
     var player: Player = Player()
     
+    var spellNode: SKSpriteNode?
+    
     var enemy: Enemy = Enemy()
     var enemyHealthBar: SKSpriteNode = SKSpriteNode()
     
-    var previousScene: ExplorationSceneProtocol = GameScene()
+    var previousScene: ExplorationSceneProtocol = ExplorationScene1()
     
     var attackNodes: [SKSpriteNode] = []
     
@@ -24,6 +27,8 @@ class BattleScene: SKScene, BattleSceneProtocol {
         AudioManager.shared.playBgm(bgmType: .battle)
         
         sceneCamera = childNode(withName: "sceneCamera") as! SKCameraNode
+        cooldownContainer = sceneCamera.childNode(withName: "cooldown-container")!
+        cooldownContainer.removeAllChildren()
         
         //        spellBookNode = SKSpriteNode(imageNamed: "spellBook")
         //        spellBookNode.zPosition = 20
@@ -182,29 +187,28 @@ class BattleScene: SKScene, BattleSceneProtocol {
                 break
             }
             
-            player.castSpellInBattleScene(scene: self, spell: player.inputSpell, enemy: enemy)
+            player.castSpellInBattleScene(scene: self, chant: player.inputSpell, enemy: enemy)
             
             player.inputSpell = ""
             player.spellLabelNode.text = player.inputSpell
-            
             player.spellLabelNodeBackground.size.width = 0
             
-        case 48:
-            if isSpellBookOpen {
-                isSpellBookOpen = false
-                spellBookNode.removeFromParent()
-            } else {
-                isSpellBookOpen = true
-                sceneCamera.addChild(spellBookNode)
-            }
+//        case 48:
+//            if isSpellBookOpen {
+//                isSpellBookOpen = false
+//                spellBookNode.removeFromParent()
+//            } else {
+//                isSpellBookOpen = true
+//                sceneCamera.addChild(spellBookNode)
+//            }
             
         default:
-//            if event.keyCode == 49 {
-//                if player.inputSpell == "" {
-//                    player.castSpellInBattleScene(scene: self, spell: player.inputSpell, enemy: enemy)
-//                    break
-//                }
-//            }
+            if event.keyCode == 49 {
+                if player.inputSpell == "" {
+                    player.castSpellInBattleScene(scene: self, chant: player.inputSpell, enemy: enemy)
+                    break
+                }
+            }
             
             player.inputSpell.append(event.characters!)
             player.spellLabelNode.text = player.inputSpell

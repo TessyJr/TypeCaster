@@ -20,8 +20,8 @@
 		261F619E2C2432DB0082232A /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261F619D2C2432DB0082232A /* AudioManager.swift */; };
 		261F61A02C2438BD0082232A /* SfxType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261F619F2C2438BD0082232A /* SfxType.swift */; };
 		53277AA52C23FA9000F15407 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53277AA42C23FA9000F15407 /* AppDelegate.swift */; };
-		53277AA72C23FA9000F15407 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 53277AA62C23FA9000F15407 /* GameScene.sks */; };
-		53277AAB2C23FA9000F15407 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53277AAA2C23FA9000F15407 /* GameScene.swift */; };
+		53277AA72C23FA9000F15407 /* ExplorationScene1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 53277AA62C23FA9000F15407 /* ExplorationScene1.sks */; };
+		53277AAB2C23FA9000F15407 /* ExplorationScene1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53277AAA2C23FA9000F15407 /* ExplorationScene1.swift */; };
 		53277AAD2C23FA9000F15407 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53277AAC2C23FA9000F15407 /* ViewController.swift */; };
 		53277AAF2C23FA9100F15407 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53277AAE2C23FA9100F15407 /* Assets.xcassets */; };
 		53277AB22C23FA9100F15407 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 53277AB12C23FA9100F15407 /* Base */; };
@@ -53,8 +53,8 @@
 		261F619F2C2438BD0082232A /* SfxType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SfxType.swift; sourceTree = "<group>"; };
 		53277AA12C23FA9000F15407 /* TypeCaster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TypeCaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53277AA42C23FA9000F15407 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		53277AA62C23FA9000F15407 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		53277AAA2C23FA9000F15407 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		53277AA62C23FA9000F15407 /* ExplorationScene1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ExplorationScene1.sks; sourceTree = "<group>"; };
+		53277AAA2C23FA9000F15407 /* ExplorationScene1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorationScene1.swift; sourceTree = "<group>"; };
 		53277AAC2C23FA9000F15407 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		53277AAE2C23FA9100F15407 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		53277AB12C23FA9100F15407 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -161,8 +161,8 @@
 		53277AB92C23FBB900F15407 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				53277AA62C23FA9000F15407 /* GameScene.sks */,
-				53277AAA2C23FA9000F15407 /* GameScene.swift */,
+				53277AA62C23FA9000F15407 /* ExplorationScene1.sks */,
+				53277AAA2C23FA9000F15407 /* ExplorationScene1.swift */,
 				53277AD52C24132200F15407 /* BattleScene.sks */,
 				53277ACF2C23FCF400F15407 /* BattleScene.swift */,
 			);
@@ -266,7 +266,7 @@
 				261F61942C242D390082232A /* alert.mp3 in Resources */,
 				261F61912C242D390082232A /* fireball.mp3 in Resources */,
 				261F61922C242D390082232A /* playerDie.mp3 in Resources */,
-				53277AA72C23FA9000F15407 /* GameScene.sks in Resources */,
+				53277AA72C23FA9000F15407 /* ExplorationScene1.sks in Resources */,
 				261F61952C242D390082232A /* throwRock.mp3 in Resources */,
 				53277AAF2C23FA9100F15407 /* Assets.xcassets in Resources */,
 				261F619A2C242D420082232A /* battleBGM.mp3 in Resources */,
@@ -283,7 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				53277AAD2C23FA9000F15407 /* ViewController.swift in Sources */,
-				53277AAB2C23FA9000F15407 /* GameScene.swift in Sources */,
+				53277AAB2C23FA9000F15407 /* ExplorationScene1.swift in Sources */,
 				261F61A02C2438BD0082232A /* SfxType.swift in Sources */,
 				53277AA52C23FA9000F15407 /* AppDelegate.swift in Sources */,
 				53277AC32C23FC7200F15407 /* BattleSceneProtocol.swift in Sources */,
@@ -441,7 +441,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = VPGX5Q423F;
+				DEVELOPMENT_TEAM = XJ7Y6VR3NN;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -468,7 +468,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = VPGX5Q423F;
+				DEVELOPMENT_TEAM = XJ7Y6VR3NN;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
