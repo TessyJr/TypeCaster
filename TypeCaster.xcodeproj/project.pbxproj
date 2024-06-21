@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		261F61892C2425B50082232A /* BgmType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261F61882C2425B50082232A /* BgmType.swift */; };
-		261F61912C242D390082232A /* fireball.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 261F618A2C242D390082232A /* fireball.mp3 */; };
 		261F61922C242D390082232A /* playerDie.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 261F618B2C242D390082232A /* playerDie.mp3 */; };
 		261F61932C242D390082232A /* healing.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 261F618C2C242D390082232A /* healing.mp3 */; };
 		261F61942C242D390082232A /* alert.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 261F618D2C242D390082232A /* alert.mp3 */; };
@@ -19,6 +18,7 @@
 		261F619B2C242D420082232A /* explorationBGM.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 261F61992C242D420082232A /* explorationBGM.mp3 */; };
 		261F619E2C2432DB0082232A /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261F619D2C2432DB0082232A /* AudioManager.swift */; };
 		261F61A02C2438BD0082232A /* SfxType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261F619F2C2438BD0082232A /* SfxType.swift */; };
+		261F61A22C257C200082232A /* fireball.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 261F61A12C257C200082232A /* fireball.mp3 */; };
 		53277AA52C23FA9000F15407 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53277AA42C23FA9000F15407 /* AppDelegate.swift */; };
 		53277AA72C23FA9000F15407 /* ExplorationScene1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 53277AA62C23FA9000F15407 /* ExplorationScene1.sks */; };
 		53277AAB2C23FA9000F15407 /* ExplorationScene1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53277AAA2C23FA9000F15407 /* ExplorationScene1.swift */; };
@@ -40,7 +40,6 @@
 
 /* Begin PBXFileReference section */
 		261F61882C2425B50082232A /* BgmType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BgmType.swift; sourceTree = "<group>"; };
-		261F618A2C242D390082232A /* fireball.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = fireball.mp3; sourceTree = "<group>"; };
 		261F618B2C242D390082232A /* playerDie.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = playerDie.mp3; sourceTree = "<group>"; };
 		261F618C2C242D390082232A /* healing.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = healing.mp3; sourceTree = "<group>"; };
 		261F618D2C242D390082232A /* alert.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alert.mp3; sourceTree = "<group>"; };
@@ -51,6 +50,7 @@
 		261F61992C242D420082232A /* explorationBGM.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = explorationBGM.mp3; sourceTree = "<group>"; };
 		261F619D2C2432DB0082232A /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		261F619F2C2438BD0082232A /* SfxType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SfxType.swift; sourceTree = "<group>"; };
+		261F61A12C257C200082232A /* fireball.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = fireball.mp3; sourceTree = "<group>"; };
 		53277AA12C23FA9000F15407 /* TypeCaster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TypeCaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53277AA42C23FA9000F15407 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		53277AA62C23FA9000F15407 /* ExplorationScene1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ExplorationScene1.sks; sourceTree = "<group>"; };
@@ -96,8 +96,8 @@
 			isa = PBXGroup;
 			children = (
 				261F618D2C242D390082232A /* alert.mp3 */,
-				261F618A2C242D390082232A /* fireball.mp3 */,
 				261F618C2C242D390082232A /* healing.mp3 */,
+				261F61A12C257C200082232A /* fireball.mp3 */,
 				261F618F2C242D390082232A /* iceblast.mp3 */,
 				261F618B2C242D390082232A /* playerDie.mp3 */,
 				261F618E2C242D390082232A /* throwRock.mp3 */,
@@ -264,10 +264,10 @@
 				261F619B2C242D420082232A /* explorationBGM.mp3 in Resources */,
 				261F61932C242D390082232A /* healing.mp3 in Resources */,
 				261F61942C242D390082232A /* alert.mp3 in Resources */,
-				261F61912C242D390082232A /* fireball.mp3 in Resources */,
 				261F61922C242D390082232A /* playerDie.mp3 in Resources */,
 				53277AA72C23FA9000F15407 /* ExplorationScene1.sks in Resources */,
 				261F61952C242D390082232A /* throwRock.mp3 in Resources */,
+				261F61A22C257C200082232A /* fireball.mp3 in Resources */,
 				53277AAF2C23FA9100F15407 /* Assets.xcassets in Resources */,
 				261F619A2C242D420082232A /* battleBGM.mp3 in Resources */,
 				53277AB22C23FA9100F15407 /* Base in Resources */,
@@ -441,7 +441,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = XJ7Y6VR3NN;
+				DEVELOPMENT_TEAM = VPGX5Q423F;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -468,7 +468,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = XJ7Y6VR3NN;
+				DEVELOPMENT_TEAM = VPGX5Q423F;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";

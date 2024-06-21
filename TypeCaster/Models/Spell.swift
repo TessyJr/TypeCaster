@@ -93,8 +93,6 @@ class Spell {
         scene.spellNode = spellNode
         scene.addChild(spellNode)
         
-        let spellType: SpellSfxType = .fireball
-        
         let dx = enemy.spriteNode.position.x - spellNode.position.x
         let dy = enemy.spriteNode.position.y - spellNode.position.y
         let angle = atan2(dy, dx)
@@ -110,7 +108,7 @@ class Spell {
         
         let sequence = SKAction.sequence([moveAction, removeAction, damageAction])
         
-        AudioManager.shared.playSpellSfx(node: spellNode, spellType: spellType)
+        AudioManager.shared.playSpellSfx(node: spellNode, spellType: self.spellType)
         
         spellNode.run(sequence)
     }
