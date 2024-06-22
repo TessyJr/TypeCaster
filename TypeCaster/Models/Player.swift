@@ -362,6 +362,13 @@ class Player {
         }
         
         if scene.wallCoordinates.contains(moveToCoordinate) || scene.objectCoordinates.contains(moveToCoordinate) || !scene.floorCoordinates.contains(moveToCoordinate) {
+            if scene.wallCoordinates.contains(moveToCoordinate) {
+                print(1)
+            } else if scene.objectCoordinates.contains(moveToCoordinate) {
+                print(2)
+            } else {
+                print(3)
+            }
             return
         } else {
             status = .moving

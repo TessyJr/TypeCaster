@@ -1,6 +1,6 @@
 import SpriteKit
 
-class ExplorationScene1: SKScene, ExplorationSceneProtocol {
+class ExplorationScene2: SKScene, ExplorationSceneProtocol {
     var sceneCamera: SKCameraNode = SKCameraNode()
     var cooldownContainer: SKNode = SKNode()
     
@@ -304,17 +304,6 @@ class ExplorationScene1: SKScene, ExplorationSceneProtocol {
                 
                 // Remove object from objects array
                 objects.remove(at: index)
-            }
-        }
-        
-        if player.spriteNode.position == nextSceneCoordinate {
-            if let nextScene = SKScene(fileNamed: "ExplorationScene2") as? ExplorationSceneProtocol {
-                nextScene.player = self.player
-                
-                if let view = self.view {
-                    let transition = SKTransition.fade(withDuration: 1.0)
-                    view.presentScene(nextScene, transition: transition)
-                }
             }
         }
     }
