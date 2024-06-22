@@ -21,8 +21,6 @@ class ExplorationScene1: SKScene, ExplorationSceneProtocol {
     var objects: [Object] = []
     var destroyedObjects: [Object] = []
     
-    var nextSceneCoordinate: CGPoint = CGPoint()
-    
     func setUpWallsAndFloors(map: SKTileMapNode) {
         let tileMap = map
         let tileSize = tileMap.tileSize
@@ -127,9 +125,14 @@ class ExplorationScene1: SKScene, ExplorationSceneProtocol {
         objectCoordinates.removeAll()
         
         for node in self.children {
-            if node.name == "object" {
+            if node.name == "object" || node.name == "door" {
                 if let objectSpriteNode = node as? SKSpriteNode,
                    let objectType = objectSpriteNode.userData?["objectType"] as? String {
+                    
+                    if objectType == "door" && enemies.isEmpty {
+                        objectSpriteNode.removeFromParent()
+                        continue
+                    }
                     
                     if let object = Object.create(spriteNode: objectSpriteNode, coordinate: objectSpriteNode.position, objectType: objectType) {
                         if destroyedObjects.contains(where: { $0.coordinate == object.coordinate }) {
@@ -148,36 +151,10 @@ class ExplorationScene1: SKScene, ExplorationSceneProtocol {
         }
     }
     
-    func setUpDoor() {
-        for node in self.children {
-            if node.name == "door" {
-                if let objectSpriteNode = node as? SKSpriteNode {
-                    
-                    
-                    if enemies.isEmpty {
-                        if let index = wallCoordinates.firstIndex(of: objectSpriteNode.position) {
-                            print("found")
-                            wallCoordinates.remove(at: index)
-                        }
-                        
-                        floorCoordinates.append(objectSpriteNode.position)
-                        
-                         nextSceneCoordinate = objectSpriteNode.position
-                        
-                        objectSpriteNode.texture = SKTexture(imageNamed: "door-open")
-                    } else {
-                        wallCoordinates.append(objectSpriteNode.position)
-                    }
-                }
-            }
-        }
-        
-    }
-    
     override func didMove(to view: SKView) {
         AudioManager.shared.playBgm(bgmType: .exploration)
         sceneCamera = childNode(withName: "sceneCamera") as! SKCameraNode
-        
+            
         for node in self.children {
             if let someTileMap = node as? SKTileMapNode {
                 if someTileMap.name == "background" {
@@ -188,7 +165,6 @@ class ExplorationScene1: SKScene, ExplorationSceneProtocol {
         
         setUpEnemies()
         setUpObjects()
-        setUpDoor()
         setUpPlayer()
     }
     
@@ -231,7 +207,7 @@ class ExplorationScene1: SKScene, ExplorationSceneProtocol {
             }
         }
     }
-    
+
     override func keyDown(with event: NSEvent) {
         if player.status == .stunned || player.isInBattle {
             return
@@ -294,6 +270,10 @@ class ExplorationScene1: SKScene, ExplorationSceneProtocol {
                 spellNode.removeFromParent()
                 self.spellNode = nil
                 
+                if object.name == "door" {
+                    continue
+                }
+                
                 object.spriteNode.removeFromParent()
                 destroyedObjects.append(object)
                 
@@ -304,17 +284,6 @@ class ExplorationScene1: SKScene, ExplorationSceneProtocol {
                 
                 // Remove object from objects array
                 objects.remove(at: index)
-            }
-        }
-        
-        if player.spriteNode.position == nextSceneCoordinate {
-            if let nextScene = SKScene(fileNamed: "ExplorationScene2") as? ExplorationSceneProtocol {
-                nextScene.player = self.player
-                
-                if let view = self.view {
-                    let transition = SKTransition.fade(withDuration: 1.0)
-                    view.presentScene(nextScene, transition: transition)
-                }
             }
         }
     }
