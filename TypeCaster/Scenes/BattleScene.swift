@@ -112,7 +112,11 @@ class BattleScene: SKScene, BattleSceneProtocol {
     }
     
     func goToPreviousScene() {
-        let waitAction = SKAction.wait(forDuration: 1.0)
+        if self.previousScene.enemies.count == 2 || self.previousScene.enemies.count == 1 {
+            self.previousScene.enemies.first?.isLastEnemy = true
+        }
+        
+        let waitAction = SKAction.wait(forDuration: enemy.isLastEnemy ? 3.0 : 1.0)
         
         let transitionAction = SKAction.run {
             self.previousScene.player = self.player
@@ -126,6 +130,11 @@ class BattleScene: SKScene, BattleSceneProtocol {
         }
         
         let sequence = SKAction.sequence([waitAction, transitionAction])
+        
+        if enemy.isLastEnemy{
+            enemy.dropKey(scene: self)
+        }
+        
         self.run(sequence)
     }
     

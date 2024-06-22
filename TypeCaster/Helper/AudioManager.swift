@@ -61,4 +61,9 @@ class AudioManager {
         node.run(sfx)
     }
     
+    func playEnemyDropKeySfx(node: SKSpriteNode) {
+        let sfx = SKAction.playSoundFileNamed("shimmeringKey", waitForCompletion: false)
+        node.run(sfx)
+    }
+    
 }

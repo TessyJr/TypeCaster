@@ -12,6 +12,8 @@ class Enemy {
     
     var attackInterval: CGFloat = 0
     
+    var isLastEnemy: Bool = false
+    
     // Factory method to create enemy based on type with customization
     static func create(spriteNode: SKSpriteNode, coordinate: CGPoint, enemyType: String) -> Enemy? {
         switch enemyType {
@@ -64,6 +66,7 @@ class Enemy {
             let dieAnimation = SKAction.animate(with: textures, timePerFrame: 0.25)
             
             spriteNode.run(dieAnimation)
+            
         case .attacking:
             for i in 1...4 {
                 let textureName = "\(name)-attack-\(i)"
@@ -101,6 +104,36 @@ class Enemy {
             self.status = .idle
             self.animateSprite()
         }
+    }
+    
+    func dropKey(scene: BattleSceneProtocol) {
+        
+        var keyTextures: [SKTexture] = []
+        
+        for i in 1...3 {
+            let textureName = "flying-key-\(i)"
+            let texture = SKTexture(imageNamed: textureName)
+            keyTextures.append(texture)
+        }
+        
+        let keyNode: SKSpriteNode = SKSpriteNode(texture: keyTextures[2])
+        keyNode.position = self.spriteNode.position
+        
+        
+        let moveAnimation = SKAction.animate(with: keyTextures, timePerFrame: 0.3)
+        let repeatAnimation = SKAction.repeatForever(moveAnimation)
+        keyNode.run(repeatAnimation)
+        
+        scene.addChild(keyNode)
+        
+        let moveAction = SKAction.move(to: scene.player.spriteNode.position, duration: 2.5)
+        let removeAction = SKAction.removeFromParent()
+        
+        let sequence = SKAction.sequence([moveAction, removeAction])
+        AudioManager.shared.stopBgm()
+        AudioManager.shared.playEnemyDropKeySfx(node: keyNode)
+        
+        keyNode.run(sequence)
     }
 }
 

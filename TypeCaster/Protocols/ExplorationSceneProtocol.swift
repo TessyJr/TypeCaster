@@ -9,6 +9,7 @@ protocol ExplorationSceneProtocol: SKScene {
     
     var player: Player { get set }
     
+    var enemies: [Enemy] {get set}
     var defeatedEnemies: [Enemy] { get set }
     
     var spellNode: SKSpriteNode? { get set }
