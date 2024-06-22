@@ -76,42 +76,43 @@ class Spell {
     }
     
     func summonSpellInBattleScene(scene: BattleSceneProtocol, enemy: Enemy) {
-        isInCooldown = true
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + cooldownDuration) {
-            self.isInCooldown = false
+            isInCooldown = true
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + cooldownDuration) {
+                self.isInCooldown = false
+            }
+            
+            let spellNode: SKSpriteNode = SKSpriteNode()
+            spellNode.name = "spell"
+            spellNode.size = CGSize(width: 32.0, height: 32.0)
+            spellNode.position = scene.player.spriteNode.position
+            
+            let moveAnimation = SKAction.animate(with: textures, timePerFrame: 0.1)
+            let repeatAnimation = SKAction.repeatForever(moveAnimation)
+            spellNode.run(repeatAnimation)
+            
+            scene.spellNode = spellNode
+            scene.addChild(spellNode)
+            
+            let dx = enemy.spriteNode.position.x - spellNode.position.x
+            let dy = enemy.spriteNode.position.y - spellNode.position.y
+            let angle = atan2(dy, dx)
+            spellNode.zRotation = angle
+            
+            let moveAction = SKAction.move(to: enemy.spriteNode.position, duration: 1.0)
+            
+            let removeAction = SKAction.removeFromParent()
+            
+            let damageAction = SKAction.run {
+                enemy.getHurt(scene: scene, damage: self.damage)
+            }
+            
+            let sequence = SKAction.sequence([moveAction, removeAction, damageAction])
+            
+            AudioManager.shared.playSpellSfx(node: spellNode, spellType: self.spellType)
+            
+            spellNode.run(sequence)
         }
-        
-        let spellNode: SKSpriteNode = SKSpriteNode()
-        spellNode.size = CGSize(width: 32.0, height: 32.0)
-        spellNode.position = scene.player.spriteNode.position
-        
-        let moveAnimation = SKAction.animate(with: textures, timePerFrame: 0.1)
-        let repeatAnimation = SKAction.repeatForever(moveAnimation)
-        spellNode.run(repeatAnimation)
-        
-        scene.spellNode = spellNode
-        scene.addChild(spellNode)
-        
-        let dx = enemy.spriteNode.position.x - spellNode.position.x
-        let dy = enemy.spriteNode.position.y - spellNode.position.y
-        let angle = atan2(dy, dx)
-        spellNode.zRotation = angle
-        
-        let moveAction = SKAction.move(to: enemy.spriteNode.position, duration: 1.0)
-        
-        let removeAction = SKAction.removeFromParent()
-        
-        let damageAction = SKAction.run {
-            enemy.getHurt(scene: scene, damage: self.damage)
-        }
-        
-        let sequence = SKAction.sequence([moveAction, removeAction, damageAction])
-        
-        AudioManager.shared.playSpellSfx(node: spellNode, spellType: self.spellType)
-        
-        spellNode.run(sequence)
-    }
 }
 
 class Rock: Spell {
