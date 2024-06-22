@@ -167,6 +167,7 @@ class BattleScene: SKScene, BattleSceneProtocol {
         
         for node in self.children {
             if node.name == "pre-attack-node" || node.name == "spell" {
+                node.removeAllActions()
                 node.removeFromParent()
             }
         }
