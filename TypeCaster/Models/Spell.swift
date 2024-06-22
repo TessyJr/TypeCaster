@@ -83,6 +83,7 @@ class Spell {
         }
         
         let spellNode: SKSpriteNode = SKSpriteNode()
+        spellNode.name = "spell"
         spellNode.size = CGSize(width: 32.0, height: 32.0)
         spellNode.position = scene.player.spriteNode.position
         

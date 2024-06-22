@@ -166,7 +166,7 @@ class BattleScene: SKScene, BattleSceneProtocol {
         self.isBattleOver = true
         
         for node in self.children {
-            if node.name == "pre-attack-node" {
+            if node.name == "pre-attack-node" || node.name == "spell" {
                 node.removeFromParent()
             }
         }
@@ -233,8 +233,6 @@ class BattleScene: SKScene, BattleSceneProtocol {
     }
     
     override func update(_ currentTime: TimeInterval) {
-//        sceneCamera.position = player.spriteNode.position
-        
         attackNodes.forEach { attackNode in
             if player.spriteNode.frame.intersects(attackNode.frame) {
                 player.getDamage(scene: self)
