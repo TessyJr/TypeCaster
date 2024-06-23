@@ -76,10 +76,30 @@ class Player {
             }
             
             let stunnedAnimation = SKAction.animate(with: textures, timePerFrame: 0.1)
-            let repeatStunnedAnimation = SKAction.repeatForever(stunnedAnimation)
+            let repeatStunnedAnimation = SKAction.repeat(stunnedAnimation, count: 5)
             
-            spriteNode.run(repeatStunnedAnimation)
+            let stunnedFinishAction = SKAction.run {
+                self.status = .idle
+                self.animateSprite()
+            }
+            
+            let stunnedSequence = SKAction.sequence([repeatStunnedAnimation, stunnedFinishAction])
+            spriteNode.run(stunnedSequence)
         case .hurt:
+            isInvincible = true
+            
+            invincibleTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
+                self.spriteNode.alpha = self.spriteNode.alpha == 1.0 ? 0.5 : 1.0
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.isInvincible = false
+                self.spriteNode.alpha = 1.0
+                
+                self.invincibleTimer?.invalidate()
+                self.invincibleTimer = nil
+            }
+            
             for i in 1...2 {
                 let textureName = "player-hurt-\(i)"
                 let texture = SKTexture(imageNamed: textureName)
@@ -87,8 +107,15 @@ class Player {
             }
             
             let hurtAnimation = SKAction.animate(with: textures, timePerFrame: 0.1)
+            let repeatHurtAnimation = SKAction.repeat(hurtAnimation, count: 2)
             
-            spriteNode.run(hurtAnimation)
+            let hurtFinishAction = SKAction.run {
+                self.status = .idle
+                self.animateSprite()
+            }
+            
+            let hurtSequence = SKAction.sequence([repeatHurtAnimation, hurtFinishAction])
+            spriteNode.run(hurtSequence)
         case .dead:
             for i in 1...7 {
                 let textureName = "player-dead-\(i)"
@@ -115,34 +142,15 @@ class Player {
                 spriteNode.removeAllActions()
                 
                 status = .dead
+                animateSprite()
                 
                 AudioManager.shared.stopBgm()
                 AudioManager.shared.playPlayerDeadSfx(node: self.spriteNode)
-                animateSprite()
                 
                 scene.goToStartScene()
             } else {
                 status = .hurt
                 animateSprite()
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    self.status = .idle
-                    self.animateSprite()
-                }
-                
-                isInvincible = true
-                
-                invincibleTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
-                    self.spriteNode.alpha = self.spriteNode.alpha == 1.0 ? 0.5 : 1.0
-                }
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                    self.isInvincible = false
-                    self.spriteNode.alpha = 1.0
-                    
-                    self.invincibleTimer?.invalidate()
-                    self.invincibleTimer = nil
-                }
             }
         }
     }
@@ -193,11 +201,6 @@ class Player {
         } else {
             status = .stunned
             animateSprite()
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                self.status = .idle
-                self.animateSprite()
-            }
         }
     }
     
@@ -324,11 +327,6 @@ class Player {
         } else {
             status = .stunned
             animateSprite()
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                self.status = .idle
-                self.animateSprite()
-            }
         }
     }
     
