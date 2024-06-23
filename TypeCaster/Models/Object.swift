@@ -2,6 +2,7 @@ import SpriteKit
 
 class Object {
     var spriteNode: SKSpriteNode = SKSpriteNode()
+    
     var coordinate: CGPoint = CGPoint()
     var objectType: String = ""
         

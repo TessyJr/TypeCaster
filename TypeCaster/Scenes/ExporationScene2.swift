@@ -7,6 +7,7 @@ class ExplorationScene2: SKScene, ExplorationSceneProtocol {
     var floorCoordinates: [CGPoint] = []
     var wallCoordinates: [CGPoint] = []
     var objectCoordinates: [CGPoint] = []
+    var npcCoordinates: [CGPoint] = []
     
     var player: Player = Player()
     var lastPlayerCoordinate: CGPoint?
@@ -20,6 +21,8 @@ class ExplorationScene2: SKScene, ExplorationSceneProtocol {
     
     var objects: [Object] = []
     var destroyedObjects: [Object] = []
+    
+    var npcs: [NPC] = []
     
     var nextSceneCoordinate: CGPoint = CGPoint()
     
@@ -273,7 +276,7 @@ class ExplorationScene2: SKScene, ExplorationSceneProtocol {
         default:
             if event.keyCode == 49 {
                 if player.inputSpell == "" {
-                    player.interactWithObject(objects: objects)
+                    player.interactWith(objects: objects, npcs: npcs)
                     break
                 }
             }

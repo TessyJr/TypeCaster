@@ -38,6 +38,7 @@
 		53277AD62C24132200F15407 /* BattleScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 53277AD52C24132200F15407 /* BattleScene.sks */; };
 		53277AD82C26F6CA00F15407 /* ExporationScene2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53277AD72C26F6CA00F15407 /* ExporationScene2.swift */; };
 		53277ADA2C26F6D800F15407 /* ExplorationScene2.sks in Resources */ = {isa = PBXBuildFile; fileRef = 53277AD92C26F6D800F15407 /* ExplorationScene2.sks */; };
+		53277ADC2C27E35C00F15407 /* NPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53277ADB2C27E35C00F15407 /* NPC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		53277AD52C24132200F15407 /* BattleScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BattleScene.sks; sourceTree = "<group>"; };
 		53277AD72C26F6CA00F15407 /* ExporationScene2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExporationScene2.swift; sourceTree = "<group>"; };
 		53277AD92C26F6D800F15407 /* ExplorationScene2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ExplorationScene2.sks; sourceTree = "<group>"; };
+		53277ADB2C27E35C00F15407 /* NPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NPC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +204,7 @@
 				53277AC92C23FCAB00F15407 /* Enemy.swift */,
 				53277ACB2C23FCC100F15407 /* Object.swift */,
 				53277ACD2C23FCD100F15407 /* Spell.swift */,
+				53277ADB2C27E35C00F15407 /* NPC.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				53277ACA2C23FCAB00F15407 /* Enemy.swift in Sources */,
 				261F619E2C2432DB0082232A /* AudioManager.swift in Sources */,
 				53277AD82C26F6CA00F15407 /* ExporationScene2.swift in Sources */,
+				53277ADC2C27E35C00F15407 /* NPC.swift in Sources */,
 				53277ACC2C23FCC100F15407 /* Object.swift in Sources */,
 				53277ABF2C23FC3800F15407 /* Direction.swift in Sources */,
 				261F61892C2425B50082232A /* BgmType.swift in Sources */,

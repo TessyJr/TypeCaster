@@ -7,6 +7,7 @@ class ExplorationScene1: SKScene, ExplorationSceneProtocol {
     var floorCoordinates: [CGPoint] = []
     var wallCoordinates: [CGPoint] = []
     var objectCoordinates: [CGPoint] = []
+    var npcCoordinates: [CGPoint] = []
     
     var player: Player = Player()
     var lastPlayerCoordinate: CGPoint?
@@ -20,6 +21,8 @@ class ExplorationScene1: SKScene, ExplorationSceneProtocol {
     
     var objects: [Object] = []
     var destroyedObjects: [Object] = []
+    
+    var npcs: [NPC] = []
     
     var nextSceneCoordinate: CGPoint = CGPoint()
     
@@ -162,7 +165,7 @@ class ExplorationScene1: SKScene, ExplorationSceneProtocol {
                         
                         floorCoordinates.append(objectSpriteNode.position)
                         
-                         nextSceneCoordinate = objectSpriteNode.position
+                        nextSceneCoordinate = objectSpriteNode.position
                         
                         objectSpriteNode.texture = SKTexture(imageNamed: "door-open")
                     } else {
@@ -171,7 +174,26 @@ class ExplorationScene1: SKScene, ExplorationSceneProtocol {
                 }
             }
         }
-        
+    }
+    
+    func setUpNPCS() {
+        if npcCoordinates.isEmpty {
+            for node in self.children {
+                if node.name == "npc" {
+                    if let npcSpriteNode = node as? SKSpriteNode,
+                       let npcType = npcSpriteNode.userData?["npcType"] as? String {
+                        
+                        if let npc = NPC.create(spriteNode: npcSpriteNode, coordinate: npcSpriteNode.position, npcType: npcType) {
+                            npc.status = .idle
+                            npc.animateSprite()
+                            
+                            npcCoordinates.append(npc.coordinate)
+                            npcs.append(npc)
+                        }
+                    }
+                }
+            }
+        }
     }
     
     override func didMove(to view: SKView) {
@@ -187,11 +209,11 @@ class ExplorationScene1: SKScene, ExplorationSceneProtocol {
         }
         
         setUpEnemies()
+        setUpNPCS()
         setUpObjects()
         setUpDoor()
         setUpPlayer()
     }
-    
     
     func checkIfEnemyInPlayerRadius() {
         enemies.forEach { enemy in
@@ -273,7 +295,7 @@ class ExplorationScene1: SKScene, ExplorationSceneProtocol {
         default:
             if event.keyCode == 49 {
                 if player.inputSpell == "" {
-                    player.interactWithObject(objects: objects)
+                    player.interactWith(objects: objects, npcs: npcs)
                     break
                 }
             }

@@ -86,20 +86,6 @@ class Player {
             let stunnedSequence = SKAction.sequence([repeatStunnedAnimation, stunnedFinishAction])
             spriteNode.run(stunnedSequence)
         case .hurt:
-            isInvincible = true
-            
-            invincibleTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
-                self.spriteNode.alpha = self.spriteNode.alpha == 1.0 ? 0.5 : 1.0
-            }
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                self.isInvincible = false
-                self.spriteNode.alpha = 1.0
-                
-                self.invincibleTimer?.invalidate()
-                self.invincibleTimer = nil
-            }
-            
             for i in 1...2 {
                 let textureName = "player-hurt-\(i)"
                 let texture = SKTexture(imageNamed: textureName)
@@ -125,6 +111,8 @@ class Player {
             
             let deadAnimation = SKAction.animate(with: textures, timePerFrame: 0.25)
             spriteNode.run(deadAnimation)
+        default:
+            break
         }
     }
     
@@ -151,6 +139,20 @@ class Player {
             } else {
                 status = .hurt
                 animateSprite()
+                
+                isInvincible = true
+                
+                invincibleTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
+                    self.spriteNode.alpha = self.spriteNode.alpha == 1.0 ? 0.5 : 1.0
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    self.isInvincible = false
+                    self.spriteNode.alpha = 1.0
+                    
+                    self.invincibleTimer?.invalidate()
+                    self.invincibleTimer = nil
+                }
             }
         }
     }
@@ -258,7 +260,7 @@ class Player {
     }
     
     // Exploration Scene functions
-    func interactWithObject(objects: [Object]) {
+    func interactWith(objects: [Object], npcs: [NPC]) {
         let offset: CGPoint
         
         switch direction {
@@ -279,6 +281,8 @@ class Player {
         
         if let objectToInteract = objects.first(where: { $0.coordinate == interactCoordinate }) {
             objectToInteract.interact(player: self)
+        } else if let npcToInteract = npcs.first(where: { $0.coordinate == interactCoordinate }) {
+            npcToInteract.interact()
         }
     }
     
@@ -359,7 +363,7 @@ class Player {
             moveAction = SKAction.moveBy(x: 0, y: -moveAmount, duration: moveSpeed)
         }
         
-        if scene.wallCoordinates.contains(moveToCoordinate) || scene.objectCoordinates.contains(moveToCoordinate) || !scene.floorCoordinates.contains(moveToCoordinate) {
+        if scene.wallCoordinates.contains(moveToCoordinate) || scene.objectCoordinates.contains(moveToCoordinate) ||  scene.npcCoordinates.contains(moveToCoordinate) || !scene.floorCoordinates.contains(moveToCoordinate) {
             return
         } else {
             status = .moving

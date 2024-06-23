@@ -6,6 +6,7 @@ protocol ExplorationSceneProtocol: SKScene {
     var floorCoordinates: [CGPoint] { get set }
     var wallCoordinates: [CGPoint] { get set }
     var objectCoordinates: [CGPoint] { get set }
+    var npcCoordinates: [CGPoint] { get set }
     
     var player: Player { get set }
     
