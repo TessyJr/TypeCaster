@@ -13,6 +13,7 @@ protocol BattleSceneProtocol: SKScene {
     var previousScene: ExplorationSceneProtocol { get set }
     
     var spellNode: SKSpriteNode? { get set }
+    var spellCooldownNodes: [SKSpriteNode] { get set }
     
     func stopBattle()
     

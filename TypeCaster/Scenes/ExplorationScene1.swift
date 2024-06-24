@@ -13,6 +13,7 @@ class ExplorationScene1: SKScene, ExplorationSceneProtocol {
     var lastPlayerDirection: Direction?
     
     var spellNode: SKSpriteNode?
+    var spellCooldownNodes: [SKSpriteNode] = []
     
     var enemies: [Enemy] = []
     var defeatedEnemies: [Enemy] = []
@@ -63,17 +64,36 @@ class ExplorationScene1: SKScene, ExplorationSceneProtocol {
         
         player.radiusNode = childNode(withName: "player-radius") as! SKSpriteNode
         
-        player.healthBarNode = player.spriteNode.childNode(withName: "playerHealthBar") as! SKSpriteNode
+        player.healthBarNode = sceneCamera.childNode(withName: "playerHealthBar") as! SKSpriteNode
         var playerHealthRatio = CGFloat(player.currentHealth) / CGFloat(player.maxHealth)
         if playerHealthRatio < 0 {
             playerHealthRatio = 0
         }
-        player.healthBarNode.size.width = 32 * playerHealthRatio
+        player.healthBarNode.size.width = 256 * playerHealthRatio
         
         player.spellLabelNode = player.spriteNode.childNode(withName: "labelPlayerSpell") as! SKLabelNode
         player.inputSpell = ""
         player.spellLabelNode.text = player.inputSpell
         player.spellLabelNodeBackground = player.spriteNode.childNode(withName: "labelPlayerSpellBackground") as! SKSpriteNode
+        
+        cooldownContainer = sceneCamera.childNode(withName: "cooldown-container")!
+        
+        if spellCooldownNodes.isEmpty {
+            var cooldownNodePosition = CGPoint(x: 0, y: 0)
+            for spell in player.spells {
+                if spell.spellType == .throwRock {
+                    continue
+                }
+                
+                let cooldownNode = SKSpriteNode(texture: spell.cooldownTexture)
+                cooldownNode.position = cooldownNodePosition
+                cooldownContainer.addChild(cooldownNode)
+                
+                spellCooldownNodes.append(cooldownNode)
+                
+                cooldownNodePosition.x += 40
+            }
+        }
     }
     
     func setUpEnemies() {
@@ -134,9 +154,7 @@ class ExplorationScene1: SKScene, ExplorationSceneProtocol {
     override func didMove(to view: SKView) {
         AudioManager.shared.playBgm(bgmType: .exploration)
         sceneCamera = childNode(withName: "sceneCamera") as! SKCameraNode
-        cooldownContainer = sceneCamera.childNode(withName: "cooldown-container")!  
-        cooldownContainer.removeAllChildren()
-        
+            
         for node in self.children {
             if let someTileMap = node as? SKTileMapNode {
                 if someTileMap.name == "background" {
