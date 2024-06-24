@@ -1,6 +1,6 @@
 import SpriteKit
 
-class ExplorationScene1: SKScene, ExplorationSceneProtocol {
+class ExplorationScene2: SKScene, ExplorationSceneProtocol {
     var sceneCamera: SKCameraNode = SKCameraNode()
     var cooldownContainer: SKNode = SKNode()
     
@@ -165,7 +165,7 @@ class ExplorationScene1: SKScene, ExplorationSceneProtocol {
                         
                         floorCoordinates.append(objectSpriteNode.position)
                         
-                        nextSceneCoordinate = objectSpriteNode.position
+                         nextSceneCoordinate = objectSpriteNode.position
                         
                         objectSpriteNode.texture = SKTexture(imageNamed: "door-open")
                     } else {
@@ -174,26 +174,7 @@ class ExplorationScene1: SKScene, ExplorationSceneProtocol {
                 }
             }
         }
-    }
-    
-    func setUpNPCS() {
-        if npcCoordinates.isEmpty {
-            for node in self.children {
-                if node.name == "npc" {
-                    if let npcSpriteNode = node as? SKSpriteNode,
-                       let npcType = npcSpriteNode.userData?["npcType"] as? String {
-                        
-                        if let npc = NPC.create(spriteNode: npcSpriteNode, coordinate: npcSpriteNode.position, npcType: npcType) {
-                            npc.status = .idle
-                            npc.animateSprite()
-                            
-                            npcCoordinates.append(npc.coordinate)
-                            npcs.append(npc)
-                        }
-                    }
-                }
-            }
-        }
+        
     }
     
     override func didMove(to view: SKView) {
@@ -209,11 +190,11 @@ class ExplorationScene1: SKScene, ExplorationSceneProtocol {
         }
         
         setUpEnemies()
-        setUpNPCS()
         setUpObjects()
         setUpDoor()
         setUpPlayer()
     }
+    
     
     func checkIfEnemyInPlayerRadius() {
         enemies.forEach { enemy in
@@ -326,17 +307,6 @@ class ExplorationScene1: SKScene, ExplorationSceneProtocol {
                 
                 // Remove object from objects array
                 objects.remove(at: index)
-            }
-        }
-        
-        if player.spriteNode.position == nextSceneCoordinate {
-            if let nextScene = SKScene(fileNamed: "ExplorationScene2") as? ExplorationSceneProtocol {
-                nextScene.player = self.player
-                
-                if let view = self.view {
-                    let transition = SKTransition.fade(withDuration: 1.0)
-                    view.presentScene(nextScene, transition: transition)
-                }
             }
         }
     }

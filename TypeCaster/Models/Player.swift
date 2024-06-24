@@ -76,9 +76,15 @@ class Player {
             }
             
             let stunnedAnimation = SKAction.animate(with: textures, timePerFrame: 0.1)
-            let repeatStunnedAnimation = SKAction.repeatForever(stunnedAnimation)
+            let repeatStunnedAnimation = SKAction.repeat(stunnedAnimation, count: 5)
             
-            spriteNode.run(repeatStunnedAnimation)
+            let stunnedFinishAction = SKAction.run {
+                self.status = .idle
+                self.animateSprite()
+            }
+            
+            let stunnedSequence = SKAction.sequence([repeatStunnedAnimation, stunnedFinishAction])
+            spriteNode.run(stunnedSequence)
         case .hurt:
             for i in 1...2 {
                 let textureName = "player-hurt-\(i)"
@@ -87,8 +93,15 @@ class Player {
             }
             
             let hurtAnimation = SKAction.animate(with: textures, timePerFrame: 0.1)
+            let repeatHurtAnimation = SKAction.repeat(hurtAnimation, count: 2)
             
-            spriteNode.run(hurtAnimation)
+            let hurtFinishAction = SKAction.run {
+                self.status = .idle
+                self.animateSprite()
+            }
+            
+            let hurtSequence = SKAction.sequence([repeatHurtAnimation, hurtFinishAction])
+            spriteNode.run(hurtSequence)
         case .dead:
             for i in 1...7 {
                 let textureName = "player-dead-\(i)"
@@ -98,6 +111,8 @@ class Player {
             
             let deadAnimation = SKAction.animate(with: textures, timePerFrame: 0.25)
             spriteNode.run(deadAnimation)
+        default:
+            break
         }
     }
     
@@ -115,6 +130,7 @@ class Player {
                 spriteNode.removeAllActions()
                 
                 status = .dead
+                animateSprite()
                 
                 AudioManager.shared.stopBgm()
                 AudioManager.shared.playPlayerStateSfx(node: self.spriteNode, playerState: .playerDie)
@@ -124,11 +140,6 @@ class Player {
             } else {
                 status = .hurt
                 animateSprite()
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    self.status = .idle
-                    self.animateSprite()
-                }
                 
                 isInvincible = true
                 
@@ -194,11 +205,6 @@ class Player {
             status = .stunned
             AudioManager.shared.playPlayerStateSfx(node: self.spriteNode, playerState: .stunned)
             animateSprite()
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                self.status = .idle
-                self.animateSprite()
-            }
         }
     }
     
@@ -256,7 +262,7 @@ class Player {
     }
     
     // Exploration Scene functions
-    func interactWithObject(objects: [Object]) {
+    func interactWith(objects: [Object], npcs: [NPC]) {
         let offset: CGPoint
         
         switch direction {
@@ -277,6 +283,8 @@ class Player {
         
         if let objectToInteract = objects.first(where: { $0.coordinate == interactCoordinate }) {
             objectToInteract.interact(player: self)
+        } else if let npcToInteract = npcs.first(where: { $0.coordinate == interactCoordinate }) {
+            npcToInteract.interact()
         }
     }
     
@@ -326,11 +334,6 @@ class Player {
             status = .stunned
             AudioManager.shared.playPlayerStateSfx(node: self.spriteNode, playerState: .stunned)
             animateSprite()
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                self.status = .idle
-                self.animateSprite()
-            }
         }
     }
     
@@ -363,7 +366,7 @@ class Player {
             moveAction = SKAction.moveBy(x: 0, y: -moveAmount, duration: moveSpeed)
         }
         
-        if scene.wallCoordinates.contains(moveToCoordinate) || scene.objectCoordinates.contains(moveToCoordinate) || !scene.floorCoordinates.contains(moveToCoordinate) {
+        if scene.wallCoordinates.contains(moveToCoordinate) || scene.objectCoordinates.contains(moveToCoordinate) ||  scene.npcCoordinates.contains(moveToCoordinate) || !scene.floorCoordinates.contains(moveToCoordinate) {
             return
         } else {
             status = .moving

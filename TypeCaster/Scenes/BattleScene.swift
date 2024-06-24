@@ -3,7 +3,7 @@ import SpriteKit
 class BattleScene: SKScene, BattleSceneProtocol {
     var sceneCamera: SKCameraNode = SKCameraNode()
     var cooldownContainer: SKNode = SKNode()
-    
+
     var isBattleOver: Bool = false
     
     var floorCoordinates: [CGPoint] = [CGPoint]()
@@ -63,7 +63,6 @@ class BattleScene: SKScene, BattleSceneProtocol {
         player.animateSprite()
                 
         player.healthBarNode = sceneCamera.childNode(withName: "playerHealthBar") as! SKSpriteNode
-        
         var playerHealthRatio = CGFloat(player.currentHealth) / CGFloat(player.maxHealth)
         if playerHealthRatio < 0 {
             playerHealthRatio = 0
@@ -127,11 +126,7 @@ class BattleScene: SKScene, BattleSceneProtocol {
     }
     
     func goToPreviousScene() {
-        if self.previousScene.enemies.count == 2 || self.previousScene.enemies.count == 1 {
-            self.previousScene.enemies.first?.isLastEnemy = true
-        }
-        
-        let waitAction = SKAction.wait(forDuration: enemy.isLastEnemy ? 3.0 : 1.0)
+        let waitAction = SKAction.wait(forDuration: 1.0)
         
         let transitionAction = SKAction.run {
             self.previousScene.player = self.player
@@ -145,11 +140,6 @@ class BattleScene: SKScene, BattleSceneProtocol {
         }
         
         let sequence = SKAction.sequence([waitAction, transitionAction])
-        
-        if enemy.isLastEnemy{
-            enemy.dropKey(scene: self)
-        }
-        
         self.run(sequence)
     }
     
@@ -187,7 +177,6 @@ class BattleScene: SKScene, BattleSceneProtocol {
         }
         
         self.attackNodes.removeAll()
-        
     }
     
     override func keyDown(with event: NSEvent) {
@@ -219,14 +208,14 @@ class BattleScene: SKScene, BattleSceneProtocol {
             player.spellLabelNode.text = player.inputSpell
             player.spellLabelNodeBackground.size.width = 0
             
-            //        case 48:
-            //            if isSpellBookOpen {
-            //                isSpellBookOpen = false
-            //                spellBookNode.removeFromParent()
-            //            } else {
-            //                isSpellBookOpen = true
-            //                sceneCamera.addChild(spellBookNode)
-            //            }
+//        case 48:
+//            if isSpellBookOpen {
+//                isSpellBookOpen = false
+//                spellBookNode.removeFromParent()
+//            } else {
+//                isSpellBookOpen = true
+//                sceneCamera.addChild(spellBookNode)
+//            }
             
         default:
             if event.keyCode == 49 {
@@ -245,8 +234,6 @@ class BattleScene: SKScene, BattleSceneProtocol {
     }
     
     override func update(_ currentTime: TimeInterval) {
-        //        sceneCamera.position = player.spriteNode.position
-        
         attackNodes.forEach { attackNode in
             if player.spriteNode.frame.intersects(attackNode.frame) {
                 player.getDamage(scene: self)
