@@ -3,7 +3,7 @@ import SpriteKit
 class BattleScene: SKScene, BattleSceneProtocol {
     var sceneCamera: SKCameraNode = SKCameraNode()
     var cooldownContainer: SKNode = SKNode()
-
+    
     var isBattleOver: Bool = false
     
     var floorCoordinates: [CGPoint] = [CGPoint]()
@@ -61,7 +61,7 @@ class BattleScene: SKScene, BattleSceneProtocol {
         player.direction = .right
         
         player.animateSprite()
-                
+        
         player.healthBarNode = sceneCamera.childNode(withName: "playerHealthBar") as! SKSpriteNode
         var playerHealthRatio = CGFloat(player.currentHealth) / CGFloat(player.maxHealth)
         if playerHealthRatio < 0 {
@@ -126,7 +126,15 @@ class BattleScene: SKScene, BattleSceneProtocol {
     }
     
     func goToPreviousScene() {
-        let waitAction = SKAction.wait(forDuration: 1.0)
+        
+        var waitAction: SKAction = SKAction()
+        
+        if self.previousScene.enemies.count == 1 {
+            waitAction = SKAction.wait(forDuration: 3.0)
+            enemy.dropKey(scene: self)
+        } else {
+            waitAction = SKAction.wait(forDuration: 1.0)
+        }
         
         let transitionAction = SKAction.run {
             self.previousScene.player = self.player
@@ -140,6 +148,7 @@ class BattleScene: SKScene, BattleSceneProtocol {
         }
         
         let sequence = SKAction.sequence([waitAction, transitionAction])
+
         self.run(sequence)
     }
     
@@ -208,14 +217,14 @@ class BattleScene: SKScene, BattleSceneProtocol {
             player.spellLabelNode.text = player.inputSpell
             player.spellLabelNodeBackground.size.width = 0
             
-//        case 48:
-//            if isSpellBookOpen {
-//                isSpellBookOpen = false
-//                spellBookNode.removeFromParent()
-//            } else {
-//                isSpellBookOpen = true
-//                sceneCamera.addChild(spellBookNode)
-//            }
+            //        case 48:
+            //            if isSpellBookOpen {
+            //                isSpellBookOpen = false
+            //                spellBookNode.removeFromParent()
+            //            } else {
+            //                isSpellBookOpen = true
+            //                sceneCamera.addChild(spellBookNode)
+            //            }
             
         default:
             if event.keyCode == 49 {
