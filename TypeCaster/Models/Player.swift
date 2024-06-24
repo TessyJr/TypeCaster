@@ -117,11 +117,11 @@ class Player {
     }
     
     func getDamage(scene: BattleScene) {
-        inputSpell = ""
-        spellLabelNode.text = inputSpell
-        spellLabelNodeBackground.size.width = 0
-        
         if !isInvincible {
+            inputSpell = ""
+            spellLabelNode.text = inputSpell
+            spellLabelNodeBackground.size.width = 0
+            
             currentHealth -= 10
             
             if currentHealth <= 0 {
@@ -175,8 +175,8 @@ class Player {
                     let overlayNode = SKSpriteNode(color: .black, size: cooldownNode.size)
                     overlayNode.alpha = 0.8
                     overlayNode.zPosition = 5
-                    overlayNode.anchorPoint = CGPoint(x: 0.5, y: 0.0) // Anchor at the bottom center
-                    overlayNode.position = CGPoint(x: 0, y: -cooldownNode.size.height / 2) // Position it at the bottom of the parent node
+                    overlayNode.anchorPoint = CGPoint(x: 0.5, y: 0.0)
+                    overlayNode.position = CGPoint(x: 0, y: -cooldownNode.size.height / 2)
                     
                     cooldownNode.addChild(overlayNode)
                     
@@ -304,8 +304,8 @@ class Player {
                     let overlayNode = SKSpriteNode(color: .black, size: cooldownNode.size)
                     overlayNode.alpha = 0.8
                     overlayNode.zPosition = 5
-                    overlayNode.anchorPoint = CGPoint(x: 0.5, y: 0.0) // Anchor at the bottom center
-                    overlayNode.position = CGPoint(x: 0, y: -cooldownNode.size.height / 2) // Position it at the bottom of the parent node
+                    overlayNode.anchorPoint = CGPoint(x: 0.5, y: 0.0)
+                    overlayNode.position = CGPoint(x: 0, y: -cooldownNode.size.height / 2)
                     
                     cooldownNode.addChild(overlayNode)
                     

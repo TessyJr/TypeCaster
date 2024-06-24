@@ -133,7 +133,7 @@ class Rock: Spell {
 
 class Fireball: Spell {
     init() {
-        let chant = "fireball"
+        let chant = "ignitia"
         let cooldownDuration: CGFloat = 2.0
         let speed: CGFloat = 1.0
         let cooldownTexture = SKTexture(imageNamed: "cooldown-fireball")
@@ -152,8 +152,8 @@ class Fireball: Spell {
 
 class Iceblast: Spell {
     init() {
-        let chant = "ice blast"
-        let cooldownDuration: CGFloat = 3.0
+        let chant = "glacius acuti"
+        let cooldownDuration: CGFloat = 4.0
         let speed: CGFloat = 1.0
         let cooldownTexture = SKTexture(imageNamed: "cooldown-iceblast")
         let textures = [
@@ -161,7 +161,7 @@ class Iceblast: Spell {
             SKTexture(imageNamed: "iceblast-2"),
             SKTexture(imageNamed: "iceblast-3")
         ]
-        let damage = 15
+        let damage = 20
         let spellType: SpellSfxType = .iceblast
         
         super.init(chant: chant, cooldownDuration: cooldownDuration, speed: speed, cooldownTexture: cooldownTexture, textures: textures, damage: damage, spellType: spellType)

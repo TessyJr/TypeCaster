@@ -56,8 +56,8 @@
 		261F619D2C2432DB0082232A /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		261F619F2C2438BD0082232A /* SfxType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SfxType.swift; sourceTree = "<group>"; };
 		261F61A12C257C200082232A /* fireball.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = fireball.mp3; sourceTree = "<group>"; };
-		266E9BB12C2982DE0052D5A9 /* shimmeringKey.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = shimmeringKey.mp3; path = ../../../../../../Sound/shimmeringKey.mp3; sourceTree = "<group>"; };
-		266E9BB32C2982E40052D5A9 /* stunned.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = stunned.mp3; path = ../../../../../../Sound/stunned.mp3; sourceTree = "<group>"; };
+		266E9BB12C2982DE0052D5A9 /* shimmeringKey.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = shimmeringKey.mp3; sourceTree = "<group>"; };
+		266E9BB32C2982E40052D5A9 /* stunned.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = stunned.mp3; sourceTree = "<group>"; };
 		53277AA12C23FA9000F15407 /* TypeCaster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TypeCaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53277AA42C23FA9000F15407 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		53277AA62C23FA9000F15407 /* ExplorationScene1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ExplorationScene1.sks; sourceTree = "<group>"; };
@@ -175,10 +175,10 @@
 			children = (
 				53277AA62C23FA9000F15407 /* ExplorationScene1.sks */,
 				53277AAA2C23FA9000F15407 /* ExplorationScene1.swift */,
-				53277AD52C24132200F15407 /* BattleScene.sks */,
-				53277ACF2C23FCF400F15407 /* BattleScene.swift */,
 				53277AD92C26F6D800F15407 /* ExplorationScene2.sks */,
 				53277AD72C26F6CA00F15407 /* ExporationScene2.swift */,
+				53277AD52C24132200F15407 /* BattleScene.sks */,
+				53277ACF2C23FCF400F15407 /* BattleScene.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -461,7 +461,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = VPGX5Q423F;
+				DEVELOPMENT_TEAM = XJ7Y6VR3NN;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -488,7 +488,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = VPGX5Q423F;
+				DEVELOPMENT_TEAM = XJ7Y6VR3NN;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
