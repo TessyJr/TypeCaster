@@ -65,5 +65,4 @@ class AudioManager {
         let sfx = SKAction.playSoundFileNamed("shimmeringKey", waitForCompletion: false)
         node.run(sfx)
     }
-    
 }

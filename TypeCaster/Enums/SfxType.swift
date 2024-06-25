@@ -3,5 +3,5 @@ enum SpellSfxType: String {
 }
 
 enum PlayerStateSfxType: String {
-    case playerDie, stunned
+    case playerDie, stunned, healing
 }

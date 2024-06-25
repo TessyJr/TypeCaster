@@ -78,7 +78,8 @@ class Fountain: Object {
             player.spellLabelNode.text = "That's refreshing!"
             player.spellLabelNodeBackground.size.width = player.spellLabelNode.frame.width + 2
             
-            player.currentHealth += 10
+            AudioManager.shared.playPlayerStateSfx(node: player.spriteNode, playerState: .healing)
+            player.currentHealth += 20
             
             if player.currentHealth > player.maxHealth {
                 player.currentHealth = player.maxHealth
