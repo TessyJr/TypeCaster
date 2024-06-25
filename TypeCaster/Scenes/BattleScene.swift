@@ -110,6 +110,9 @@ class BattleScene: SKScene, BattleSceneProtocol {
                 spellbookNode = SKSpriteNode(imageNamed: "spell-book-with-shield")
             }
             
+            spellbookNode.name = "spell-book"
+            spellbookNode.zPosition = 20
+            
             if isSpellbookOpen {
                 if let node = sceneCamera.childNode(withName: "spell-book") {
                     node.removeFromParent()
