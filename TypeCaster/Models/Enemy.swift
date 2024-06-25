@@ -141,14 +141,14 @@ class Enemy {
     }
 }
 
-class Devil: Enemy {
+class Kraken: Enemy {
     init(spriteNode: SKSpriteNode, coordinate: CGPoint) {
         super.init()
         
         self.spriteNode = spriteNode
         self.coordinate = coordinate
-        self.name = "devil"
-        self.currentHealth = 10
+        self.name = "kraken"
+        self.currentHealth = 100
         self.maxHealth = 100
         self.attackInterval = 1.0
     }
@@ -256,13 +256,13 @@ class Devil: Enemy {
     }
 }
 
-class Kraken: Enemy {
+class Devil: Enemy {
     init(spriteNode: SKSpriteNode, coordinate: CGPoint) {
         super.init()
         
         self.spriteNode = spriteNode
         self.coordinate = coordinate
-        self.name = "kraken"
+        self.name = "devil"
         self.currentHealth = 100
         self.maxHealth = 100
         self.attackInterval = 1.0
@@ -278,7 +278,7 @@ class Kraken: Enemy {
         let getUniqueRowsAction = SKAction.run {
             scene.floorCoordinates.forEach { coordinate in
                 let y = coordinate.y
-                if !uniqueRows.contains(y) {
+                if !uniqueRows.contains(y){
                     uniqueRows.append(y)
                 }
                 
@@ -291,12 +291,16 @@ class Kraken: Enemy {
         
         // Step 2: Get attack coordinates
         let getAttackCoordinatesAction = SKAction.run {
-            uniqueRows.forEach { y in
+            for y in uniqueRows {
                 
                 let randomInt = Int.random(in: 1...2)
                 
                 if randomInt == 1 {
                     attackCoordinates.append(CGPoint(x: firstColumn, y: y))
+                }
+                
+                if attackCoordinates.count == 6 {
+                    break
                 }
             }
         }
@@ -509,12 +513,16 @@ class Boss: Enemy {
         
         // Step 2: Get attack coordinates
         let getAttackCoordinatesAction = SKAction.run {
-            uniqueRows.forEach { y in
+            for y in uniqueRows {
                 
                 let randomInt = Int.random(in: 1...5)
                 
                 if randomInt <= 3 {
                     attackCoordinates.append(CGPoint(x: firstColumn, y: y))
+                }
+                
+                if attackCoordinates.count == 6 {
+                    break
                 }
             }
         }
@@ -612,12 +620,16 @@ class Boss: Enemy {
         
         // Step 2: Get attack coordinates
         let getAttackCoordinatesAction = SKAction.run {
-            uniqueRows.forEach { y in
+            for y in uniqueRows {
                 
                 let randomInt = Int.random(in: 1...5)
                 
                 if randomInt <= 3 {
                     attackCoordinates.append(CGPoint(x: firstColumn, y: y))
+                }
+                
+                if attackCoordinates.count == 6 {
+                    break
                 }
             }
         }
@@ -715,12 +727,16 @@ class Boss: Enemy {
         
         // Step 2: Get attack coordinates
         let getAttackCoordinatesAction = SKAction.run {
-            uniqueColumns.forEach { x in
+            for x in uniqueColumns {
                 
                 let randomInt = Int.random(in: 1...5)
                 
                 if randomInt <= 3 {
                     attackCoordinates.append(CGPoint(x: x, y: firstRow))
+                }
+                
+                if attackCoordinates.count == 6 {
+                    break
                 }
             }
         }
@@ -818,12 +834,16 @@ class Boss: Enemy {
         
         // Step 2: Get attack coordinates
         let getAttackCoordinatesAction = SKAction.run {
-            uniqueColumns.forEach { x in
+            for x in uniqueColumns {
                 
                 let randomInt = Int.random(in: 1...5)
                 
                 if randomInt <= 3 {
                     attackCoordinates.append(CGPoint(x: x, y: firstRow))
+                }
+                
+                if attackCoordinates.count == 6 {
+                    break
                 }
             }
         }
