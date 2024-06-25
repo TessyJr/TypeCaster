@@ -44,6 +44,8 @@
 		53277ADC2C27E35C00F15407 /* NPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53277ADB2C27E35C00F15407 /* NPC.swift */; };
 		539649C72C2AC4DD000519CE /* ExplorationScene3.sks in Resources */ = {isa = PBXBuildFile; fileRef = 539649C62C2AC4DD000519CE /* ExplorationScene3.sks */; };
 		539649C92C2AC9C6000519CE /* ExplorationScene3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539649C82C2AC9C6000519CE /* ExplorationScene3.swift */; };
+		539649CB2C2ACF46000519CE /* StartScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 539649CA2C2ACF46000519CE /* StartScene.sks */; };
+		539649CD2C2ACFF1000519CE /* StartScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539649CC2C2ACFF1000519CE /* StartScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +89,8 @@
 		53277ADB2C27E35C00F15407 /* NPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NPC.swift; sourceTree = "<group>"; };
 		539649C62C2AC4DD000519CE /* ExplorationScene3.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ExplorationScene3.sks; sourceTree = "<group>"; };
 		539649C82C2AC9C6000519CE /* ExplorationScene3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorationScene3.swift; sourceTree = "<group>"; };
+		539649CA2C2ACF46000519CE /* StartScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StartScene.sks; sourceTree = "<group>"; };
+		539649CC2C2ACFF1000519CE /* StartScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +210,8 @@
 				539649C82C2AC9C6000519CE /* ExplorationScene3.swift */,
 				53277AD52C24132200F15407 /* BattleScene.sks */,
 				53277ACF2C23FCF400F15407 /* BattleScene.swift */,
+				539649CA2C2ACF46000519CE /* StartScene.sks */,
+				539649CC2C2ACFF1000519CE /* StartScene.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -313,6 +319,7 @@
 				266E9BB82C2A9FCA0052D5A9 /* healing.mp3 in Resources */,
 				261F61A22C257C200082232A /* fireball.mp3 in Resources */,
 				53277ADA2C26F6D800F15407 /* ExplorationScene2.sks in Resources */,
+				539649CB2C2ACF46000519CE /* StartScene.sks in Resources */,
 				266E9BB22C2982DE0052D5A9 /* shimmeringKey.mp3 in Resources */,
 				53277AAF2C23FA9100F15407 /* Assets.xcassets in Resources */,
 				266E9BB42C2982E40052D5A9 /* stunned.mp3 in Resources */,
@@ -342,6 +349,7 @@
 				261F619E2C2432DB0082232A /* AudioManager.swift in Sources */,
 				53277AD82C26F6CA00F15407 /* ExplorationScene2.swift in Sources */,
 				53277ADC2C27E35C00F15407 /* NPC.swift in Sources */,
+				539649CD2C2ACFF1000519CE /* StartScene.swift in Sources */,
 				53277ACC2C23FCC100F15407 /* Object.swift in Sources */,
 				53277ABF2C23FC3800F15407 /* Direction.swift in Sources */,
 				261F61892C2425B50082232A /* BgmType.swift in Sources */,

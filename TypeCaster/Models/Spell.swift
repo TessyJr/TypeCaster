@@ -175,7 +175,7 @@ class Shield: Spell {
         let chant = "aegis"
         let cooldownDuration: CGFloat = 20.0
         let speed: CGFloat = 0
-        let cooldownTexture = SKTexture(imageNamed: "cooldown-iceblast")
+        let cooldownTexture = SKTexture(imageNamed: "cooldown-shield")
         let textures = [
             SKTexture(imageNamed: "shield"),
         ]
