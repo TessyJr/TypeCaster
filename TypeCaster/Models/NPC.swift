@@ -68,9 +68,16 @@ class NPC1: NPC {
         self.npcType = npcType
         
         self.dialogs = [
-            "Hi there!",
-            "Blah blah blah",
-            "Bwek"
+            "Oh?!",
+            "Well, well... We have a new challenger, huh?",
+            "You look kinda weak and homeless lol",
+            "Either way, welcome to the Tower of Trials, newbie!",
+            "I'll be generous and give you some tips.",
+            "Press the [TAB] Button to open your spell book.",
+            "You might want to memorize the magic spells.",
+            "Try using one to break the boxes over there!",
+            "Then you could practice with the training dummy in that room!",
+            "Well then, good luck newbie!",
         ]
     }
     
