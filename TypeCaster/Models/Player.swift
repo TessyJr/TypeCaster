@@ -17,7 +17,7 @@ class Player {
     var maxHealth: Int = 50
     
     var inputSpell: String = ""
-    var spells: [Spell] = [Rock(), Fireball(), Iceblast(), Shield()]
+    var spells: [Spell] = [Rock(), Fireball(), Iceblast()]
     
     var isInBattle: Bool = false
     

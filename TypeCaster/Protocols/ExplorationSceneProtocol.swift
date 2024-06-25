@@ -73,23 +73,34 @@ extension ExplorationSceneProtocol {
         
         player.animateSprite()
         
-        player.radiusNode = childNode(withName: "player-radius") as! SKSpriteNode
-        
-        player.healthBarNode = sceneCamera.childNode(withName: "playerHealthBar") as! SKSpriteNode
-        var playerHealthRatio = CGFloat(player.currentHealth) / CGFloat(player.maxHealth)
-        if playerHealthRatio < 0 {
-            playerHealthRatio = 0
+        if let radiusNode = childNode(withName: "player-radius") as? SKSpriteNode {
+            player.radiusNode = radiusNode
         }
-        player.healthBarNode.size.width = 256 * playerHealthRatio
         
-        player.spellLabelNode = player.spriteNode.childNode(withName: "labelPlayerSpell") as! SKLabelNode
-        player.inputSpell = ""
-        player.spellLabelNode.text = player.inputSpell
+        if let healthBarNode = sceneCamera.childNode(withName: "playerHealthBar") as? SKSpriteNode {
+            player.healthBarNode = healthBarNode
+            var playerHealthRatio = CGFloat(player.currentHealth) / CGFloat(player.maxHealth)
+            if playerHealthRatio < 0 {
+                playerHealthRatio = 0
+                
+                player.healthBarNode.size.width = 256 * playerHealthRatio
+            }
+        }
         
-        player.spellLabelNodeBackground = player.spriteNode.childNode(withName: "labelPlayerSpellBackground") as! SKSpriteNode
-        player.spellLabelNodeBackground.size.width = 0
+        if let spellLabelNode = player.spriteNode.childNode(withName: "labelPlayerSpell") as? SKLabelNode {
+            player.spellLabelNode = spellLabelNode
+            player.inputSpell = ""
+            player.spellLabelNode.text = player.inputSpell
+        }
         
-        cooldownContainer = sceneCamera.childNode(withName: "cooldown-container")!
+        if let spellLabelNodeBackground = player.spriteNode.childNode(withName: "labelPlayerSpellBackground") as? SKSpriteNode {
+            player.spellLabelNodeBackground = spellLabelNodeBackground
+            player.spellLabelNodeBackground.size.width = 0
+        }
+        
+        if let cooldownContainer = sceneCamera.childNode(withName: "cooldown-container") {
+            self.cooldownContainer = cooldownContainer
+        }
         
         if spellCooldownNodes.isEmpty {
             var cooldownNodePosition = CGPoint(x: 0, y: 0)

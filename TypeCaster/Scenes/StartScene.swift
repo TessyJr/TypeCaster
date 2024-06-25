@@ -29,8 +29,6 @@ class StartScene: SKScene, ExplorationSceneProtocol {
     var nextSceneCoordinate: CGPoint = CGPoint()
     
     override func didMove(to view: SKView) {
-        sceneCamera = childNode(withName: "sceneCamera") as! SKCameraNode
-
         for node in self.children {
             if let someTileMap = node as? SKTileMapNode {
                 if someTileMap.name == "background" {
@@ -48,18 +46,18 @@ class StartScene: SKScene, ExplorationSceneProtocol {
         }
            
            // Create the actions to change alpha
-//        let setAlphaToZero = SKAction.run { instructionLabel.alpha = 0.0 }
-//            let setAlphaToOne = SKAction.run { instructionLabel.alpha = 1.0 }
-//            let waitAction1 = SKAction.wait(forDuration: 0.75)
-//        let waitAction2 = SKAction.wait(forDuration: 0.75)
+        let setAlphaToZero = SKAction.run { instructionLabel.alpha = 0.0 }
+            let setAlphaToOne = SKAction.run { instructionLabel.alpha = 1.0 }
+            let waitAction1 = SKAction.wait(forDuration: 0.75)
+        let waitAction2 = SKAction.wait(forDuration: 0.75)
         
-        let setAlphaToZero = SKAction.run { instructionLabel.position.y += 1.0 }
-        let setAlphaToOne = SKAction.run { instructionLabel.position.y -= 1.0 }
-            let waitAction1 = SKAction.wait(forDuration: 0.25)
-        let waitAction2 = SKAction.wait(forDuration: 0.25)
+//        let setAlphaToZero = SKAction.run { instructionLabel.position.y += 1.0 }
+//        let setAlphaToOne = SKAction.run { instructionLabel.position.y -= 1.0 }
+//            let waitAction1 = SKAction.wait(forDuration: 0.25)
+//        let waitAction2 = SKAction.wait(forDuration: 0.25)
             
             // Create the sequence and repeat forever action
-            let sequence = SKAction.sequence([setAlphaToZero, waitAction1, setAlphaToOne, waitAction2])
+            let sequence = SKAction.sequence([setAlphaToOne, waitAction1, setAlphaToZero, waitAction2])
             let repeatForever = SKAction.repeatForever(sequence)
         
            // Run the action on the start scene node
