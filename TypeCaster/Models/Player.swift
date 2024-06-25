@@ -305,7 +305,7 @@ class Player {
         )
         
         if let objectToInteract = scene.objects.first(where: { $0.coordinate == interactCoordinate }) {
-            objectToInteract.interact(scene: scene, player: self)
+            objectToInteract.interact(scene: scene)
         } else if let npcToInteract = scene.npcs.first(where: { $0.coordinate == interactCoordinate }) {
             npcToInteract.interact()
         }

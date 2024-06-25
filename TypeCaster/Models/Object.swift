@@ -5,6 +5,8 @@ class Object {
     var coordinate: CGPoint = CGPoint()
     var textures: [SKTexture] = []
     
+    var isDestructible: Bool = false
+    
     static func create(spriteNode: SKSpriteNode, coordinate: CGPoint, objectType: String) -> Object? {
         switch objectType {
         case "boxes":
@@ -20,7 +22,7 @@ class Object {
     
     func animateObject() {}
     
-    func interact(scene: ExplorationSceneProtocol, player: Player) {}
+    func interact(scene: ExplorationSceneProtocol) {}
 }
 
 class Boxes: Object {
@@ -29,11 +31,13 @@ class Boxes: Object {
         
         self.spriteNode = spriteNode
         self.coordinate = coordinate
+        
+        self.isDestructible = true
     }
     
-    override func interact(scene: ExplorationSceneProtocol, player: Player) {
-        player.spellLabelNode.text = "I think I can break these rocks with a spell"
-        player.spellLabelNodeBackground.size.width = player.spellLabelNode.frame.width + 2
+    override func interact(scene: ExplorationSceneProtocol) {
+        scene.player.spellLabelNode.text = "I think I can break these rocks with a spell"
+        scene.player.spellLabelNodeBackground.size.width = scene.player.spellLabelNode.frame.width + 2
     }
 }
 
@@ -45,6 +49,8 @@ class Fountain: Object {
         
         self.spriteNode = spriteNode
         self.coordinate = coordinate
+        
+        self.isDestructible = false
         
         self.animateObject()
     }
@@ -75,23 +81,23 @@ class Fountain: Object {
         }
     }
     
-    override func interact(scene: ExplorationSceneProtocol, player: Player) {
+    override func interact(scene: ExplorationSceneProtocol) {
         if isActive {
-            player.spellLabelNode.text = "That's refreshing!"
-            player.spellLabelNodeBackground.size.width = player.spellLabelNode.frame.width + 2
+            scene.player.spellLabelNode.text = "That's refreshing!"
+            scene.player.spellLabelNodeBackground.size.width = scene.player.spellLabelNode.frame.width + 2
             
-            AudioManager.shared.playPlayerStateSfx(node: player.spriteNode, playerState: .healing)
-            player.currentHealth += 20
+            AudioManager.shared.playPlayerStateSfx(node: scene.player.spriteNode, playerState: .healing)
+            scene.player.currentHealth += 20
             
-            if player.currentHealth > player.maxHealth {
-                player.currentHealth = player.maxHealth
+            if scene.player.currentHealth > scene.player.maxHealth {
+                scene.player.currentHealth = scene.player.maxHealth
             }
             
             isActive = false
             animateObject()
         } else {
-            player.spellLabelNode.text = "The fountain is empty"
-            player.spellLabelNodeBackground.size.width = player.spellLabelNode.frame.width + 2
+            scene.player.spellLabelNode.text = "The fountain is empty"
+            scene.player.spellLabelNodeBackground.size.width = scene.player.spellLabelNode.frame.width + 2
         }
     }
 }
@@ -104,14 +110,16 @@ class SpellChest: Object {
         
         self.spriteNode = spriteNode
         self.coordinate = coordinate
+        
+        self.isDestructible = false
     }
     
-    override func interact(scene: ExplorationSceneProtocol, player: Player) {
+    override func interact(scene: ExplorationSceneProtocol) {
         if !isOpened {
             isOpened = true
             spriteNode.texture = SKTexture(imageNamed: "chest-open")
             
-            player.spells.append(Shield())
+            scene.player.spells.append(Shield())
             
             scene.setupSpells()
             

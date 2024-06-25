@@ -128,21 +128,21 @@ class ExplorationScene2: SKScene, ExplorationSceneProtocol {
                 spellNode.removeFromParent()
                 self.spellNode = nil
                 
-                object.spriteNode.removeFromParent()
-                destroyedObjects.append(object)
-                
-                if let coordinateIndex = objectCoordinates.firstIndex(of: object.coordinate) {
-                    objectCoordinates.remove(at: coordinateIndex)
+                if object.isDestructible {
+                    object.spriteNode.removeFromParent()
+                    destroyedObjects.append(object)
+                    
+                    if let coordinateIndex = objectCoordinates.firstIndex(of: object.coordinate) {
+                        objectCoordinates.remove(at: coordinateIndex)
+                    }
+                    
+                    objects.remove(at: index)
                 }
-                
-                objects.remove(at: index)
             }
         }
         
         if player.spriteNode.position == nextSceneCoordinate {
-            print(1)
             if let nextScene = SKScene(fileNamed: "ExplorationScene3") as? ExplorationSceneProtocol {
-                print(2)
                 nextScene.player = self.player
                 
                 if let view = self.view {
