@@ -58,6 +58,30 @@ extension ExplorationSceneProtocol {
         }
     }
     
+    func setupSpells() {
+        for spell in player.spells {
+            spell.isInCooldown = false
+            spell.cooldownTimer?.invalidate()
+            spell.cooldownTimer = nil
+        }
+        
+        cooldownContainer = sceneCamera.childNode(withName: "cooldown-container")!
+        
+        cooldownContainer.removeAllChildren()
+        spellCooldownNodes.removeAll()
+        
+        var cooldownNodePosition = CGPoint(x: 0, y: 0)
+        for spell in player.spells {
+            let cooldownNode = SKSpriteNode(texture: spell.cooldownTexture)
+            cooldownNode.position = cooldownNodePosition
+            cooldownContainer.addChild(cooldownNode)
+            
+            spellCooldownNodes.append(cooldownNode)
+            
+            cooldownNodePosition.x += 40
+        }
+    }
+    
     func setUpPlayer() {
         player.spriteNode = childNode(withName: "player") as! SKSpriteNode
         player.spriteNode.position.x = round(player.spriteNode.position.x)
@@ -96,27 +120,6 @@ extension ExplorationSceneProtocol {
         if let spellLabelNodeBackground = player.spriteNode.childNode(withName: "labelPlayerSpellBackground") as? SKSpriteNode {
             player.spellLabelNodeBackground = spellLabelNodeBackground
             player.spellLabelNodeBackground.size.width = 0
-        }
-        
-        if let cooldownContainer = sceneCamera.childNode(withName: "cooldown-container") {
-            self.cooldownContainer = cooldownContainer
-        }
-        
-        if spellCooldownNodes.isEmpty {
-            var cooldownNodePosition = CGPoint(x: 0, y: 0)
-            for spell in player.spells {
-                if spell.spellType == .throwRock {
-                    continue
-                }
-                
-                let cooldownNode = SKSpriteNode(texture: spell.cooldownTexture)
-                cooldownNode.position = cooldownNodePosition
-                cooldownContainer.addChild(cooldownNode)
-                
-                spellCooldownNodes.append(cooldownNode)
-                
-                cooldownNodePosition.x += 40
-            }
         }
     }
     
@@ -238,7 +241,13 @@ extension ExplorationSceneProtocol {
                         self.lastPlayerDirection = self.player.direction
                         
                         battleScene.scaleMode = .aspectFill
-                        battleScene.player.currentHealth = self.player.currentHealth
+                        //                        battleScene.player.currentHealth = self.player.currentHealth
+                        battleScene.player = self.player
+                        
+                        //                        for spell in self.player.spells {
+                        //                            battleScene.player.spells.append(spell)
+                        //                        }
+                        
                         battleScene.enemy = enemy
                         battleScene.previousScene = self
                         

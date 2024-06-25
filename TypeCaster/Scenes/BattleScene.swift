@@ -40,6 +40,7 @@ class BattleScene: SKScene, BattleSceneProtocol {
         }
         
         setUpPlayer()
+        setupSpells()
         setUpEnemy()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {

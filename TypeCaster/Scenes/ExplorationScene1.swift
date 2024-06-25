@@ -46,6 +46,7 @@ class ExplorationScene1: SKScene, ExplorationSceneProtocol {
         setUpObjects()
         setUpDoor()
         setUpPlayer()
+        setupSpells()
     }
     
     override func keyDown(with event: NSEvent) {
@@ -102,7 +103,7 @@ class ExplorationScene1: SKScene, ExplorationSceneProtocol {
         default:
             if event.keyCode == 49 {
                 if player.inputSpell == "" {
-                    player.interactWith(objects: objects, npcs: npcs)
+                    player.interactWith(scene: self)
                     break
                 }
             }
@@ -142,7 +143,7 @@ class ExplorationScene1: SKScene, ExplorationSceneProtocol {
         
         if player.spriteNode.position == nextSceneCoordinate {
             if let nextScene = SKScene(fileNamed: "ExplorationScene2") as? ExplorationSceneProtocol {
-                nextScene.player.currentHealth = self.player.currentHealth
+                nextScene.player = self.player
                 
                 if let view = self.view {
                     let transition = SKTransition.fade(withDuration: 1.0)

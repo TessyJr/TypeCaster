@@ -4,6 +4,7 @@ class Spell {
     var chant: String
     var cooldownDuration: CGFloat
     var isInCooldown: Bool = false
+    var cooldownTimer: Timer?
     var speed: CGFloat
     var cooldownTexture: SKTexture
     var textures: [SKTexture]
@@ -26,8 +27,10 @@ class Spell {
         
         isInCooldown = true
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + cooldownDuration) {
+        cooldownTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(cooldownDuration), repeats: false) { _ in
             self.isInCooldown = false
+            self.cooldownTimer?.invalidate()
+            self.cooldownTimer = nil
         }
         
         let spellNode: SKSpriteNode = SKSpriteNode()
@@ -78,8 +81,10 @@ class Spell {
     func summonSpellInBattleScene(scene: BattleSceneProtocol, enemy: Enemy) {
         isInCooldown = true
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + cooldownDuration) {
+        cooldownTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(cooldownDuration), repeats: false) { _ in
             self.isInCooldown = false
+            self.cooldownTimer?.invalidate()
+            self.cooldownTimer = nil
         }
         
         let spellNode: SKSpriteNode = SKSpriteNode()
@@ -188,8 +193,10 @@ class Shield: Spell {
     override func summonShield(player: Player) {
         isInCooldown = true
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + cooldownDuration) {
+        cooldownTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(cooldownDuration), repeats: false) { _ in
             self.isInCooldown = false
+            self.cooldownTimer?.invalidate()
+            self.cooldownTimer = nil
         }
         
         let spellNode: SKSpriteNode = SKSpriteNode(texture: self.textures[0])
@@ -198,7 +205,7 @@ class Shield: Spell {
         
         player.spriteNode.addChild(spellNode)
         player.isShielded = true
-
+        
         let waitAction = SKAction.wait(forDuration: 5.0)
         let removeSpellNodeAction = SKAction.run {
             spellNode.removeFromParent()

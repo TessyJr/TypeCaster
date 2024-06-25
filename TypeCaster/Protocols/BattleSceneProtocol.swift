@@ -56,37 +56,59 @@ extension BattleSceneProtocol {
         }
     }
     
-    func setUpPlayer() {
-        player.spriteNode = childNode(withName: "player") as! SKSpriteNode
-        player.direction = .right
-        
-        player.animateSprite()
-        
-        player.healthBarNode = sceneCamera.childNode(withName: "playerHealthBar") as! SKSpriteNode
-        var playerHealthRatio = CGFloat(player.currentHealth) / CGFloat(player.maxHealth)
-        if playerHealthRatio < 0 {
-            playerHealthRatio = 0
+    func setupSpells() {
+        for spell in player.spells {
+            spell.isInCooldown = false
+            spell.cooldownTimer?.invalidate()
+            spell.cooldownTimer = nil
         }
-        player.healthBarNode.size.width = 256 * playerHealthRatio
-        
-        player.spellLabelNode = player.spriteNode.childNode(withName: "labelPlayerSpell") as! SKLabelNode
-        player.inputSpell = ""
-        player.spellLabelNode.text = player.inputSpell
-        player.spellLabelNodeBackground = player.spriteNode.childNode(withName: "labelPlayerSpellBackground") as! SKSpriteNode
         
         cooldownContainer = sceneCamera.childNode(withName: "cooldown-container")!
         
-        if spellCooldownNodes.isEmpty {
-            var cooldownNodePosition = CGPoint(x: 0, y: 0)
-            for spell in player.spells {
-                let cooldownNode = SKSpriteNode(texture: spell.cooldownTexture)
-                cooldownNode.position = cooldownNodePosition
-                cooldownContainer.addChild(cooldownNode)
+        cooldownContainer.removeAllChildren()
+        spellCooldownNodes.removeAll()
+        
+        var cooldownNodePosition = CGPoint(x: 0, y: 0)
+        for spell in player.spells {
+            let cooldownNode = SKSpriteNode(texture: spell.cooldownTexture)
+            cooldownNode.position = cooldownNodePosition
+            cooldownContainer.addChild(cooldownNode)
+            
+            spellCooldownNodes.append(cooldownNode)
+            
+            cooldownNodePosition.x += 40
+        }
+    }
+    
+    func setUpPlayer() {
+        player.spriteNode = childNode(withName: "player") as! SKSpriteNode
+        
+        player.direction = .right
+        player.animateSprite()
+        
+        if let radiusNode = childNode(withName: "player-radius") as? SKSpriteNode {
+            player.radiusNode = radiusNode
+        }
+        
+        if let healthBarNode = sceneCamera.childNode(withName: "playerHealthBar") as? SKSpriteNode {
+            player.healthBarNode = healthBarNode
+            var playerHealthRatio = CGFloat(player.currentHealth) / CGFloat(player.maxHealth)
+            if playerHealthRatio < 0 {
+                playerHealthRatio = 0
                 
-                spellCooldownNodes.append(cooldownNode)
-                
-                cooldownNodePosition.x += 40
+                player.healthBarNode.size.width = 256 * playerHealthRatio
             }
+        }
+        
+        if let spellLabelNode = player.spriteNode.childNode(withName: "labelPlayerSpell") as? SKLabelNode {
+            player.spellLabelNode = spellLabelNode
+            player.inputSpell = ""
+            player.spellLabelNode.text = player.inputSpell
+        }
+        
+        if let spellLabelNodeBackground = player.spriteNode.childNode(withName: "labelPlayerSpellBackground") as? SKSpriteNode {
+            player.spellLabelNodeBackground = spellLabelNodeBackground
+            player.spellLabelNodeBackground.size.width = 0
         }
     }
     

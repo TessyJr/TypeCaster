@@ -2,7 +2,6 @@ import AVFoundation
 import SpriteKit
 
 class AudioManager {
-    
     static let shared = AudioManager()
     
     private var BgmPlayer: AVAudioPlayer?

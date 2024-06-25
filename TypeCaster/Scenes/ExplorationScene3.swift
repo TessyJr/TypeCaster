@@ -44,6 +44,7 @@ class ExplorationScene3: SKScene, ExplorationSceneProtocol {
         setUpObjects()
         setUpDoor()
         setUpPlayer()
+        setupSpells()
     }
     
     override func keyDown(with event: NSEvent) {
@@ -100,7 +101,7 @@ class ExplorationScene3: SKScene, ExplorationSceneProtocol {
         default:
             if event.keyCode == 49 {
                 if player.inputSpell == "" {
-                    player.interactWith(objects: objects, npcs: npcs)
+                    player.interactWith(scene: self)
                     break
                 }
             }

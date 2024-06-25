@@ -285,7 +285,7 @@ class Player {
     }
     
     // Exploration Scene functions
-    func interactWith(objects: [Object], npcs: [NPC]) {
+    func interactWith(scene: ExplorationSceneProtocol) {
         let offset: CGPoint
         
         switch direction {
@@ -304,9 +304,9 @@ class Player {
             y: round(spriteNode.position.y + offset.y)
         )
         
-        if let objectToInteract = objects.first(where: { $0.coordinate == interactCoordinate }) {
-            objectToInteract.interact(player: self)
-        } else if let npcToInteract = npcs.first(where: { $0.coordinate == interactCoordinate }) {
+        if let objectToInteract = scene.objects.first(where: { $0.coordinate == interactCoordinate }) {
+            objectToInteract.interact(scene: scene, player: self)
+        } else if let npcToInteract = scene.npcs.first(where: { $0.coordinate == interactCoordinate }) {
             npcToInteract.interact()
         }
     }

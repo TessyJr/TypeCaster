@@ -42,28 +42,20 @@ class StartScene: SKScene, ExplorationSceneProtocol {
         setUpPlayer()
         
         guard let instructionLabel = childNode(withName: "instruction") as? SKLabelNode else {
-               return
+            return
         }
-           
-           // Create the actions to change alpha
+        
         let setAlphaToZero = SKAction.run { instructionLabel.alpha = 0.0 }
-            let setAlphaToOne = SKAction.run { instructionLabel.alpha = 1.0 }
-            let waitAction1 = SKAction.wait(forDuration: 0.75)
+        let setAlphaToOne = SKAction.run { instructionLabel.alpha = 1.0 }
+        let waitAction1 = SKAction.wait(forDuration: 0.75)
         let waitAction2 = SKAction.wait(forDuration: 0.75)
         
-//        let setAlphaToZero = SKAction.run { instructionLabel.position.y += 1.0 }
-//        let setAlphaToOne = SKAction.run { instructionLabel.position.y -= 1.0 }
-//            let waitAction1 = SKAction.wait(forDuration: 0.25)
-//        let waitAction2 = SKAction.wait(forDuration: 0.25)
-            
-            // Create the sequence and repeat forever action
-            let sequence = SKAction.sequence([setAlphaToOne, waitAction1, setAlphaToZero, waitAction2])
-            let repeatForever = SKAction.repeatForever(sequence)
+        let sequence = SKAction.sequence([setAlphaToOne, waitAction1, setAlphaToZero, waitAction2])
+        let repeatForever = SKAction.repeatForever(sequence)
         
-           // Run the action on the start scene node
-           instructionLabel.run(repeatForever)
+        instructionLabel.run(repeatForever)
     }
-
+    
     
     override func keyDown(with event: NSEvent) {
         switch event.keyCode {
