@@ -17,12 +17,14 @@ class Player {
     var maxHealth: Int = 50
     
     var inputSpell: String = ""
-    var spells: [Spell] = [Rock(), Fireball(), Iceblast()]
+    var spells: [Spell] = [Rock(), Fireball(), Iceblast(), Shield()]
     
     var isInBattle: Bool = false
     
     var isInvincible: Bool = false
     var invincibleTimer: Timer?
+    
+    var isShielded: Bool = false
     
     var isSpellBookOpen: Bool = false
     var spellBookNode: SKSpriteNode = SKSpriteNode()
@@ -117,7 +119,24 @@ class Player {
     }
     
     func getDamage(scene: BattleScene) {
-        if !isInvincible {
+        if isInvincible {
+            return
+        } else if isShielded {
+            isShielded = false
+            if let shieldNode =  spriteNode.childNode(withName: "shield") {
+                shieldNode.removeAllActions()
+                shieldNode.removeFromParent()
+                
+                isInvincible = true
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    self.isInvincible = false
+                    
+                    self.invincibleTimer?.invalidate()
+                    self.invincibleTimer = nil
+                }
+            }
+        } else {
             inputSpell = ""
             spellLabelNode.text = inputSpell
             spellLabelNodeBackground.size.width = 0
@@ -199,7 +218,11 @@ class Player {
                     self.animateSprite()
                 }
                 
-                spell.summonSpellInBattleScene(scene: scene, enemy: enemy)
+                if spell.spellType == .shield {
+                    spell.summonShield(player: self)
+                } else {
+                    spell.summonSpellInBattleScene(scene: scene, enemy: enemy)
+                }
             }
         } else {
             status = .stunned
@@ -328,7 +351,11 @@ class Player {
                     self.animateSprite()
                 }
                 
-                spell.summonSpellInExplorationScene(scene: scene)
+                if spell.spellType == .shield {
+                    spell.summonShield(player: self)
+                } else {
+                    spell.summonSpellInExplorationScene(scene: scene)
+                }
             }
         } else {
             status = .stunned

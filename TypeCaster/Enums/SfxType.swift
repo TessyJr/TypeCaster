@@ -1,5 +1,5 @@
 enum SpellSfxType: String {
-    case fireball, iceblast, throwRock
+    case fireball, iceblast, throwRock, shield
 }
 
 enum PlayerStateSfxType: String {

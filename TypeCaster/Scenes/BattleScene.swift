@@ -132,7 +132,6 @@ class BattleScene: SKScene, BattleSceneProtocol {
             if player.spriteNode.frame.intersects(attackNode.frame) {
                 player.getDamage(scene: self)
             }
-            
         }
         
         var playerHealthRatio = CGFloat(player.currentHealth) / CGFloat(player.maxHealth)

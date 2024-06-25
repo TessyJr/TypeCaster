@@ -113,6 +113,8 @@ class Spell {
         
         spellNode.run(sequence)
     }
+    
+    func summonShield(player: Player) {}
 }
 
 class Rock: Spell {
@@ -165,5 +167,45 @@ class Iceblast: Spell {
         let spellType: SpellSfxType = .iceblast
         
         super.init(chant: chant, cooldownDuration: cooldownDuration, speed: speed, cooldownTexture: cooldownTexture, textures: textures, damage: damage, spellType: spellType)
+    }
+}
+
+class Shield: Spell {
+    init() {
+        let chant = "shield"
+        let cooldownDuration: CGFloat = 20.0
+        let speed: CGFloat = 0
+        let cooldownTexture = SKTexture(imageNamed: "cooldown-iceblast")
+        let textures = [
+            SKTexture(imageNamed: "shield"),
+        ]
+        let damage = 0
+        let spellType: SpellSfxType = .shield
+        
+        super.init(chant: chant, cooldownDuration: cooldownDuration, speed: speed, cooldownTexture: cooldownTexture, textures: textures, damage: damage, spellType: spellType)
+    }
+    
+    override func summonShield(player: Player) {
+        isInCooldown = true
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + cooldownDuration) {
+            self.isInCooldown = false
+        }
+        
+        let spellNode: SKSpriteNode = SKSpriteNode(texture: self.textures[0])
+        spellNode.name = "shield"
+        spellNode.size = CGSize(width: 48.0, height: 48.0)
+        
+        player.spriteNode.addChild(spellNode)
+        player.isShielded = true
+
+        let waitAction = SKAction.wait(forDuration: 4.0)
+        let removeSpellNodeAction = SKAction.run {
+            spellNode.removeFromParent()
+            player.isShielded = false
+        }
+        let actionSequence = SKAction.sequence([waitAction, removeSpellNodeAction])
+        
+        spellNode.run(actionSequence)
     }
 }

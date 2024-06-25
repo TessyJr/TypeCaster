@@ -221,7 +221,7 @@ extension ExplorationSceneProtocol {
                         self.lastPlayerDirection = self.player.direction
                         
                         battleScene.scaleMode = .aspectFill
-                        battleScene.player = self.player
+                        battleScene.player.currentHealth = self.player.currentHealth
                         battleScene.enemy = enemy
                         battleScene.previousScene = self
                         

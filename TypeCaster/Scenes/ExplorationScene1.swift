@@ -135,7 +135,7 @@ class ExplorationScene1: SKScene, ExplorationSceneProtocol {
         
         if player.spriteNode.position == nextSceneCoordinate {
             if let nextScene = SKScene(fileNamed: "ExplorationScene2") as? ExplorationSceneProtocol {
-                nextScene.player = self.player
+                nextScene.player.currentHealth = self.player.currentHealth
                 
                 if let view = self.view {
                     let transition = SKTransition.fade(withDuration: 1.0)

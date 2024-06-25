@@ -106,7 +106,7 @@ extension BattleSceneProtocol {
         }
         
         let transitionAction = SKAction.run {
-            self.previousScene.player = self.player
+            self.previousScene.player.currentHealth = self.player.currentHealth
             self.previousScene.player.isInBattle = false
             self.previousScene.defeatedEnemies.append(self.enemy)
             
