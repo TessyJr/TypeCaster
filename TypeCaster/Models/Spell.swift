@@ -172,7 +172,7 @@ class Iceblast: Spell {
 
 class Shield: Spell {
     init() {
-        let chant = "shield"
+        let chant = "aegis"
         let cooldownDuration: CGFloat = 20.0
         let speed: CGFloat = 0
         let cooldownTexture = SKTexture(imageNamed: "cooldown-iceblast")
@@ -199,7 +199,7 @@ class Shield: Spell {
         player.spriteNode.addChild(spellNode)
         player.isShielded = true
 
-        let waitAction = SKAction.wait(forDuration: 4.0)
+        let waitAction = SKAction.wait(forDuration: 5.0)
         let removeSpellNodeAction = SKAction.run {
             spellNode.removeFromParent()
             player.isShielded = false

@@ -12,6 +12,8 @@ protocol BattleSceneProtocol: SKScene {
     var isSpellBookOpen: Bool { get set }
     var spellBookNode: SKSpriteNode { get set }
     
+    var isSpellbookOpen: Bool { get set }
+    
     var player: Player { get set }
     
     var spellNode: SKSpriteNode? { get set }

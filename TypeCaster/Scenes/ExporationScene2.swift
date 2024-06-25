@@ -13,6 +13,8 @@ class ExplorationScene2: SKScene, ExplorationSceneProtocol {
     var lastPlayerCoordinate: CGPoint?
     var lastPlayerDirection: Direction?
     
+    var isSpellbookOpen: Bool = false
+    
     var spellNode: SKSpriteNode?
     var spellCooldownNodes: [SKSpriteNode] = []
     
@@ -67,20 +69,33 @@ class ExplorationScene2: SKScene, ExplorationSceneProtocol {
                 break
             }
             
-            player.castSpellInExplorationScene(scene: self, chant: player.inputSpell)
+            player.castSpellInExplorationScene(scene: self, chant: player.inputSpell.lowercased())
             
             player.inputSpell = ""
             player.spellLabelNode.text = player.inputSpell
             player.spellLabelNodeBackground.size.width = 0
             
-            //        case 48:
-            //            if isSpellBookOpen {
-            //                isSpellBookOpen = false
-            //                spellBookNode.removeFromParent()
-            //            } else {
-            //                isSpellBookOpen = true
-            //                sceneCamera.addChild(spellBookNode)
-            //            }
+        case 48:
+            var spellbookNode: SKSpriteNode = SKSpriteNode()
+            
+            if player.spells.count == 3 {
+                spellbookNode = SKSpriteNode(imageNamed: "spell-book-no-shield")
+            } else if player.spells.count == 4 {
+                spellbookNode = SKSpriteNode(imageNamed: "spell-book-with-shield")
+            }
+            
+            spellbookNode.name = "spell-book"
+            spellbookNode.zPosition = 20
+            
+            if isSpellbookOpen {
+                if let node = sceneCamera.childNode(withName: "spell-book") {
+                    node.removeFromParent()
+                    isSpellbookOpen = false
+                }
+            } else {
+                sceneCamera.addChild(spellbookNode)
+                isSpellbookOpen = true
+            }
             
         default:
             if event.keyCode == 49 {

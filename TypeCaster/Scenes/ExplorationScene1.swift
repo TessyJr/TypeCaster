@@ -71,14 +71,21 @@ class ExplorationScene1: SKScene, ExplorationSceneProtocol {
                 break
             }
             
-            player.castSpellInExplorationScene(scene: self, chant: player.inputSpell)
+            player.castSpellInExplorationScene(scene: self, chant: player.inputSpell.lowercased())
             
             player.inputSpell = ""
             player.spellLabelNode.text = player.inputSpell
             player.spellLabelNodeBackground.size.width = 0
             
         case 48:
-            let spellbookNode = SKSpriteNode(imageNamed: "spell-book")
+            var spellbookNode: SKSpriteNode = SKSpriteNode()
+            
+            if player.spells.count == 3 {
+                spellbookNode = SKSpriteNode(imageNamed: "spell-book-no-shield")
+            } else if player.spells.count == 4 {
+                spellbookNode = SKSpriteNode(imageNamed: "spell-book-with-shield")
+            }
+            
             spellbookNode.name = "spell-book"
             spellbookNode.zPosition = 20
             

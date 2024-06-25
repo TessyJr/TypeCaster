@@ -16,6 +16,8 @@ protocol ExplorationSceneProtocol: SKScene {
     var spellNode: SKSpriteNode? { get set }
     var spellCooldownNodes: [SKSpriteNode] { get set }
     
+    var isSpellbookOpen: Bool { get set }
+    
     var enemies: [Enemy] { get set }
     var defeatedEnemies: [Enemy] { get set }
     

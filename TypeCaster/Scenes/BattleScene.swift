@@ -12,6 +12,8 @@ class BattleScene: SKScene, BattleSceneProtocol {
     var isSpellBookOpen: Bool = false
     var spellBookNode: SKSpriteNode = SKSpriteNode()
     
+    var isSpellbookOpen: Bool = false
+    
     var player: Player = Player()
     
     var spellNode: SKSpriteNode?
@@ -28,9 +30,6 @@ class BattleScene: SKScene, BattleSceneProtocol {
         AudioManager.shared.playBgm(bgmType: .battle)
         
         sceneCamera = childNode(withName: "sceneCamera") as! SKCameraNode
-        
-        //        spellBookNode = SKSpriteNode(imageNamed: "spellBook")
-        //        spellBookNode.zPosition = 20
         
         for node in self.children {
             if let someTileMap = node as? SKTileMapNode {
@@ -102,19 +101,29 @@ class BattleScene: SKScene, BattleSceneProtocol {
             player.spellLabelNode.text = player.inputSpell
             player.spellLabelNodeBackground.size.width = 0
             
-            //        case 48:
-            //            if isSpellBookOpen {
-            //                isSpellBookOpen = false
-            //                spellBookNode.removeFromParent()
-            //            } else {
-            //                isSpellBookOpen = true
-            //                sceneCamera.addChild(spellBookNode)
-            //            }
+        case 48:
+            var spellbookNode: SKSpriteNode = SKSpriteNode()
+            
+            if player.spells.count == 3 {
+                spellbookNode = SKSpriteNode(imageNamed: "spell-book-no-shield")
+            } else if player.spells.count == 4 {
+                spellbookNode = SKSpriteNode(imageNamed: "spell-book-with-shield")
+            }
+            
+            if isSpellbookOpen {
+                if let node = sceneCamera.childNode(withName: "spell-book") {
+                    node.removeFromParent()
+                    isSpellbookOpen = false
+                }
+            } else {
+                sceneCamera.addChild(spellbookNode)
+                isSpellbookOpen = true
+            }
             
         default:
             if event.keyCode == 49 {
                 if player.inputSpell == "" {
-                    player.castSpellInBattleScene(scene: self, chant: player.inputSpell, enemy: enemy)
+                    player.castSpellInBattleScene(scene: self, chant: player.inputSpell.lowercased(), enemy: enemy)
                     break
                 }
             }
