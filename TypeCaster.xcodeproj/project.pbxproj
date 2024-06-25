@@ -39,9 +39,11 @@
 		53277AD02C23FCF400F15407 /* BattleScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53277ACF2C23FCF400F15407 /* BattleScene.swift */; };
 		53277AD32C24097700F15407 /* GameTileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = 53277AD12C24097700F15407 /* GameTileSet.sks */; };
 		53277AD62C24132200F15407 /* BattleScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 53277AD52C24132200F15407 /* BattleScene.sks */; };
-		53277AD82C26F6CA00F15407 /* ExporationScene2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53277AD72C26F6CA00F15407 /* ExporationScene2.swift */; };
+		53277AD82C26F6CA00F15407 /* ExplorationScene2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53277AD72C26F6CA00F15407 /* ExplorationScene2.swift */; };
 		53277ADA2C26F6D800F15407 /* ExplorationScene2.sks in Resources */ = {isa = PBXBuildFile; fileRef = 53277AD92C26F6D800F15407 /* ExplorationScene2.sks */; };
 		53277ADC2C27E35C00F15407 /* NPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53277ADB2C27E35C00F15407 /* NPC.swift */; };
+		539649C72C2AC4DD000519CE /* ExplorationScene3.sks in Resources */ = {isa = PBXBuildFile; fileRef = 539649C62C2AC4DD000519CE /* ExplorationScene3.sks */; };
+		539649C92C2AC9C6000519CE /* ExplorationScene3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539649C82C2AC9C6000519CE /* ExplorationScene3.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,9 +82,11 @@
 		53277ACF2C23FCF400F15407 /* BattleScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleScene.swift; sourceTree = "<group>"; };
 		53277AD12C24097700F15407 /* GameTileSet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameTileSet.sks; sourceTree = "<group>"; };
 		53277AD52C24132200F15407 /* BattleScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BattleScene.sks; sourceTree = "<group>"; };
-		53277AD72C26F6CA00F15407 /* ExporationScene2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExporationScene2.swift; sourceTree = "<group>"; };
+		53277AD72C26F6CA00F15407 /* ExplorationScene2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorationScene2.swift; sourceTree = "<group>"; };
 		53277AD92C26F6D800F15407 /* ExplorationScene2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ExplorationScene2.sks; sourceTree = "<group>"; };
 		53277ADB2C27E35C00F15407 /* NPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NPC.swift; sourceTree = "<group>"; };
+		539649C62C2AC4DD000519CE /* ExplorationScene3.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ExplorationScene3.sks; sourceTree = "<group>"; };
+		539649C82C2AC9C6000519CE /* ExplorationScene3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorationScene3.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,7 +201,9 @@
 				53277AA62C23FA9000F15407 /* ExplorationScene1.sks */,
 				53277AAA2C23FA9000F15407 /* ExplorationScene1.swift */,
 				53277AD92C26F6D800F15407 /* ExplorationScene2.sks */,
-				53277AD72C26F6CA00F15407 /* ExporationScene2.swift */,
+				53277AD72C26F6CA00F15407 /* ExplorationScene2.swift */,
+				539649C62C2AC4DD000519CE /* ExplorationScene3.sks */,
+				539649C82C2AC9C6000519CE /* ExplorationScene3.swift */,
 				53277AD52C24132200F15407 /* BattleScene.sks */,
 				53277ACF2C23FCF400F15407 /* BattleScene.swift */,
 			);
@@ -300,6 +306,7 @@
 				261F61972C242D390082232A /* treasureFound.mp3 in Resources */,
 				261F619B2C242D420082232A /* explorationBGM.mp3 in Resources */,
 				261F61942C242D390082232A /* alert.mp3 in Resources */,
+				539649C72C2AC4DD000519CE /* ExplorationScene3.sks in Resources */,
 				261F61922C242D390082232A /* playerDie.mp3 in Resources */,
 				53277AA72C23FA9000F15407 /* ExplorationScene1.sks in Resources */,
 				261F61952C242D390082232A /* throwRock.mp3 in Resources */,
@@ -326,13 +333,14 @@
 				53277AAB2C23FA9000F15407 /* ExplorationScene1.swift in Sources */,
 				261F61A02C2438BD0082232A /* SfxType.swift in Sources */,
 				53277AA52C23FA9000F15407 /* AppDelegate.swift in Sources */,
+				539649C92C2AC9C6000519CE /* ExplorationScene3.swift in Sources */,
 				53277AC32C23FC7200F15407 /* BattleSceneProtocol.swift in Sources */,
 				53277ACE2C23FCD100F15407 /* Spell.swift in Sources */,
 				53277AC82C23FC9D00F15407 /* Player.swift in Sources */,
 				53277AD02C23FCF400F15407 /* BattleScene.swift in Sources */,
 				53277ACA2C23FCAB00F15407 /* Enemy.swift in Sources */,
 				261F619E2C2432DB0082232A /* AudioManager.swift in Sources */,
-				53277AD82C26F6CA00F15407 /* ExporationScene2.swift in Sources */,
+				53277AD82C26F6CA00F15407 /* ExplorationScene2.swift in Sources */,
 				53277ADC2C27E35C00F15407 /* NPC.swift in Sources */,
 				53277ACC2C23FCC100F15407 /* Object.swift in Sources */,
 				53277ABF2C23FC3800F15407 /* Direction.swift in Sources */,
@@ -483,7 +491,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = VPGX5Q423F;
+				DEVELOPMENT_TEAM = XJ7Y6VR3NN;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TypeCaster/Info.plist;
@@ -511,7 +519,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = VPGX5Q423F;
+				DEVELOPMENT_TEAM = XJ7Y6VR3NN;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TypeCaster/Info.plist;

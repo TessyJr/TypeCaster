@@ -1,6 +1,6 @@
 import SpriteKit
 
-class ExplorationScene2: SKScene, ExplorationSceneProtocol {
+class ExplorationScene3: SKScene, ExplorationSceneProtocol {
     var sceneCamera: SKCameraNode = SKCameraNode()
     var cooldownContainer: SKNode = SKNode()
     
