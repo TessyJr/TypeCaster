@@ -85,7 +85,9 @@ extension ExplorationSceneProtocol {
         player.spellLabelNode = player.spriteNode.childNode(withName: "labelPlayerSpell") as! SKLabelNode
         player.inputSpell = ""
         player.spellLabelNode.text = player.inputSpell
+        
         player.spellLabelNodeBackground = player.spriteNode.childNode(withName: "labelPlayerSpellBackground") as! SKSpriteNode
+        player.spellLabelNodeBackground.size.width = 0
         
         cooldownContainer = sceneCamera.childNode(withName: "cooldown-container")!
         
@@ -189,6 +191,8 @@ extension ExplorationSceneProtocol {
                 if node.name == "npc" {
                     if let npcSpriteNode = node as? SKSpriteNode,
                        let npcType = npcSpriteNode.userData?["npcType"] as? String {
+                        npcSpriteNode.position.x = round(npcSpriteNode.position.x)
+                        npcSpriteNode.position.y = round(npcSpriteNode.position.y)
                         
                         if let npc = NPC.create(spriteNode: npcSpriteNode, coordinate: npcSpriteNode.position, npcType: npcType) {
                             npc.status = .idle

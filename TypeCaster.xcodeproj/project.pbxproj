@@ -202,6 +202,8 @@
 		53277AB92C23FBB900F15407 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				539649CA2C2ACF46000519CE /* StartScene.sks */,
+				539649CC2C2ACFF1000519CE /* StartScene.swift */,
 				53277AA62C23FA9000F15407 /* ExplorationScene1.sks */,
 				53277AAA2C23FA9000F15407 /* ExplorationScene1.swift */,
 				53277AD92C26F6D800F15407 /* ExplorationScene2.sks */,
@@ -210,8 +212,6 @@
 				539649C82C2AC9C6000519CE /* ExplorationScene3.swift */,
 				53277AD52C24132200F15407 /* BattleScene.sks */,
 				53277ACF2C23FCF400F15407 /* BattleScene.swift */,
-				539649CA2C2ACF46000519CE /* StartScene.sks */,
-				539649CC2C2ACFF1000519CE /* StartScene.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -499,7 +499,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = VPGX5Q423F;
+				DEVELOPMENT_TEAM = XJ7Y6VR3NN;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TypeCaster/Info.plist;
@@ -527,7 +527,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = VPGX5Q423F;
+				DEVELOPMENT_TEAM = XJ7Y6VR3NN;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TypeCaster/Info.plist;
