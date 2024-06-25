@@ -76,7 +76,7 @@ class NPC1: NPC {
             "Press the [TAB] Button to open your spell book.",
             "You might want to memorize the magic spells.",
             "Try using one to break the boxes over there!",
-            "Then you could practice with the training dummy in that room!",
+            "Then you could practice with the training dummy!",
             "Well then, good luck newbie!",
         ]
     }

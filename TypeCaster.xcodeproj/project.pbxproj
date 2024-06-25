@@ -21,6 +21,7 @@
 		266E9BB22C2982DE0052D5A9 /* shimmeringKey.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 266E9BB12C2982DE0052D5A9 /* shimmeringKey.mp3 */; };
 		266E9BB42C2982E40052D5A9 /* stunned.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 266E9BB32C2982E40052D5A9 /* stunned.mp3 */; };
 		266E9BB82C2A9FCA0052D5A9 /* healing.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 266E9BB72C2A9FCA0052D5A9 /* healing.mp3 */; };
+		266E9BBC2C2AA2E70052D5A9 /* Pixel Times.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 266E9BBB2C2AA2E70052D5A9 /* Pixel Times.ttf */; };
 		53277AA52C23FA9000F15407 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53277AA42C23FA9000F15407 /* AppDelegate.swift */; };
 		53277AA72C23FA9000F15407 /* ExplorationScene1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 53277AA62C23FA9000F15407 /* ExplorationScene1.sks */; };
 		53277AAB2C23FA9000F15407 /* ExplorationScene1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53277AAA2C23FA9000F15407 /* ExplorationScene1.swift */; };
@@ -58,6 +59,8 @@
 		266E9BB12C2982DE0052D5A9 /* shimmeringKey.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = shimmeringKey.mp3; sourceTree = "<group>"; };
 		266E9BB32C2982E40052D5A9 /* stunned.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = stunned.mp3; sourceTree = "<group>"; };
 		266E9BB72C2A9FCA0052D5A9 /* healing.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = healing.mp3; sourceTree = "<group>"; };
+		266E9BBB2C2AA2E70052D5A9 /* Pixel Times.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pixel Times.ttf"; sourceTree = "<group>"; };
+		266E9BBD2C2AA3750052D5A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		53277AA12C23FA9000F15407 /* TypeCaster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TypeCaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53277AA42C23FA9000F15407 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		53277AA62C23FA9000F15407 /* ExplorationScene1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ExplorationScene1.sks; sourceTree = "<group>"; };
@@ -135,6 +138,23 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
+		266E9BB92C2AA2490052D5A9 /* Asset */ = {
+			isa = PBXGroup;
+			children = (
+				261F61852C24254D0082232A /* Audio */,
+				266E9BBA2C2AA2500052D5A9 /* Fonts */,
+			);
+			path = Asset;
+			sourceTree = "<group>";
+		};
+		266E9BBA2C2AA2500052D5A9 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				266E9BBB2C2AA2E70052D5A9 /* Pixel Times.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		53277A982C23FA9000F15407 = {
 			isa = PBXGroup;
 			children = (
@@ -154,7 +174,7 @@
 		53277AA32C23FA9000F15407 /* TypeCaster */ = {
 			isa = PBXGroup;
 			children = (
-				261F61852C24254D0082232A /* Audio */,
+				266E9BB92C2AA2490052D5A9 /* Asset */,
 				53277ABA2C23FC0800F15407 /* Enums */,
 				261F619C2C2432AF0082232A /* Helper */,
 				53277ABB2C23FC0D00F15407 /* Protocols */,
@@ -163,6 +183,7 @@
 				53277AA42C23FA9000F15407 /* AppDelegate.swift */,
 				53277AAC2C23FA9000F15407 /* ViewController.swift */,
 				53277AAE2C23FA9100F15407 /* Assets.xcassets */,
+				266E9BBD2C2AA3750052D5A9 /* Info.plist */,
 				53277AB02C23FA9100F15407 /* Main.storyboard */,
 				53277AB32C23FA9100F15407 /* TypeCaster.entitlements */,
 				53277AD12C24097700F15407 /* GameTileSet.sks */,
@@ -274,6 +295,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				53277AD32C24097700F15407 /* GameTileSet.sks in Resources */,
+				266E9BBC2C2AA2E70052D5A9 /* Pixel Times.ttf in Resources */,
 				261F61962C242D390082232A /* iceblast.mp3 in Resources */,
 				261F61972C242D390082232A /* treasureFound.mp3 in Resources */,
 				261F619B2C242D420082232A /* explorationBGM.mp3 in Resources */,
@@ -464,6 +486,7 @@
 				DEVELOPMENT_TEAM = VPGX5Q423F;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TypeCaster/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -491,6 +514,7 @@
 				DEVELOPMENT_TEAM = VPGX5Q423F;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TypeCaster/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
