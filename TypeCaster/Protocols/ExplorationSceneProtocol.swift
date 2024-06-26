@@ -75,6 +75,10 @@ extension ExplorationSceneProtocol {
         
         var cooldownNodePosition = CGPoint(x: 0, y: 0)
         for spell in player.spells {
+            if spell.spellType == .throwRock {
+                continue
+            }
+            
             let cooldownNode = SKSpriteNode(texture: spell.cooldownTexture)
             cooldownNode.position = cooldownNodePosition
             cooldownContainer.addChild(cooldownNode)
@@ -144,6 +148,7 @@ extension ExplorationSceneProtocol {
                             
                             enemySpriteNode.removeFromParent()
                         } else {
+                            enemy.animateMapSprite()
                             enemies.append(enemy)
                         }
                     }

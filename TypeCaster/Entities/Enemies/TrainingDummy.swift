@@ -12,6 +12,21 @@ class TrainingDummy: Enemy {
         self.attackInterval = 0.0
     }
     
+    override func animateMapSprite() {
+        var textures: [SKTexture] = []
+        
+        for i in 1...1 {
+            let textureName = "\(name)-map-\(i)"
+            let texture = SKTexture(imageNamed: textureName)
+            textures.append(texture)
+        }
+        
+        let idleAnimation = SKAction.animate(with: textures, timePerFrame: 0.25)
+        let repeatIdleAnimation = SKAction.repeatForever(idleAnimation)
+        
+        spriteNode.run(repeatIdleAnimation)
+    }
+    
     override func animateSprite() {
         spriteNode.removeAllActions()
         
@@ -52,6 +67,30 @@ class TrainingDummy: Enemy {
             spriteNode.run(dieAnimation)
         default:
             break
+        }
+    }
+    
+    override func getHurt(scene: BattleSceneProtocol, damage: Int) {
+        currentHealth -= damage
+        
+        if currentHealth <= 0 {
+            spriteNode.removeAllActions()
+            scene.stopBattle()
+            
+            status = .dead
+            animateSprite()
+            
+            scene.goToPreviousScene(delay: 1.0)
+            
+            return
+        }
+        
+        status = .hurt
+        animateSprite()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+            self.status = .idle
+            self.animateSprite()
         }
     }
     

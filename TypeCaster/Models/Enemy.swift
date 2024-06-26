@@ -31,86 +31,13 @@ class Enemy {
     
     func startAttacking(scene: BattleScene, player: Player, completion: @escaping () -> Void) {}
     
-    func animateSprite() {
-        spriteNode.removeAllActions()
-        
-        var textures: [SKTexture] = []
-        
-        switch status {
-        case .idle:
-            for i in 1...2 {
-                let textureName = "\(name)-idle-\(i)"
-                let texture = SKTexture(imageNamed: textureName)
-                textures.append(texture)
-            }
-            
-            let idleAnimation = SKAction.animate(with: textures, timePerFrame: 0.25)
-            let repeatIdleAnimation = SKAction.repeatForever(idleAnimation)
-            
-            spriteNode.run(repeatIdleAnimation)
-        case .hurt:
-            var textures: [SKTexture] = []
-            for i in 1...2 {
-                let textureName = "\(name)-hurt-\(i)"
-                let texture = SKTexture(imageNamed: textureName)
-                textures.append(texture)
-            }
-            
-            let hurtAnimation = SKAction.animate(with: textures, timePerFrame: 0.25)
-            
-            spriteNode.run(hurtAnimation)
-        case .dead:
-            for i in 1...4 {
-                let textureName = "\(name)-die-\(i)"
-                let texture = SKTexture(imageNamed: textureName)
-                textures.append(texture)
-            }
-            
-            let dieAnimation = SKAction.animate(with: textures, timePerFrame: 0.25)
-            
-            spriteNode.run(dieAnimation)
-            
-        case .attacking:
-            for i in 1...4 {
-                let textureName = "\(name)-attack-\(i)"
-                let texture = SKTexture(imageNamed: textureName)
-                textures.append(texture)
-            }
-            
-            let attackAnimation = SKAction.animate(with: textures, timePerFrame: 0.25)
-            
-            spriteNode.run(attackAnimation)
-        default:
-            break
-        }
-    }
+    func animateMapSprite() {}
     
-    func getHurt(scene: BattleSceneProtocol, damage: Int) {
-        currentHealth -= damage
-        
-        if currentHealth <= 0 {
-            spriteNode.removeAllActions()
-            scene.stopBattle()
-            
-            status = .dead
-            animateSprite()
-            
-            scene.goToPreviousScene()
-            
-            return
-        }
-        
-        status = .hurt
-        animateSprite()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
-            self.status = .idle
-            self.animateSprite()
-        }
-    }
+    func animateSprite() {}
+    
+    func getHurt(scene: BattleSceneProtocol, damage: Int) {}
     
     func dropKey(scene: BattleSceneProtocol) {
-        
         var keyTextures: [SKTexture] = []
         
         for i in 1...3 {

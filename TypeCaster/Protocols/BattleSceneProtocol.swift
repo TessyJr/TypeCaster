@@ -119,14 +119,14 @@ extension BattleSceneProtocol {
         enemyHealthBar = sceneCamera.childNode(withName: "enemyHealthBar") as! SKSpriteNode
     }
     
-    func goToPreviousScene() {
+    func goToPreviousScene(delay: CGFloat) {
         var waitAction: SKAction = SKAction()
         
         if self.previousScene.enemies.count == 1 {
             waitAction = SKAction.wait(forDuration: 3.0)
             enemy.dropKey(scene: self)
         } else {
-            waitAction = SKAction.wait(forDuration: 1.0)
+            waitAction = SKAction.wait(forDuration: delay + 0.5)
         }
         
         let transitionAction = SKAction.run {

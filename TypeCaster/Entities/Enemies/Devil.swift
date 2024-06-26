@@ -7,9 +7,102 @@ class Devil: Enemy {
         self.spriteNode = spriteNode
         self.coordinate = coordinate
         self.name = "devil"
-        self.currentHealth = 10
-        self.maxHealth = 100
+        self.currentHealth = 40
+        self.maxHealth = 40
         self.attackInterval = 1.0
+    }
+    
+    override func animateMapSprite() {
+        var textures: [SKTexture] = []
+        
+        for i in 1...2 {
+            let textureName = "\(name)-map-\(i)"
+            let texture = SKTexture(imageNamed: textureName)
+            textures.append(texture)
+        }
+        
+        let idleAnimation = SKAction.animate(with: textures, timePerFrame: 0.25)
+        let repeatIdleAnimation = SKAction.repeatForever(idleAnimation)
+        
+        spriteNode.run(repeatIdleAnimation)
+    }
+    
+    override func animateSprite() {
+        spriteNode.removeAllActions()
+        
+        var textures: [SKTexture] = []
+        
+        switch status {
+        case .idle:
+            for i in 1...2 {
+                let textureName = "\(name)-idle-\(i)"
+                let texture = SKTexture(imageNamed: textureName)
+                textures.append(texture)
+            }
+            
+            let idleAnimation = SKAction.animate(with: textures, timePerFrame: 0.25)
+            let repeatIdleAnimation = SKAction.repeatForever(idleAnimation)
+            
+            spriteNode.run(repeatIdleAnimation)
+        case .hurt:
+            var textures: [SKTexture] = []
+            for i in 1...2 {
+                let textureName = "\(name)-hurt-\(i)"
+                let texture = SKTexture(imageNamed: textureName)
+                textures.append(texture)
+            }
+            
+            let hurtAnimation = SKAction.animate(with: textures, timePerFrame: 0.25)
+            
+            spriteNode.run(hurtAnimation)
+        case .dead:
+            for i in 1...4 {
+                let textureName = "\(name)-die-\(i)"
+                let texture = SKTexture(imageNamed: textureName)
+                textures.append(texture)
+            }
+            
+            let dieAnimation = SKAction.animate(with: textures, timePerFrame: 0.25)
+            
+            spriteNode.run(dieAnimation)
+            
+        case .attacking:
+            for i in 1...4 {
+                let textureName = "\(name)-attack-\(i)"
+                let texture = SKTexture(imageNamed: textureName)
+                textures.append(texture)
+            }
+            
+            let attackAnimation = SKAction.animate(with: textures, timePerFrame: 0.25)
+            
+            spriteNode.run(attackAnimation)
+        default:
+            break
+        }
+    }
+    
+    override func getHurt(scene: BattleSceneProtocol, damage: Int) {
+        currentHealth -= damage
+        
+        if currentHealth <= 0 {
+            spriteNode.removeAllActions()
+            scene.stopBattle()
+            
+            status = .dead
+            animateSprite()
+            
+            scene.goToPreviousScene(delay: 1.0)
+            
+            return
+        }
+        
+        status = .hurt
+        animateSprite()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+            self.status = .idle
+            self.animateSprite()
+        }
     }
     
     // Moving Right Rows Attack
@@ -58,7 +151,7 @@ class Devil: Enemy {
             self.animateSprite()
             
             for coordinate in attackCoordinates {
-                let preAttackTexture = SKTexture(imageNamed: "attack-preview")
+                let preAttackTexture = SKTexture(imageNamed: "attack-preview-left")
                 let preAttackNode = SKSpriteNode(texture: preAttackTexture)
                 preAttackNode.name = "pre-attack-node"
                 preAttackNode.position = coordinate
@@ -86,10 +179,22 @@ class Devil: Enemy {
         // Step 6: Attack logic
         let attackAction = SKAction.run {
             for coordinate in attackCoordinates {
-                let enemyAttackTexture = SKTexture(imageNamed: "fireball")
-                let enemyAttackNode = SKSpriteNode(texture: enemyAttackTexture)
+                var textures: [SKTexture] = []
+                
+                for i in 1...3 {
+                    let textureName = "spear-left-\(i)"
+                    let texture = SKTexture(imageNamed: textureName)
+                    textures.append(texture)
+                }
+                
+                let movingAnimation = SKAction.animate(with: textures, timePerFrame: 0.25)
+                let repeatedMovingAnimation = SKAction.repeatForever(movingAnimation)
+                
+                let enemyAttackNode = SKSpriteNode()
                 enemyAttackNode.position = coordinate
                 enemyAttackNode.size = CGSize(width: 32, height: 32)
+                
+                enemyAttackNode.run(repeatedMovingAnimation)
                 
                 scene.addChild(enemyAttackNode)
                 scene.attackNodes.append(enemyAttackNode)
@@ -167,7 +272,7 @@ class Devil: Enemy {
             self.animateSprite()
             
             for coordinate in attackCoordinates {
-                let preAttackTexture = SKTexture(imageNamed: "attack-preview")
+                let preAttackTexture = SKTexture(imageNamed: "attack-preview-right")
                 let preAttackNode = SKSpriteNode(texture: preAttackTexture)
                 preAttackNode.name = "pre-attack-node"
                 preAttackNode.position = coordinate
@@ -195,10 +300,23 @@ class Devil: Enemy {
         // Step 6: Attack logic
         let attackAction = SKAction.run {
             for coordinate in attackCoordinates {
-                let enemyAttackTexture = SKTexture(imageNamed: "fireball")
+                var textures: [SKTexture] = []
+                
+                for i in 1...3 {
+                    let textureName = "spear-right-\(i)"
+                    let texture = SKTexture(imageNamed: textureName)
+                    textures.append(texture)
+                }
+                
+                let movingAnimation = SKAction.animate(with: textures, timePerFrame: 0.25)
+                let repeatedMovingAnimation = SKAction.repeatForever(movingAnimation)
+                
+                let enemyAttackTexture = SKTexture()
                 let enemyAttackNode = SKSpriteNode(texture: enemyAttackTexture)
                 enemyAttackNode.position = coordinate
                 enemyAttackNode.size = CGSize(width: 32, height: 32)
+                
+                enemyAttackNode.run(repeatedMovingAnimation)
                 
                 scene.addChild(enemyAttackNode)
                 scene.attackNodes.append(enemyAttackNode)
@@ -276,7 +394,7 @@ class Devil: Enemy {
             self.animateSprite()
             
             for coordinate in attackCoordinates {
-                let preAttackTexture = SKTexture(imageNamed: "attack-preview")
+                let preAttackTexture = SKTexture(imageNamed: "attack-preview-down")
                 let preAttackNode = SKSpriteNode(texture: preAttackTexture)
                 preAttackNode.name = "pre-attack-node"
                 preAttackNode.position = coordinate
@@ -304,10 +422,23 @@ class Devil: Enemy {
         // Step 6: Attack logic
         let attackAction = SKAction.run {
             for coordinate in attackCoordinates {
-                let enemyAttackTexture = SKTexture(imageNamed: "fireball")
+                var textures: [SKTexture] = []
+                
+                for i in 1...3 {
+                    let textureName = "spear-down-\(i)"
+                    let texture = SKTexture(imageNamed: textureName)
+                    textures.append(texture)
+                }
+                
+                let movingAnimation = SKAction.animate(with: textures, timePerFrame: 0.25)
+                let repeatedMovingAnimation = SKAction.repeatForever(movingAnimation)
+                
+                let enemyAttackTexture = SKTexture()
                 let enemyAttackNode = SKSpriteNode(texture: enemyAttackTexture)
                 enemyAttackNode.position = coordinate
                 enemyAttackNode.size = CGSize(width: 32, height: 32)
+                
+                enemyAttackNode.run(repeatedMovingAnimation)
                 
                 scene.addChild(enemyAttackNode)
                 scene.attackNodes.append(enemyAttackNode)
@@ -385,7 +516,7 @@ class Devil: Enemy {
             self.animateSprite()
             
             for coordinate in attackCoordinates {
-                let preAttackTexture = SKTexture(imageNamed: "attack-preview")
+                let preAttackTexture = SKTexture(imageNamed: "attack-preview-up")
                 let preAttackNode = SKSpriteNode(texture: preAttackTexture)
                 preAttackNode.name = "pre-attack-node"
                 preAttackNode.position = coordinate
@@ -413,10 +544,23 @@ class Devil: Enemy {
         // Step 6: Attack logic
         let attackAction = SKAction.run {
             for coordinate in attackCoordinates {
-                let enemyAttackTexture = SKTexture(imageNamed: "fireball")
+                var textures: [SKTexture] = []
+                
+                for i in 1...3 {
+                    let textureName = "spear-up-\(i)"
+                    let texture = SKTexture(imageNamed: textureName)
+                    textures.append(texture)
+                }
+                
+                let movingAnimation = SKAction.animate(with: textures, timePerFrame: 0.25)
+                let repeatedMovingAnimation = SKAction.repeatForever(movingAnimation)
+                
+                let enemyAttackTexture = SKTexture()
                 let enemyAttackNode = SKSpriteNode(texture: enemyAttackTexture)
                 enemyAttackNode.position = coordinate
                 enemyAttackNode.size = CGSize(width: 32, height: 32)
+                
+                enemyAttackNode.run(repeatedMovingAnimation)
                 
                 scene.addChild(enemyAttackNode)
                 scene.attackNodes.append(enemyAttackNode)

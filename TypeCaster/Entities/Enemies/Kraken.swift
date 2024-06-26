@@ -12,6 +12,101 @@ class Kraken: Enemy {
         self.attackInterval = 1.0
     }
     
+    override func animateMapSprite() {
+        var textures: [SKTexture] = []
+        
+        for i in 1...2 {
+            let textureName = "\(name)-map-\(i)"
+            let texture = SKTexture(imageNamed: textureName)
+            textures.append(texture)
+        }
+        
+        let idleAnimation = SKAction.animate(with: textures, timePerFrame: 0.25)
+        let repeatIdleAnimation = SKAction.repeatForever(idleAnimation)
+        
+        spriteNode.run(repeatIdleAnimation)
+    }
+    
+    override func animateSprite() {
+        spriteNode.size = CGSize(width: 64.0, height: 64.0)
+
+        spriteNode.removeAllActions()
+        
+        var textures: [SKTexture] = []
+        
+        switch status {
+        case .idle:
+            for i in 1...3 {
+                let textureName = "\(name)-idle-\(i)"
+                let texture = SKTexture(imageNamed: textureName)
+                textures.append(texture)
+            }
+            
+            let idleAnimation = SKAction.animate(with: textures, timePerFrame: 0.25)
+            let repeatIdleAnimation = SKAction.repeatForever(idleAnimation)
+            
+            spriteNode.run(repeatIdleAnimation)
+        case .hurt:
+            var textures: [SKTexture] = []
+            for i in 1...2 {
+                let textureName = "\(name)-hurt-\(i)"
+                let texture = SKTexture(imageNamed: textureName)
+                textures.append(texture)
+            }
+            
+            let hurtAnimation = SKAction.animate(with: textures, timePerFrame: 0.25)
+            
+            spriteNode.run(hurtAnimation)
+        case .dead:
+            for i in 1...6 {
+                let textureName = "\(name)-die-\(i)"
+                let texture = SKTexture(imageNamed: textureName)
+                textures.append(texture)
+            }
+            
+            let dieAnimation = SKAction.animate(with: textures, timePerFrame: 0.25)
+            
+            spriteNode.run(dieAnimation)
+            
+        case .attacking:
+            for i in 1...4 {
+                let textureName = "\(name)-attack-\(i)"
+                let texture = SKTexture(imageNamed: textureName)
+                textures.append(texture)
+            }
+            
+            let attackAnimation = SKAction.animate(with: textures, timePerFrame: 0.25)
+            
+            spriteNode.run(attackAnimation)
+        default:
+            break
+        }
+    }
+    
+    override func getHurt(scene: BattleSceneProtocol, damage: Int) {
+        currentHealth -= damage
+        
+        if currentHealth <= 0 {
+            spriteNode.removeAllActions()
+            scene.stopBattle()
+            
+            status = .dead
+            animateSprite()
+            
+            scene.goToPreviousScene(delay: 1.5)
+            
+            return
+        }
+        
+        status = .hurt
+        animateSprite()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+            self.status = .idle
+            self.animateSprite()
+        }
+    }
+    
     // Random Tile Attack
     private func attack1Action(scene: BattleScene, player: Player) -> SKAction {
         var attackCoordinates = [CGPoint]()
@@ -33,7 +128,7 @@ class Kraken: Enemy {
             self.animateSprite()
             
             for coordinate in attackCoordinates {
-                let preAttackTexture = SKTexture(imageNamed: "attack-preview")
+                let preAttackTexture = SKTexture(imageNamed: "attack-preview-middle")
                 let preAttackNode = SKSpriteNode(texture: preAttackTexture)
                 preAttackNode.name = "pre-attack-node"
                 preAttackNode.position = coordinate
@@ -61,13 +156,24 @@ class Kraken: Enemy {
         // Step 5: Attack logic
         let attackAction = SKAction.run {
             for coordinate in attackCoordinates {
-                let trapdoorTexture = SKTexture(imageNamed: "fireball")
-                let trapdoorNode = SKSpriteNode(texture: trapdoorTexture)
-                trapdoorNode.position = coordinate
-                trapdoorNode.size = CGSize(width: 32, height: 32)
+                var textures: [SKTexture] = []
                 
-                scene.addChild(trapdoorNode)
-                scene.attackNodes.append(trapdoorNode)
+                for i in 1...3 {
+                    let textureName = "iceshard-\(i)"
+                    let texture = SKTexture(imageNamed: textureName)
+                    textures.append(texture)
+                }
+                
+                let movingAnimation = SKAction.animate(with: textures, timePerFrame: 0.25)
+                
+                let enemyAttackNode = SKSpriteNode()
+                enemyAttackNode.position = coordinate
+                enemyAttackNode.size = CGSize(width: 32, height: 32)
+                
+                enemyAttackNode.run(movingAnimation)
+                
+                scene.addChild(enemyAttackNode)
+                scene.attackNodes.append(enemyAttackNode)
             }
         }
         
