@@ -18,10 +18,12 @@
 		261F619E2C2432DB0082232A /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261F619D2C2432DB0082232A /* AudioManager.swift */; };
 		261F61A02C2438BD0082232A /* SfxType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261F619F2C2438BD0082232A /* SfxType.swift */; };
 		261F61A22C257C200082232A /* fireball.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 261F61A12C257C200082232A /* fireball.mp3 */; };
-		266E9BB22C2982DE0052D5A9 /* shimmeringKey.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 266E9BB12C2982DE0052D5A9 /* shimmeringKey.mp3 */; };
 		266E9BB42C2982E40052D5A9 /* stunned.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 266E9BB32C2982E40052D5A9 /* stunned.mp3 */; };
 		266E9BB82C2A9FCA0052D5A9 /* healing.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 266E9BB72C2A9FCA0052D5A9 /* healing.mp3 */; };
 		266E9BBC2C2AA2E70052D5A9 /* Pixel Times.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 266E9BBB2C2AA2E70052D5A9 /* Pixel Times.ttf */; };
+		266E9BC12C2B9C850052D5A9 /* enterGame.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 266E9BC02C2B9C850052D5A9 /* enterGame.mp3 */; };
+		266E9BC32C2BA2120052D5A9 /* changeExploration.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 266E9BC22C2BA2120052D5A9 /* changeExploration.mp3 */; };
+		266E9BC52C2BA27F0052D5A9 /* dropKey.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 266E9BC42C2BA27F0052D5A9 /* dropKey.mp3 */; };
 		53277AA52C23FA9000F15407 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53277AA42C23FA9000F15407 /* AppDelegate.swift */; };
 		53277AA72C23FA9000F15407 /* ExplorationScene1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 53277AA62C23FA9000F15407 /* ExplorationScene1.sks */; };
 		53277AAB2C23FA9000F15407 /* ExplorationScene1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53277AAA2C23FA9000F15407 /* ExplorationScene1.swift */; };
@@ -68,11 +70,13 @@
 		261F619D2C2432DB0082232A /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		261F619F2C2438BD0082232A /* SfxType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SfxType.swift; sourceTree = "<group>"; };
 		261F61A12C257C200082232A /* fireball.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = fireball.mp3; sourceTree = "<group>"; };
-		266E9BB12C2982DE0052D5A9 /* shimmeringKey.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = shimmeringKey.mp3; sourceTree = "<group>"; };
 		266E9BB32C2982E40052D5A9 /* stunned.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = stunned.mp3; sourceTree = "<group>"; };
 		266E9BB72C2A9FCA0052D5A9 /* healing.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = healing.mp3; sourceTree = "<group>"; };
 		266E9BBB2C2AA2E70052D5A9 /* Pixel Times.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pixel Times.ttf"; sourceTree = "<group>"; };
 		266E9BBD2C2AA3750052D5A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		266E9BC02C2B9C850052D5A9 /* enterGame.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = enterGame.mp3; sourceTree = "<group>"; };
+		266E9BC22C2BA2120052D5A9 /* changeExploration.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = changeExploration.mp3; sourceTree = "<group>"; };
+		266E9BC42C2BA27F0052D5A9 /* dropKey.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = dropKey.mp3; sourceTree = "<group>"; };
 		53277AA12C23FA9000F15407 /* TypeCaster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TypeCaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53277AA42C23FA9000F15407 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		53277AA62C23FA9000F15407 /* ExplorationScene1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ExplorationScene1.sks; sourceTree = "<group>"; };
@@ -133,14 +137,16 @@
 			isa = PBXGroup;
 			children = (
 				261F618D2C242D390082232A /* alert.mp3 */,
-				266E9BB72C2A9FCA0052D5A9 /* healing.mp3 */,
+				266E9BC22C2BA2120052D5A9 /* changeExploration.mp3 */,
+				266E9BC42C2BA27F0052D5A9 /* dropKey.mp3 */,
+				266E9BC02C2B9C850052D5A9 /* enterGame.mp3 */,
 				261F61A12C257C200082232A /* fireball.mp3 */,
+				266E9BB72C2A9FCA0052D5A9 /* healing.mp3 */,
 				261F618F2C242D390082232A /* iceblast.mp3 */,
 				261F618B2C242D390082232A /* playerDie.mp3 */,
+				266E9BB32C2982E40052D5A9 /* stunned.mp3 */,
 				261F618E2C242D390082232A /* throwRock.mp3 */,
 				261F61902C242D390082232A /* treasureFound.mp3 */,
-				266E9BB12C2982DE0052D5A9 /* shimmeringKey.mp3 */,
-				266E9BB32C2982E40052D5A9 /* stunned.mp3 */,
 			);
 			path = SFXs;
 			sourceTree = "<group>";
@@ -364,10 +370,13 @@
 			files = (
 				53277AD32C24097700F15407 /* GameTileSet.sks in Resources */,
 				266E9BBC2C2AA2E70052D5A9 /* Pixel Times.ttf in Resources */,
+				266E9BC52C2BA27F0052D5A9 /* dropKey.mp3 in Resources */,
 				261F61962C242D390082232A /* iceblast.mp3 in Resources */,
 				261F61972C242D390082232A /* treasureFound.mp3 in Resources */,
 				261F619B2C242D420082232A /* explorationBGM.mp3 in Resources */,
 				261F61942C242D390082232A /* alert.mp3 in Resources */,
+				266E9BC32C2BA2120052D5A9 /* changeExploration.mp3 in Resources */,
+				266E9BC12C2B9C850052D5A9 /* enterGame.mp3 in Resources */,
 				539649C72C2AC4DD000519CE /* ExplorationScene3.sks in Resources */,
 				261F61922C242D390082232A /* playerDie.mp3 in Resources */,
 				53277AA72C23FA9000F15407 /* ExplorationScene1.sks in Resources */,
@@ -376,7 +385,6 @@
 				261F61A22C257C200082232A /* fireball.mp3 in Resources */,
 				53277ADA2C26F6D800F15407 /* ExplorationScene2.sks in Resources */,
 				539649CB2C2ACF46000519CE /* StartScene.sks in Resources */,
-				266E9BB22C2982DE0052D5A9 /* shimmeringKey.mp3 in Resources */,
 				53277AAF2C23FA9100F15407 /* Assets.xcassets in Resources */,
 				266E9BB42C2982E40052D5A9 /* stunned.mp3 in Resources */,
 				261F619A2C242D420082232A /* battleBGM.mp3 in Resources */,
@@ -563,7 +571,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = XJ7Y6VR3NN;
+				DEVELOPMENT_TEAM = VPGX5Q423F;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TypeCaster/Info.plist;
@@ -591,7 +599,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = XJ7Y6VR3NN;
+				DEVELOPMENT_TEAM = VPGX5Q423F;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TypeCaster/Info.plist;

@@ -134,7 +134,7 @@ class Enemy {
         
         let sequence = SKAction.sequence([moveAction, removeAction])
         AudioManager.shared.stopBgm()
-        AudioManager.shared.playEnemyDropKeySfx(node: keyNode)
+        AudioManager.shared.playEnemyStateSfx(node: keyNode, enemyState: .dropKey)
         
         keyNode.run(sequence)
     }
