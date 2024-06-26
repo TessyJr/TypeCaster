@@ -31,6 +31,9 @@ protocol ExplorationSceneProtocol: SKScene {
 
 extension ExplorationSceneProtocol {
     func setUpWallsAndFloors(map: SKTileMapNode) {
+        wallCoordinates.removeAll()
+        floorCoordinates.removeAll()
+        
         let tileMap = map
         let tileSize = tileMap.tileSize
         let halfWidth = CGFloat(tileMap.numberOfColumns) / 2.0 * tileSize.width
@@ -181,6 +184,9 @@ extension ExplorationSceneProtocol {
         for node in self.children {
             if node.name == "door" {
                 if let objectSpriteNode = node as? SKSpriteNode {
+                    objectSpriteNode.position.x = round(objectSpriteNode.position.x)
+                    objectSpriteNode.position.y = round(objectSpriteNode.position.y)
+                    
                     if enemies.isEmpty {
                         if let index = wallCoordinates.firstIndex(of: objectSpriteNode.position) {
                             wallCoordinates.remove(at: index)
@@ -241,12 +247,7 @@ extension ExplorationSceneProtocol {
                         self.lastPlayerDirection = self.player.direction
                         
                         battleScene.scaleMode = .aspectFill
-                        //                        battleScene.player.currentHealth = self.player.currentHealth
                         battleScene.player = self.player
-                        
-                        //                        for spell in self.player.spells {
-                        //                            battleScene.player.spells.append(spell)
-                        //                        }
                         
                         battleScene.enemy = enemy
                         battleScene.previousScene = self

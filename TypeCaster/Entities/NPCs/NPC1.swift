@@ -16,6 +16,7 @@ class NPC1: NPC {
             "I'll be generous and give you some tips.",
             "Press the [TAB] Button to open your spell book.",
             "You might want to memorize the magic spells.",
+            "[TYPE] the spell then press [ENTER] to cast them!",
             "Try using one to break the boxes over there!",
             "Then you could practice with the training dummy!",
             "Well then, good luck newbie!",

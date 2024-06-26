@@ -7,7 +7,7 @@ class Devil: Enemy {
         self.spriteNode = spriteNode
         self.coordinate = coordinate
         self.name = "devil"
-        self.currentHealth = 100
+        self.currentHealth = 10
         self.maxHealth = 100
         self.attackInterval = 1.0
     }
