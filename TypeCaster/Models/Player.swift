@@ -141,6 +141,8 @@ class Player {
             spellLabelNode.text = inputSpell
             spellLabelNodeBackground.size.width = 0
             
+            AudioManager.shared.playPlayerStateSfx(node: self.spriteNode, playerState: .playerHit)
+            
             currentHealth -= 10
             
             if currentHealth <= 0 {

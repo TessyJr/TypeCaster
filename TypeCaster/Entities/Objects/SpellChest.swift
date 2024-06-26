@@ -17,6 +17,8 @@ class SpellChest: Object {
             isOpened = true
             spriteNode.texture = SKTexture(imageNamed: "chest-open")
             
+            AudioManager.shared.playChestOpenSfx(node: self.spriteNode)
+            
             scene.player.spells.append(Shield())
             
             scene.setupSpells()

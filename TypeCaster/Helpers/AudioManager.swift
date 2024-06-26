@@ -66,4 +66,9 @@ class AudioManager {
         let sfx = SKAction.playSoundFileNamed(fileName, waitForCompletion: false)
         node.run(sfx)
     }
+    
+    func playChestOpenSfx(node: SKSpriteNode) {
+        let sfx = SKAction.playSoundFileNamed("treasureFound", waitForCompletion: false)
+        node.run(sfx)
+    }
 }
