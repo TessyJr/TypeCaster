@@ -42,6 +42,14 @@
 		53277AD82C26F6CA00F15407 /* ExplorationScene2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53277AD72C26F6CA00F15407 /* ExplorationScene2.swift */; };
 		53277ADA2C26F6D800F15407 /* ExplorationScene2.sks in Resources */ = {isa = PBXBuildFile; fileRef = 53277AD92C26F6D800F15407 /* ExplorationScene2.sks */; };
 		53277ADC2C27E35C00F15407 /* NPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53277ADB2C27E35C00F15407 /* NPC.swift */; };
+		534EF7872C2B902B00CB4B8E /* Kraken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534EF7862C2B902B00CB4B8E /* Kraken.swift */; };
+		534EF7892C2B904700CB4B8E /* Devil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534EF7882C2B904700CB4B8E /* Devil.swift */; };
+		534EF78B2C2B905900CB4B8E /* Boss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534EF78A2C2B905900CB4B8E /* Boss.swift */; };
+		534EF78D2C2B907600CB4B8E /* TrainingDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534EF78C2C2B907600CB4B8E /* TrainingDummy.swift */; };
+		534EF78F2C2B90CF00CB4B8E /* NPC1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534EF78E2C2B90CF00CB4B8E /* NPC1.swift */; };
+		534EF7912C2B90ED00CB4B8E /* Boxes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534EF7902C2B90ED00CB4B8E /* Boxes.swift */; };
+		534EF7932C2B910600CB4B8E /* Fountain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534EF7922C2B910600CB4B8E /* Fountain.swift */; };
+		534EF7952C2B912C00CB4B8E /* SpellChest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534EF7942C2B912C00CB4B8E /* SpellChest.swift */; };
 		539649C72C2AC4DD000519CE /* ExplorationScene3.sks in Resources */ = {isa = PBXBuildFile; fileRef = 539649C62C2AC4DD000519CE /* ExplorationScene3.sks */; };
 		539649C92C2AC9C6000519CE /* ExplorationScene3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539649C82C2AC9C6000519CE /* ExplorationScene3.swift */; };
 		539649CB2C2ACF46000519CE /* StartScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 539649CA2C2ACF46000519CE /* StartScene.sks */; };
@@ -87,6 +95,14 @@
 		53277AD72C26F6CA00F15407 /* ExplorationScene2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorationScene2.swift; sourceTree = "<group>"; };
 		53277AD92C26F6D800F15407 /* ExplorationScene2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ExplorationScene2.sks; sourceTree = "<group>"; };
 		53277ADB2C27E35C00F15407 /* NPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NPC.swift; sourceTree = "<group>"; };
+		534EF7862C2B902B00CB4B8E /* Kraken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kraken.swift; sourceTree = "<group>"; };
+		534EF7882C2B904700CB4B8E /* Devil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Devil.swift; sourceTree = "<group>"; };
+		534EF78A2C2B905900CB4B8E /* Boss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Boss.swift; sourceTree = "<group>"; };
+		534EF78C2C2B907600CB4B8E /* TrainingDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingDummy.swift; sourceTree = "<group>"; };
+		534EF78E2C2B90CF00CB4B8E /* NPC1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NPC1.swift; sourceTree = "<group>"; };
+		534EF7902C2B90ED00CB4B8E /* Boxes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Boxes.swift; sourceTree = "<group>"; };
+		534EF7922C2B910600CB4B8E /* Fountain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fountain.swift; sourceTree = "<group>"; };
+		534EF7942C2B912C00CB4B8E /* SpellChest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpellChest.swift; sourceTree = "<group>"; };
 		539649C62C2AC4DD000519CE /* ExplorationScene3.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ExplorationScene3.sks; sourceTree = "<group>"; };
 		539649C82C2AC9C6000519CE /* ExplorationScene3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorationScene3.swift; sourceTree = "<group>"; };
 		539649CA2C2ACF46000519CE /* StartScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StartScene.sks; sourceTree = "<group>"; };
@@ -138,21 +154,21 @@
 			path = BGMs;
 			sourceTree = "<group>";
 		};
-		261F619C2C2432AF0082232A /* Helper */ = {
+		261F619C2C2432AF0082232A /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
 				261F619D2C2432DB0082232A /* AudioManager.swift */,
 			);
-			path = Helper;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
-		266E9BB92C2AA2490052D5A9 /* Asset */ = {
+		266E9BB92C2AA2490052D5A9 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
 				261F61852C24254D0082232A /* Audio */,
 				266E9BBA2C2AA2500052D5A9 /* Fonts */,
 			);
-			path = Asset;
+			path = Assets;
 			sourceTree = "<group>";
 		};
 		266E9BBA2C2AA2500052D5A9 /* Fonts */ = {
@@ -182,9 +198,10 @@
 		53277AA32C23FA9000F15407 /* TypeCaster */ = {
 			isa = PBXGroup;
 			children = (
-				266E9BB92C2AA2490052D5A9 /* Asset */,
+				534EF7822C2B8FEB00CB4B8E /* Entities */,
+				266E9BB92C2AA2490052D5A9 /* Assets */,
 				53277ABA2C23FC0800F15407 /* Enums */,
-				261F619C2C2432AF0082232A /* Helper */,
+				261F619C2C2432AF0082232A /* Helpers */,
 				53277ABB2C23FC0D00F15407 /* Protocols */,
 				53277AC62C23FC9500F15407 /* Models */,
 				53277AB92C23FBB900F15407 /* Scenes */,
@@ -246,6 +263,45 @@
 				53277ADB2C27E35C00F15407 /* NPC.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		534EF7822C2B8FEB00CB4B8E /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				534EF7852C2B900B00CB4B8E /* Objects */,
+				534EF7842C2B8FFD00CB4B8E /* NPCs */,
+				534EF7832C2B8FF400CB4B8E /* Enemies */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		534EF7832C2B8FF400CB4B8E /* Enemies */ = {
+			isa = PBXGroup;
+			children = (
+				534EF7862C2B902B00CB4B8E /* Kraken.swift */,
+				534EF7882C2B904700CB4B8E /* Devil.swift */,
+				534EF78A2C2B905900CB4B8E /* Boss.swift */,
+				534EF78C2C2B907600CB4B8E /* TrainingDummy.swift */,
+			);
+			path = Enemies;
+			sourceTree = "<group>";
+		};
+		534EF7842C2B8FFD00CB4B8E /* NPCs */ = {
+			isa = PBXGroup;
+			children = (
+				534EF78E2C2B90CF00CB4B8E /* NPC1.swift */,
+			);
+			path = NPCs;
+			sourceTree = "<group>";
+		};
+		534EF7852C2B900B00CB4B8E /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				534EF7902C2B90ED00CB4B8E /* Boxes.swift */,
+				534EF7922C2B910600CB4B8E /* Fountain.swift */,
+				534EF7942C2B912C00CB4B8E /* SpellChest.swift */,
+			);
+			path = Objects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -343,18 +399,26 @@
 				539649C92C2AC9C6000519CE /* ExplorationScene3.swift in Sources */,
 				53277AC32C23FC7200F15407 /* BattleSceneProtocol.swift in Sources */,
 				53277ACE2C23FCD100F15407 /* Spell.swift in Sources */,
+				534EF7872C2B902B00CB4B8E /* Kraken.swift in Sources */,
 				53277AC82C23FC9D00F15407 /* Player.swift in Sources */,
 				53277AD02C23FCF400F15407 /* BattleScene.swift in Sources */,
 				53277ACA2C23FCAB00F15407 /* Enemy.swift in Sources */,
+				534EF78D2C2B907600CB4B8E /* TrainingDummy.swift in Sources */,
 				261F619E2C2432DB0082232A /* AudioManager.swift in Sources */,
 				53277AD82C26F6CA00F15407 /* ExplorationScene2.swift in Sources */,
+				534EF7952C2B912C00CB4B8E /* SpellChest.swift in Sources */,
 				53277ADC2C27E35C00F15407 /* NPC.swift in Sources */,
 				539649CD2C2ACFF1000519CE /* StartScene.swift in Sources */,
 				53277ACC2C23FCC100F15407 /* Object.swift in Sources */,
+				534EF78B2C2B905900CB4B8E /* Boss.swift in Sources */,
 				53277ABF2C23FC3800F15407 /* Direction.swift in Sources */,
+				534EF7892C2B904700CB4B8E /* Devil.swift in Sources */,
 				261F61892C2425B50082232A /* BgmType.swift in Sources */,
+				534EF7932C2B910600CB4B8E /* Fountain.swift in Sources */,
+				534EF7912C2B90ED00CB4B8E /* Boxes.swift in Sources */,
 				53277AC12C23FC4C00F15407 /* ExplorationSceneProtocol.swift in Sources */,
 				53277ABD2C23FC2000F15407 /* Status.swift in Sources */,
+				534EF78F2C2B90CF00CB4B8E /* NPC1.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
