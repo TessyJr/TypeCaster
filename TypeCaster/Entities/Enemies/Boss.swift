@@ -9,7 +9,7 @@ class Boss: Enemy {
         self.name = "boss"
         self.currentHealth = 200
         self.maxHealth = 200
-        self.attackInterval = 0.5
+        self.attackInterval = 0.2
     }
     
     // Random Tile Attack
@@ -44,7 +44,7 @@ class Boss: Enemy {
         }
         
         // Step 3: Wait for 1.5 seconda
-        let waitAction1 = SKAction.wait(forDuration: 1.0)
+        let waitAction1 = SKAction.wait(forDuration: 1.2)
         
         // Step 4: Remove pre-attack nodes
         let removePreAttackAction = SKAction.run {
@@ -113,16 +113,19 @@ class Boss: Enemy {
         
         // Step 2: Get attack coordinates
         let getAttackCoordinatesAction = SKAction.run {
-            for y in uniqueRows {
-                
-                let randomInt = Int.random(in: 1...5)
-                
-                if randomInt <= 3 {
-                    attackCoordinates.append(CGPoint(x: firstColumn, y: y))
-                }
-                
-                if attackCoordinates.count == 6 {
-                    break
+            while attackCoordinates.count < 6 {
+                for y in uniqueRows {
+                    
+                    let randomInt = Int.random(in: 1...3)
+                    
+                    if randomInt != 3 {
+                        attackCoordinates.append(CGPoint(x: firstColumn, y: y))
+                        uniqueRows.removeAll(where: { $0 == y })
+                    }
+                    
+                    if attackCoordinates.count == 6 {
+                        break
+                    }
                 }
             }
         }
@@ -144,7 +147,7 @@ class Boss: Enemy {
         }
         
         // Step 4: Wait for 1.5 seconda
-        let waitAction1 = SKAction.wait(forDuration: 1.0)
+        let waitAction1 = SKAction.wait(forDuration: 1.2)
         
         // Step 5: Remove pre-attack nodes
         let removePreAttackAction = SKAction.run {
@@ -219,16 +222,19 @@ class Boss: Enemy {
         
         // Step 2: Get attack coordinates
         let getAttackCoordinatesAction = SKAction.run {
-            for y in uniqueRows {
-                
-                let randomInt = Int.random(in: 1...5)
-                
-                if randomInt <= 3 {
-                    attackCoordinates.append(CGPoint(x: firstColumn, y: y))
-                }
-                
-                if attackCoordinates.count == 6 {
-                    break
+            while attackCoordinates.count < 6 {
+                for y in uniqueRows {
+                    
+                    let randomInt = Int.random(in: 1...3)
+                    
+                    if randomInt != 3 {
+                        attackCoordinates.append(CGPoint(x: firstColumn, y: y))
+                        uniqueRows.removeAll(where: { $0 == y })
+                    }
+                    
+                    if attackCoordinates.count == 6 {
+                        break
+                    }
                 }
             }
         }
@@ -250,7 +256,7 @@ class Boss: Enemy {
         }
         
         // Step 4: Wait for 1.5 seconda
-        let waitAction1 = SKAction.wait(forDuration: 1.0)
+        let waitAction1 = SKAction.wait(forDuration: 1.2)
         
         // Step 5: Remove pre-attack nodes
         let removePreAttackAction = SKAction.run {
@@ -325,16 +331,19 @@ class Boss: Enemy {
         
         // Step 2: Get attack coordinates
         let getAttackCoordinatesAction = SKAction.run {
-            for x in uniqueColumns {
-                
-                let randomInt = Int.random(in: 1...5)
-                
-                if randomInt <= 3 {
-                    attackCoordinates.append(CGPoint(x: x, y: firstRow))
-                }
-                
-                if attackCoordinates.count == 6 {
-                    break
+            while attackCoordinates.count < 6 {
+                for x in uniqueColumns {
+                    
+                    let randomInt = Int.random(in: 1...3)
+                    
+                    if randomInt != 3 {
+                        attackCoordinates.append(CGPoint(x: x, y: firstRow))
+                        uniqueColumns.removeAll(where: { $0 == x })
+                    }
+                    
+                    if attackCoordinates.count == 6 {
+                        break
+                    }
                 }
             }
         }
@@ -356,7 +365,7 @@ class Boss: Enemy {
         }
         
         // Step 4: Wait for 1.5 seconda
-        let waitAction1 = SKAction.wait(forDuration: 1.0)
+        let waitAction1 = SKAction.wait(forDuration: 1.2)
         
         // Step 5: Remove pre-attack nodes
         let removePreAttackAction = SKAction.run {
@@ -431,16 +440,19 @@ class Boss: Enemy {
         
         // Step 2: Get attack coordinates
         let getAttackCoordinatesAction = SKAction.run {
-            for x in uniqueColumns {
-                
-                let randomInt = Int.random(in: 1...5)
-                
-                if randomInt <= 3 {
-                    attackCoordinates.append(CGPoint(x: x, y: firstRow))
-                }
-                
-                if attackCoordinates.count == 6 {
-                    break
+            while attackCoordinates.count < 6 {
+                for x in uniqueColumns {
+                    
+                    let randomInt = Int.random(in: 1...3)
+                    
+                    if randomInt != 3 {
+                        attackCoordinates.append(CGPoint(x: x, y: firstRow))
+                        uniqueColumns.removeAll(where: { $0 == x })
+                    }
+                    
+                    if attackCoordinates.count == 6 {
+                        break
+                    }
                 }
             }
         }
@@ -462,7 +474,7 @@ class Boss: Enemy {
         }
         
         // Step 4: Wait for 1.5 seconda
-        let waitAction1 = SKAction.wait(forDuration: 1.0)
+        let waitAction1 = SKAction.wait(forDuration: 1.2)
         
         // Step 5: Remove pre-attack nodes
         let removePreAttackAction = SKAction.run {

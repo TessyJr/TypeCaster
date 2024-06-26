@@ -35,16 +35,20 @@ class Devil: Enemy {
         
         // Step 2: Get attack coordinates
         let getAttackCoordinatesAction = SKAction.run {
-            for y in uniqueRows {
+            while attackCoordinates.count < 4 {
                 
-                let randomInt = Int.random(in: 1...2)
-                
-                if randomInt == 1 {
-                    attackCoordinates.append(CGPoint(x: firstColumn, y: y))
-                }
-                
-                if attackCoordinates.count == 6 {
-                    break
+                for y in uniqueRows {
+                    
+                    let randomInt = Int.random(in: 1...2)
+                    
+                    if randomInt == 1 {
+                        attackCoordinates.append(CGPoint(x: firstColumn, y: y))
+                        uniqueRows.removeAll(where: $0 == y)
+                    }
+                    
+                    if attackCoordinates.count == 6 {
+                        break
+                    }
                 }
             }
         }
@@ -141,16 +145,19 @@ class Devil: Enemy {
         
         // Step 2: Get attack coordinates
         let getAttackCoordinatesAction = SKAction.run {
-            for y in uniqueRows {
-                
-                let randomInt = Int.random(in: 1...2)
-                
-                if randomInt == 1 {
-                    attackCoordinates.append(CGPoint(x: firstColumn, y: y))
-                }
-                
-                if attackCoordinates.count == 6 {
-                    break
+            while attackCoordinates.count < 4 {
+                for y in uniqueRows {
+                    
+                    let randomInt = Int.random(in: 1...2)
+                    
+                    if randomInt == 1 {
+                        attackCoordinates.append(CGPoint(x: firstColumn, y: y))
+                        uniqueRows.removeAll(where: { $0 == y })
+                    }
+                    
+                    if attackCoordinates.count == 6 {
+                        break
+                    }
                 }
             }
         }
@@ -247,16 +254,19 @@ class Devil: Enemy {
         
         // Step 2: Get attack coordinates
         let getAttackCoordinatesAction = SKAction.run {
-            for x in uniqueColumns {
-                
-                let randomInt = Int.random(in: 1...2)
-                
-                if randomInt == 1 {
-                    attackCoordinates.append(CGPoint(x: x, y: firstRow))
-                }
-                
-                if attackCoordinates.count == 6 {
-                    break
+            while attackCoordinates.count < 4 {
+                for x in uniqueColumns {
+                    
+                    let randomInt = Int.random(in: 1...2)
+                    
+                    if randomInt == 1 {
+                        attackCoordinates.append(CGPoint(x: x, y: firstRow))
+                        uniqueColumns.removeAll(where: { $0 == x })
+                    }
+                    
+                    if attackCoordinates.count == 6 {
+                        break
+                    }
                 }
             }
         }
@@ -353,16 +363,19 @@ class Devil: Enemy {
         
         // Step 2: Get attack coordinates
         let getAttackCoordinatesAction = SKAction.run {
-            for x in uniqueColumns {
-                
-                let randomInt = Int.random(in: 1...2)
-                
-                if randomInt == 1 {
-                    attackCoordinates.append(CGPoint(x: x, y: firstRow))
-                }
-                
-                if attackCoordinates.count == 6 {
-                    break
+            while attackCoordinates.count < 4 {
+                for x in uniqueColumns {
+                    
+                    let randomInt = Int.random(in: 1...2)
+                    
+                    if randomInt == 1 {
+                        attackCoordinates.append(CGPoint(x: x, y: firstRow))
+                        uniqueColumns.removeAll(where: { $0 == x })
+                    }
+                    
+                    if attackCoordinates.count == 6 {
+                        break
+                    }
                 }
             }
         }
