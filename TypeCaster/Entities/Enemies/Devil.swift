@@ -55,12 +55,11 @@ class Devil: Enemy {
             self.animateSprite()
             
             for coordinate in attackCoordinates {
-                let preAttackTexture = SKTexture(imageNamed: "fireball")
+                let preAttackTexture = SKTexture(imageNamed: "attack-preview")
                 let preAttackNode = SKSpriteNode(texture: preAttackTexture)
                 preAttackNode.name = "pre-attack-node"
                 preAttackNode.position = coordinate
                 preAttackNode.size = CGSize(width: 32, height: 32)
-                preAttackNode.alpha = 0.2
                 
                 scene.addChild(preAttackNode)
             }
