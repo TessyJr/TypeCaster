@@ -232,7 +232,7 @@ extension ExplorationSceneProtocol {
                 exclamationSpriteNode.run(SKAction.move(by: CGVector(dx: 0, dy: 24.0), duration: 0.1))
                 
                 enemy.spriteNode.addChild(exclamationSpriteNode)
-                AudioManager.shared.playEnemyFoundSfx(node: enemy.spriteNode)
+                AudioManager.shared.playEnemyStateSfx(node: enemy.spriteNode, enemyState: .alert)
                 
                 let waitAction = SKAction.wait(forDuration: 1.0)
                 let transitionAction = SKAction.run {

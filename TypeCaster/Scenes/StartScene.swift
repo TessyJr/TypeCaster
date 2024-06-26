@@ -29,6 +29,9 @@ class StartScene: SKScene, ExplorationSceneProtocol {
     var nextSceneCoordinate: CGPoint = CGPoint()
     
     override func didMove(to view: SKView) {
+        
+        AudioManager.shared.playBgm(bgmType: .exploration)
+        
         for node in self.children {
             if let someTileMap = node as? SKTileMapNode {
                 if someTileMap.name == "background" {
@@ -73,8 +76,9 @@ class StartScene: SKScene, ExplorationSceneProtocol {
             
         case 49:
             if let nextScene = SKScene(fileNamed: "ExplorationScene1") as? ExplorationSceneProtocol {
+                AudioManager.shared.playChangeSceneSfx(node: player.spriteNode, changeSceneType: .enterGame)
                 if let view = self.view {
-                    let transition = SKTransition.fade(withDuration: 1.0)
+                    let transition = SKTransition.fade(withDuration: 3.0)
                     view.presentScene(nextScene, transition: transition)
                 }
             }

@@ -55,13 +55,15 @@ class AudioManager {
         node.run(sfx)
     }
     
-    func playEnemyFoundSfx(node: SKSpriteNode) {
-        let sfx = SKAction.playSoundFileNamed("alert", waitForCompletion: false)
+    func playEnemyStateSfx(node: SKSpriteNode, enemyState: EnemyStateSfxType) {
+        let fileName = enemyState.rawValue
+        let sfx = SKAction.playSoundFileNamed(fileName, waitForCompletion: false)
         node.run(sfx)
     }
     
-    func playEnemyDropKeySfx(node: SKSpriteNode) {
-        let sfx = SKAction.playSoundFileNamed("shimmeringKey", waitForCompletion: false)
+    func playChangeSceneSfx(node: SKSpriteNode, changeSceneType: ChangeSceneSfxType) {
+        let fileName = changeSceneType.rawValue
+        let sfx = SKAction.playSoundFileNamed(fileName, waitForCompletion: false)
         node.run(sfx)
     }
 }

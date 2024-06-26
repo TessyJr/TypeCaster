@@ -147,6 +147,8 @@ class ExplorationScene1: SKScene, ExplorationSceneProtocol {
             if let nextScene = SKScene(fileNamed: "ExplorationScene2") as? ExplorationSceneProtocol {
                 nextScene.player = self.player
                 
+                AudioManager.shared.playChangeSceneSfx(node: player.spriteNode, changeSceneType: .changeExploration)
+                
                 if let view = self.view {
                     let transition = SKTransition.fade(withDuration: 1.0)
                     view.presentScene(nextScene, transition: transition)
