@@ -36,14 +36,13 @@ class Devil: Enemy {
         // Step 2: Get attack coordinates
         let getAttackCoordinatesAction = SKAction.run {
             while attackCoordinates.count < 4 {
-                
                 for y in uniqueRows {
                     
                     let randomInt = Int.random(in: 1...2)
                     
                     if randomInt == 1 {
                         attackCoordinates.append(CGPoint(x: firstColumn, y: y))
-                        uniqueRows.removeAll(where: $0 == y)
+                        uniqueRows.removeAll(where: {$0 == y})
                     }
                     
                     if attackCoordinates.count == 6 {
