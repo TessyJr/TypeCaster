@@ -141,5 +141,16 @@ class ExplorationScene3: SKScene, ExplorationSceneProtocol {
                 }
             }
         }
+        
+        if player.spriteNode.position == nextSceneCoordinate {
+            if let nextScene = SKScene(fileNamed: "EndScene") {
+                AudioManager.shared.stopBgm()
+                
+                if let view = self.view {
+                    let transition = SKTransition.fade(withDuration: 1.0)
+                    view.presentScene(nextScene, transition: transition)
+                }
+            }
+        }
     }
 }
