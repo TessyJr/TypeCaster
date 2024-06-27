@@ -14,7 +14,9 @@ class Object {
         case "fountain":
             return Fountain(spriteNode: spriteNode, coordinate: coordinate)
         case "spell-chest":
-            return SpellChest(spriteNode: spriteNode, coordinate: coordinate)
+            return SpellChest(spriteNode: spriteNode, coordinate: coordinate)        
+        case "candles":
+            return Candles(spriteNode: spriteNode, coordinate: coordinate)
         default:
             return nil
         }

@@ -43,10 +43,14 @@ class Fountain: Object {
     override func interact(scene: ExplorationSceneProtocol) {
         spriteNode.removeAllChildren()
         if isActive {
+            AudioManager.shared.playPlayerStateSfx(node: scene.player.spriteNode, playerState: .healing)
+
+            scene.player.currentHealth = scene.player.maxHealth
+            
             let labelNode = SKLabelNode()
             labelNode.fontName = "Pixel Times"
             labelNode.fontSize = 12.0
-            labelNode.text = "You feel refreshed after drinking the water in the fountain"
+            labelNode.text = "Your body feels refreshed"
             labelNode.position.y += 21.0
             labelNode.zPosition = 20
             

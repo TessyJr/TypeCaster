@@ -7,9 +7,10 @@ class NPC {
     var npcType: String = ""
     var status: Status = .idle
     
-    var dialogComplete = false
     var dialogIndex: Int = 0
     var dialogs: [String] = []
+    
+    var isTalking: Bool = false
     
     static func create(spriteNode: SKSpriteNode, coordinate: CGPoint, npcType: String) -> NPC? {
         switch npcType {

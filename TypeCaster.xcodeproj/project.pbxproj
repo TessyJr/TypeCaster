@@ -59,6 +59,7 @@
 		539649CD2C2ACFF1000519CE /* StartScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539649CC2C2ACFF1000519CE /* StartScene.swift */; };
 		53A56DE12C2DBD67007EE6B0 /* EndScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 53A56DE02C2DBD67007EE6B0 /* EndScene.sks */; };
 		53A56DE32C2DBE7F007EE6B0 /* EndScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A56DE22C2DBE7F007EE6B0 /* EndScene.swift */; };
+		53A56DE52C2DD309007EE6B0 /* Candles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A56DE42C2DD309007EE6B0 /* Candles.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,6 +118,7 @@
 		539649CC2C2ACFF1000519CE /* StartScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScene.swift; sourceTree = "<group>"; };
 		53A56DE02C2DBD67007EE6B0 /* EndScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = EndScene.sks; sourceTree = "<group>"; };
 		53A56DE22C2DBE7F007EE6B0 /* EndScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndScene.swift; sourceTree = "<group>"; };
+		53A56DE42C2DD309007EE6B0 /* Candles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Candles.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -323,6 +325,7 @@
 				534EF7902C2B90ED00CB4B8E /* Boxes.swift */,
 				534EF7922C2B910600CB4B8E /* Fountain.swift */,
 				534EF7942C2B912C00CB4B8E /* SpellChest.swift */,
+				53A56DE42C2DD309007EE6B0 /* Candles.swift */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -432,6 +435,7 @@
 				53277ACA2C23FCAB00F15407 /* Enemy.swift in Sources */,
 				534EF78D2C2B907600CB4B8E /* TrainingDummy.swift in Sources */,
 				261F619E2C2432DB0082232A /* AudioManager.swift in Sources */,
+				53A56DE52C2DD309007EE6B0 /* Candles.swift in Sources */,
 				53277AD82C26F6CA00F15407 /* ExplorationScene2.swift in Sources */,
 				534EF7952C2B912C00CB4B8E /* SpellChest.swift in Sources */,
 				53277ADC2C27E35C00F15407 /* NPC.swift in Sources */,
