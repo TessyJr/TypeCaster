@@ -29,6 +29,8 @@ class Player {
     var isSpellBookOpen: Bool = false
     var spellBookNode: SKSpriteNode = SKSpriteNode()
     
+    var isInteractingWithNPC: Bool = false
+    
     func animateSprite() {
         var textures: [SKTexture] = []
         
@@ -309,7 +311,7 @@ class Player {
         if let objectToInteract = scene.objects.first(where: { $0.coordinate == interactCoordinate }) {
             objectToInteract.interact(scene: scene)
         } else if let npcToInteract = scene.npcs.first(where: { $0.coordinate == interactCoordinate }) {
-            npcToInteract.interact()
+            npcToInteract.interact(player: self)
         }
     }
     

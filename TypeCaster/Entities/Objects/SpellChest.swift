@@ -28,6 +28,7 @@ class SpellChest: Object {
             labelNode.fontSize = 12.0
             labelNode.text = "New spell added to your spell book!"
             labelNode.position.y += 21.0
+            labelNode.zPosition = 20
             
             let labelNodeBackground = SKSpriteNode()
             labelNodeBackground.color = .black
@@ -35,6 +36,8 @@ class SpellChest: Object {
             labelNodeBackground.size.height = 16.0
             labelNodeBackground.size.width = labelNode.frame.width + 2
             labelNodeBackground.position.y += 26.0
+            labelNodeBackground.zPosition = 20
+
             
             spriteNode.addChild(labelNodeBackground)
             spriteNode.addChild(labelNode)

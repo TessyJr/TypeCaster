@@ -112,6 +112,7 @@ class BattleScene: SKScene, BattleSceneProtocol {
             }
             
             spellbookNode.name = "spell-book"
+            spellbookNode.position.y -= 20
             spellbookNode.zPosition = 20
             
             if isSpellbookOpen {

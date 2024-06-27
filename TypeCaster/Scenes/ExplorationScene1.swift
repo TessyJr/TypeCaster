@@ -52,6 +52,12 @@ class ExplorationScene1: SKScene, ExplorationSceneProtocol {
     override func keyDown(with event: NSEvent) {
         if player.status == .stunned || player.isInBattle {
             return
+        } else if player.isInteractingWithNPC {
+            if event.keyCode == 49 {
+                player.interactWith(scene: self)
+            } else {
+                return
+            }
         }
         
         switch event.keyCode {
@@ -88,6 +94,7 @@ class ExplorationScene1: SKScene, ExplorationSceneProtocol {
             }
             
             spellbookNode.name = "spell-book"
+            spellbookNode.position.y -= 20
             spellbookNode.zPosition = 20
             
             if isSpellbookOpen {

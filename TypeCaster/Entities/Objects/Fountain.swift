@@ -41,22 +41,62 @@ class Fountain: Object {
     }
     
     override func interact(scene: ExplorationSceneProtocol) {
+        spriteNode.removeAllChildren()
         if isActive {
-            scene.player.spellLabelNode.text = "That's refreshing!"
-            scene.player.spellLabelNodeBackground.size.width = scene.player.spellLabelNode.frame.width + 2
+            let labelNode = SKLabelNode()
+            labelNode.fontName = "Pixel Times"
+            labelNode.fontSize = 12.0
+            labelNode.text = "You feel refreshed after drinking the water in the fountain"
+            labelNode.position.y += 21.0
+            labelNode.zPosition = 20
             
-            AudioManager.shared.playPlayerStateSfx(node: scene.player.spriteNode, playerState: .healing)
-            scene.player.currentHealth += 20
+            let labelNodeBackground = SKSpriteNode()
+            labelNodeBackground.color = .black
+            labelNodeBackground.alpha = 0.8
+            labelNodeBackground.size.height = 16.0
+            labelNodeBackground.size.width = labelNode.frame.width + 2
+            labelNodeBackground.position.y += 26.0
+            labelNodeBackground.zPosition = 20
             
-            if scene.player.currentHealth > scene.player.maxHealth {
-                scene.player.currentHealth = scene.player.maxHealth
-            }
+            spriteNode.addChild(labelNodeBackground)
+            spriteNode.addChild(labelNode)
+            
+            let waitAction = SKAction.wait(forDuration: 2.0)
+            let fadeOutAction = SKAction.fadeOut(withDuration: 0.5)
+            let removeAction = SKAction.removeFromParent()
+            let sequence = SKAction.sequence([waitAction, fadeOutAction, removeAction])
+            
+            labelNode.run(sequence)
+            labelNodeBackground.run(sequence)
             
             isActive = false
             animateObject()
         } else {
-            scene.player.spellLabelNode.text = "The fountain is empty"
-            scene.player.spellLabelNodeBackground.size.width = scene.player.spellLabelNode.frame.width + 2
+            let labelNode = SKLabelNode()
+            labelNode.fontName = "Pixel Times"
+            labelNode.fontSize = 12.0
+            labelNode.text = "The fountain is empty"
+            labelNode.position.y += 21.0
+            labelNode.zPosition = 20
+            
+            let labelNodeBackground = SKSpriteNode()
+            labelNodeBackground.color = .black
+            labelNodeBackground.alpha = 0.8
+            labelNodeBackground.size.height = 16.0
+            labelNodeBackground.size.width = labelNode.frame.width + 2
+            labelNodeBackground.position.y += 26.0
+            labelNodeBackground.zPosition = 20
+            
+            spriteNode.addChild(labelNodeBackground)
+            spriteNode.addChild(labelNode)
+            
+            let waitAction = SKAction.wait(forDuration: 2.0)
+            let fadeOutAction = SKAction.fadeOut(withDuration: 0.5)
+            let removeAction = SKAction.removeFromParent()
+            let sequence = SKAction.sequence([waitAction, fadeOutAction, removeAction])
+            
+            labelNode.run(sequence)
+            labelNodeBackground.run(sequence)
         }
     }
 }

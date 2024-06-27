@@ -7,6 +7,7 @@ class NPC {
     var npcType: String = ""
     var status: Status = .idle
     
+    var dialogComplete = false
     var dialogIndex: Int = 0
     var dialogs: [String] = []
     
@@ -19,7 +20,7 @@ class NPC {
         }
     }
     
-    func interact() {}
+    func interact(player: Player) {}
     
     func animateSprite() {
         var textures: [SKTexture] = []
