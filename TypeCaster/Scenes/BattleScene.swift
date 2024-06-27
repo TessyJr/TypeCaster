@@ -59,7 +59,7 @@ class BattleScene: SKScene, BattleSceneProtocol {
     func goToStartScene() {
         let waitAction = SKAction.wait(forDuration: 4.0)
         let transitionAction = SKAction.run {
-            if let scene = SKScene(fileNamed: "ExplorationScene1") {
+            if let scene = SKScene(fileNamed: "StartScene") {
                 scene.scaleMode = .aspectFit
                 
                 if let view = self.view {
