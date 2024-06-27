@@ -75,7 +75,7 @@ class Boss: Enemy {
                 textures.append(texture)
             }
             
-            let attackAnimation = SKAction.animate(with: textures, timePerFrame: 1.0/9)
+            let attackAnimation = SKAction.animate(with: textures, timePerFrame: 1.25/9)
             
             spriteNode.run(attackAnimation)
         default:
