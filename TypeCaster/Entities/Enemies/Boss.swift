@@ -9,7 +9,7 @@ class Boss: Enemy {
         self.name = "boss"
         self.currentHealth = 200
         self.maxHealth = 200
-        self.attackInterval = 0.2
+        self.attackInterval = 0.4
     }
     
     override func animateMapSprite() {
@@ -253,7 +253,7 @@ class Boss: Enemy {
         }
         
         // Step 4: Wait for 1.5 seconda
-        let waitAction1 = SKAction.wait(forDuration: 1.2)
+        let waitAction1 = SKAction.wait(forDuration: 1.25)
         
         // Step 5: Remove pre-attack nodes
         let removePreAttackAction = SKAction.run {
@@ -367,7 +367,7 @@ class Boss: Enemy {
         }
         
         // Step 4: Wait for 1.5 seconda
-        let waitAction1 = SKAction.wait(forDuration: 1.2)
+        let waitAction1 = SKAction.wait(forDuration: 1.25)
         
         // Step 5: Remove pre-attack nodes
         let removePreAttackAction = SKAction.run {
