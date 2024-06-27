@@ -7,7 +7,7 @@ class Boss: Enemy {
         self.spriteNode = spriteNode
         self.coordinate = coordinate
         self.name = "boss"
-        self.currentHealth = 30
+        self.currentHealth = 200
         self.maxHealth = 200
         self.attackInterval = 0.2
     }

@@ -7,7 +7,7 @@ class Kraken: Enemy {
         self.spriteNode = spriteNode
         self.coordinate = coordinate
         self.name = "kraken"
-        self.currentHealth = 10
+        self.currentHealth = 100
         self.maxHealth = 100
         self.attackInterval = 1.0
     }

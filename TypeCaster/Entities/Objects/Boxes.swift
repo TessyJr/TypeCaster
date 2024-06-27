@@ -11,7 +11,7 @@ class Boxes: Object {
     }
     
     override func interact(scene: ExplorationSceneProtocol) {
-        scene.player.spellLabelNode.text = "I think I can break these rocks with a spell"
+        scene.player.spellLabelNode.text = "I think I can break these boxes with a spell"
         scene.player.spellLabelNodeBackground.size.width = scene.player.spellLabelNode.frame.width + 2
     }
 }
