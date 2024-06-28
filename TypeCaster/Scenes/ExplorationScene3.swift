@@ -144,6 +144,7 @@ class ExplorationScene3: SKScene, ExplorationSceneProtocol {
         
         if player.spriteNode.position == nextSceneCoordinate {
             if let nextScene = SKScene(fileNamed: "EndScene") {
+                nextScene.scaleMode = .aspectFill
                 AudioManager.shared.stopBgm()
                 
                 if let view = self.view {
