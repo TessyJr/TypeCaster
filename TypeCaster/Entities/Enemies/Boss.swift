@@ -9,7 +9,7 @@ class Boss: Enemy {
         self.name = "boss"
         self.currentHealth = 200
         self.maxHealth = 200
-        self.attackInterval = 0.4
+        self.attackInterval = 0.2
     }
     
     override func animateMapSprite() {

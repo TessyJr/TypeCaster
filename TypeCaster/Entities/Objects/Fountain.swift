@@ -45,7 +45,11 @@ class Fountain: Object {
         if isActive {
             AudioManager.shared.playPlayerStateSfx(node: scene.player.spriteNode, playerState: .healing)
 
-            scene.player.currentHealth = scene.player.maxHealth
+            scene.player.currentHealth += 20
+            
+            if scene.player.currentHealth > scene.player.maxHealth {
+                scene.player.currentHealth = scene.player.maxHealth
+            }
             
             let labelNode = SKLabelNode()
             labelNode.fontName = "Pixel Times"
